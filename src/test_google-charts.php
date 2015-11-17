@@ -21,6 +21,7 @@
           ['2007',  1030,      540]
         ]);
 
+
         var options = {
           title: 'Company Performance',
           curveType: 'function',
