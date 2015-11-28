@@ -16,14 +16,12 @@ class CreateHtmlMail
      * @param $cid
      * @return string
      */
-    public function CreateHTMLMailing($cid)
+    public function CreateHTMLMailing()
     {
-        //$createChart = new CreateCharts();
-        //$createChart->CreateDummyChart();
-
         // If placing the embed() code inline becomes cumbersome
         // it's easy to do this in two steps
-        //$cid = $message->embed(Swift_Image::fromPath('dummy.png'));
+        $message = SingletonMessage::Instance();
+        $cid = $message->embed(Swift_Image::fromPath('pictures/test.png'));
 
         $dummytext = "Hallo Dummy Welt";
 
