@@ -53,8 +53,8 @@ $message->addPart($text, 'text/plain');
 print $message->getBody();
 
 $access = new DBAccess();
-echo $access->GetUsername(2);
-//echo $access->GetUsername($_GET['user']);
+//echo $access->GetUsername(2);
+echo $access->GetUsername($_GET['user']);
 
 // Parameter
 //echo $_GET['user'];
