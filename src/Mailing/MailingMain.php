@@ -20,6 +20,10 @@ $to = array(
 # ,'recipient2@example2.com' => 'Recipient2 Name'
 );
 
+$id = 9;
+$db = DBAccessSingleton::getInstance($id);
+echo $db->address;
+echo $db->username;
 
 $transport = Swift_SmtpTransport::newInstance('smtp-mail.outlook.com', 587, 'tls');
 $transport->setUsername('xx.yy@live.com');

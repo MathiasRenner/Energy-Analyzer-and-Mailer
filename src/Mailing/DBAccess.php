@@ -9,23 +9,52 @@
 /**
  * Singleton class
  *
+ *
  */
-class DBAccess
+/**
+ * Singleton class
+ *
+ */
+class DBAccessSingleton
 {
-    public function GetUsername($id)
+    //variable to hold db connection
+    private $db;
+    public $username;
+    public $address;
+
+      static private $instance = null;
+
+      static public function getInstance($id)
+      {if (null === self::$instance)
+         {
+             self::$instance = new self;
+             self::$instance->runAll($id);
+         }
+         return self::$instance;
+     }
+
+     private function __construct(){
+         $this->db = mysqli_connect('***REMOVED***', '***REMOVED***', '***REMOVED***', '***REMOVED***');
+     }
+     private function __clone(){}
+
+    public function runAll($id)
     {
-        $mysqli = mysqli_connect('***REMOVED***', '***REMOVED***', '***REMOVED***', '***REMOVED***');
-        $res = mysqli_query($mysqli, "SELECT * FROM b1user WHERE id =" . $id);
-        $row = mysqli_fetch_assoc($res);
-        return $row['username'];
+        $this->GetUsername($id);
+        $this->SetAddress($id);
     }
 
-    /**
-     *  ctor
-     *
-     */
-    public function __construct()
+    private function GetUsername($id)
     {
+        $res = mysqli_query($this->db, "SELECT * FROM b1user WHERE id =" . $id);
+        $row = mysqli_fetch_assoc($res);
+        $this->username = $row['username'];
+    }
 
+    private function SetAddress($id)
+    {
+        $res = mysqli_query($this->db, "SELECT * FROM b1user WHERE id =" . $id);
+        $row = mysqli_fetch_assoc($res);
+        $this->address = $row['address'];
     }
 }

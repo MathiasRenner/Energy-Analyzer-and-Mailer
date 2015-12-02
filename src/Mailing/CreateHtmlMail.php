@@ -18,6 +18,12 @@ class CreateHtmlMail
      */
     public function CreateHTMLMailing()
     {
+
+
+        $db = DBAccessSingleton::getInstance(9);
+        echo $test = $db->address;
+        echo $db->username;
+
         // If placing the embed() code inline becomes cumbersome
         // it's easy to do this in two steps
         $message = SingletonMessage::Instance();
