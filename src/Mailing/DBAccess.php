@@ -24,10 +24,11 @@ class DBAccessSingleton
 
       static private $instance = null;
 
-      static public function getInstance($id)
+      static public function getInstance($id = 0)
       {if (null === self::$instance)
          {
              self::$instance = new self;
+
              self::$instance->runAll($id);
          }
          return self::$instance;
@@ -38,7 +39,7 @@ class DBAccessSingleton
      }
      private function __clone(){}
 
-    public function runAll($id)
+    private function runAll($id)
     {
         $this->GetUsername($id);
         $this->SetAddress($id);

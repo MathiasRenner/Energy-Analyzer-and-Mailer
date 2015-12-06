@@ -22,8 +22,8 @@ $to = array(
 
 $id = 9;
 $db = DBAccessSingleton::getInstance($id);
-echo $db->address;
-echo $db->username;
+//echo $db->address;
+//echo $db->username;
 
 $transport = Swift_SmtpTransport::newInstance('smtp-mail.outlook.com', 587, 'tls');
 $transport->setUsername('xx.yy@live.com');
@@ -56,9 +56,6 @@ $message->addPart($text, 'text/plain');
 
 print $message->getBody();
 
-$access = new DBAccess();
-//echo $access->GetUsername(2);
-echo $access->GetUsername($_GET['user']);
 
 // Parameter
 //echo $_GET['user'];
