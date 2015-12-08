@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Max
@@ -6,16 +7,21 @@
  * Time: 14:33
  */
 
-    $db = DBAccessSingleton::getInstance();
-    $name = 'maxxxx';//$db->username;
-    //$message = SingletonMessage::Instance();
-    //$cid = $message->embed(Swift_Image::fromPath('pictures/test.png'));
+class HtmlPriming
+{
+    public function GetHtmlPriming()
+    {
+        $db = DBAccessSingleton::getInstance();
+        $name = $db->username;
+        //$message = SingletonMessage::Instance();
+        //$cid = $message->embed(Swift_Image::fromPath('pictures/test.png'));
 
+        return
 
- echo '<table cellpadding="0" cellspacing="0">
+            '<table cellpadding="0" cellspacing="0">
     <tr>
         <td class="pattern" width="800" align="center">
-            <table cellpadding="0" cellspacing="0">
+            <table class="content-shadow" cellpadding="0" cellspacing="0">
                 <tr>
                     <td class="col" width="200" valign="top">
                         <table cellpadding="0" cellspacing="0">
@@ -69,8 +75,10 @@
         </td>
     </tr>
 </table>
-<hr>'
+<hr>';
 
-?>
+    }
+}
+
 
 

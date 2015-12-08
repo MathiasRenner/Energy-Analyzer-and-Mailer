@@ -16,12 +16,36 @@ include("libs/charts/pChart2_1_4/class/pImage.class.php");
 
 class CreateCharts
 {
-    // Deklaration einer Eigenschaft
-    public $var = 'ein Standardwert';
+    public function __construct(){
+       }
 
-    // Deklaration einer Methode
-    public function CreateDummyChart() {
+    public function CreateAllCharts()
+    {
+        $this->CreateDummyChart();
+        $this->CreateDescChart();
+        $this->CreateTimeCompChart();
+    }
 
+    public function CreateDescChart()
+    {
+        $db = DBAccessSingleton::getInstance();
+        $usern = $db->username;
+
+
+    }
+
+    public function CreateTimeCompChart()
+    {
+        $db = DBAccessSingleton::getInstance();
+        $usern = $db->username;
+    }
+
+
+    private function CreateDummyChart() {
+
+        $db = DBAccessSingleton::getInstance();
+        $usern = $db->username;
+        
         $MyData = new pData();
         $MyData->addPoints(array(13251,4118,3087,1460,1248,156,26,9,8),"Hits");
         $MyData->setAxisName(0,"Hits");
@@ -62,8 +86,5 @@ class CreateCharts
         /* Render the picture (choose the best way) */
         //$myPicture->autoOutput("pictures/test.png");
         $myPicture->render("pictures/test.png");
-
     }
-
-
 }

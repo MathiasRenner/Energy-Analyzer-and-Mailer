@@ -13,76 +13,58 @@ include "CreateHtmlMail.php";
 include "SingletonSwiftMessage.php";
 include "DBAccess.php";
 
-$subject = 'Our MCM Mailing';
-$from = array('absender@live.com' =>'Absender');
-$to = array(
-    'xx.xx@gmail.com'  => 'xx'
-# ,'recipient2@example2.com' => 'Recipient2 Name'
-);
+// Parameter
+//echo $_GET['user'];
 
-$id = 9;
+// Init DB and get all relevant db entries
+$id = 9; // id will be set from outside
 $db = DBAccessSingleton::getInstance($id);
 //echo $db->address;
 //echo $db->username;
 
-$transport = Swift_SmtpTransport::newInstance('smtp-mail.outlook.com', 587, 'tls');
-$transport->setUsername('xx.xx@live.com');
-$transport->setPassword('xxx;');
-
-//$transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de');
-
-$mailer = Swift_Mailer::newInstance($transport);
-
-$text = "Here you can write plain Text";
-
-// Create the Charts
+// create all charts
 $createChart = new CreateCharts();
-$createChart->CreateDummyChart();
+$createChart->CreateAllCharts();
 
-// Create the message object
-$message = SingletonMessage::Instance();// new Swift_Message($subject);
-
-// Create the html mail including all pictures
+// Create the html mail including all pictures + html + style
 $htmlMailing = new CreateHtmlMail();
 $html = $htmlMailing->CreateHTMLMailing();
 
 
-use Openbuildings\Swiftmailer\CssInlinerPlugin;
-require "libs/CssToInlineStyles-master/src/CssToInlineStyles.php";
-use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
-require "libs/swiftmailer-css-inliner-master/src/CssInlinerPlugin.php";
+// the transport object
+// TODO: auf mail.uni.bamberg umstellen
+$transport = Swift_SmtpTransport::newInstance('smtp-mail.outlook.com', 587, 'tls');
+$transport->setUsername('xx.xx@live.com');
+$transport->setPassword('xxx;');
+//$transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de');
 
+// TODO: Absender anpassen
+// TODO: Dynamisch den addressaten abfragen über die db con
+$from = array('amphiro@live.com' =>'Amphiro_Absender');
+$to = array(
+    'xx.xx@gmail.com'  => 'xx'
+);
 
+// object for sending the finished mail
+$mailer = Swift_Mailer::newInstance($transport);
 
-$mailer->registerPlugin(new CssInlinerPlugin());
-
-
-
-// create instance
-//$cssToInlineStyles = new CssToInlineStyles();
-
-//$css = file_get_contents(__DIR__ . '/mailing.css');
-//$html = file_get_contents(__DIR__ . '/MailingDesign.html');
-//$cssToInlineStyles->setHTML($html);
-//$cssToInlineStyles->setCSS($css);
-// output
-//$html -> $cssToInlineStyles->convert();
+// Create the message object
+$message = SingletonMessage::Instance();
 
 // build your mail
 $message->setFrom($from);
 $message->setBody($html, 'text/html');
 
 // further infos
+$text = "Here you can write plain Text and further infos...";
+
 $message->setTo($to);
 $message->addPart($text, 'text/plain');
 
+// display for debug
 print $message->getBody();//toString();
 
-
-// Parameter
-//echo $_GET['user'];
-
 // for sending your email
-if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!'; } else { echo "There was an error:\n"; print_r($failures);}
+//if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!'; } else { echo "There was an error:\n"; print_r($failures);}
 
 ?>

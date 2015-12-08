@@ -17,7 +17,7 @@ final class SingletonMessage extends Swift_Message
     {
         static $inst = null;
         if ($inst === null) {
-            $subject = 'Our MCM Mailing';
+            $subject = 'This is your Ampiro Report! Together we can save the planet!';
             $inst = new Swift_Message($subject);
         }
         return $inst;

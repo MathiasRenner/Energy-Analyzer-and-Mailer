@@ -19,27 +19,30 @@ class DBAccessSingleton
 {
     //variable to hold db connection
     private $db;
+
+    // variable for all the funny stuff
     public $username;
     public $address;
 
-      static private $instance = null;
+    static private $instance = null;
 
-      static public function getInstance($id = 0)
-      {if (null === self::$instance)
-         {
+    static public function getInstance($id = 0)
+    {
+        if (null === self::$instance)
+        {
              self::$instance = new self;
 
-             self::$instance->runAll($id);
-         }
-         return self::$instance;
-     }
+             self::$instance->RunAll($id);
+        }
+        return self::$instance;
+    }
 
      private function __construct(){
          $this->db = mysqli_connect('***REMOVED***', '***REMOVED***', '***REMOVED***', '***REMOVED***');
      }
      private function __clone(){}
 
-    private function runAll($id)
+    private function RunAll($id)
     {
         $this->GetUsername($id);
         $this->SetAddress($id);
