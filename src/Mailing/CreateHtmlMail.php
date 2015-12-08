@@ -32,13 +32,20 @@ class CreateHtmlMail
         $classification = $this->GetClassification();
         $descinjunctive = $this->GetDescInj();
         $time = $this->GetTimeComparison();
-        $recommendations = $this->GetRecommendatios();
+        $recommendations = $this->GetRecommendations();
         $dummytext = $this->GetDummyHtml();
 
-        return $style .''. $priming .''. $descinjunctive  .''. $classification . '' . $time . '' . $recommendations;
+        return $dummytext;
+       // return $style .''. $priming .''. $descinjunctive  .''. $classification . '' . $time . '' . $recommendations;
+        //return  $priming .''. $descinjunctive  .''. $classification . '' . $time . '' . $recommendations;
         //. '' . $dummytext;
 
 
+    }
+
+    public function GetCss()
+    {
+        return $this->GetStyle();
     }
 
     private function GetRecommendations()
@@ -135,74 +142,13 @@ class CreateHtmlMail
 
     private function GetPriming()
     {
-        $db = DBAccessSingleton::getInstance();
-        $name = $db->username;
+    //    $db = DBAccessSingleton::getInstance();
+        //$name = 'MAX'; // $db->username;
         //$message = SingletonMessage::Instance();
         //$cid = $message->embed(Swift_Image::fromPath('pictures/test.png'));
 
 
-        return
-'
- <table cellpadding="0" cellspacing="0">
-    <tr>
-        <td class="pattern" width="800" align="center">
-            <table cellpadding="0" cellspacing="0">
-                <tr>
-                    <td class="col" width="200" valign="top">
-                        <table cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td class="hero_image"><img src="assets/priming_eisbaer.png" width="200" alt="" style="display: block; border: 0;" /></td>
-                            </tr>
-
-                        </table>
-                    </td>
-                    <td class="spacer" width="20" style="font-size: 1px;">&nbsp;</td>
-                    <td class="col" width="400" valign="top">
-                        <table cellpadding="0" cellspacing="0">
-
-                            <tr>
-                                <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    Together we are can save his world!
-                                    <hr/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                    Hallo ' .  $name .' </br>
-                                    We are pleased to provide you this personal report to help reduce energy consumption.
-                                    </br/>
-                                    The purpose of this report is to:
-                                    <lu>
-                                        <li><strong>provide information</strong></li>
-                                        <li><strong>help to track your progress</strong></li>
-                                        <li><strong>share energy saving tips</strong></li>
-                                    </lu>
-                                </td>
-                            </tr>
-                         </table>
-                    </td>
-
-                    <td class="spacer" width="20" style="font-size: 1px;">&nbsp;</td>
-
-                    <td class="col" width="200" valign="top">
-                        <table cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td class="hero_image"><img src="assets/logo.png" width="200" alt="" style="display: block; border: 0;" /></td>
-                            </tr>
-                             <tr>
-                               <!-- link auf amphiro oder einer anderen health care seite -->
-                            </tr>
-
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
-<hr>
-
-';
+        return include("priming.php");
     }
 
     private function GetClassification()
@@ -444,6 +390,29 @@ class CreateHtmlMail
     private function GetDummyHtml()
     {
         return '
+<html>
+
+<head>
+
+<style>
+
+  .buttonshare {
+        display: block;
+        width: 150px;
+        height: 20px;
+        background: #4E9CAF;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        }
+
+
+</style>
+</head>
+
+<body>
 <table cellpadding="0" cellspacing="0">
     <tr>
         <td class="pattern" width="600" align="center">
@@ -456,7 +425,7 @@ class CreateHtmlMail
                             </tr>
                             <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    This is a story headline
+                                  <a class="buttonshare" href="www.google.de">butttttoooon</a>
                                 </td>
                             </tr>
                             <tr>
@@ -523,6 +492,9 @@ class CreateHtmlMail
             </table>
         </td>
     </tr>
-</table>';
+</table>
+</body>
+</html>
+';
     }
 }

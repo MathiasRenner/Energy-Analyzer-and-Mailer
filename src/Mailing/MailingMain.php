@@ -16,7 +16,7 @@ include "DBAccess.php";
 $subject = 'Our MCM Mailing';
 $from = array('absender@live.com' =>'Absender');
 $to = array(
-    'xx.yy@gmail.com'  => 'xx'
+    'xx.xx@gmail.com'  => 'xx'
 # ,'recipient2@example2.com' => 'Recipient2 Name'
 );
 
@@ -26,8 +26,8 @@ $db = DBAccessSingleton::getInstance($id);
 //echo $db->username;
 
 $transport = Swift_SmtpTransport::newInstance('smtp-mail.outlook.com', 587, 'tls');
-$transport->setUsername('xx.yy@live.com');
-$transport->setPassword('123435;');
+$transport->setUsername('xx.xx@live.com');
+$transport->setPassword('xxx;');
 
 //$transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de');
 
@@ -46,6 +46,28 @@ $message = SingletonMessage::Instance();// new Swift_Message($subject);
 $htmlMailing = new CreateHtmlMail();
 $html = $htmlMailing->CreateHTMLMailing();
 
+
+use Openbuildings\Swiftmailer\CssInlinerPlugin;
+require "libs/CssToInlineStyles-master/src/CssToInlineStyles.php";
+use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
+require "libs/swiftmailer-css-inliner-master/src/CssInlinerPlugin.php";
+
+
+
+$mailer->registerPlugin(new CssInlinerPlugin());
+
+
+
+// create instance
+//$cssToInlineStyles = new CssToInlineStyles();
+
+//$css = file_get_contents(__DIR__ . '/mailing.css');
+//$html = file_get_contents(__DIR__ . '/MailingDesign.html');
+//$cssToInlineStyles->setHTML($html);
+//$cssToInlineStyles->setCSS($css);
+// output
+//$html -> $cssToInlineStyles->convert();
+
 // build your mail
 $message->setFrom($from);
 $message->setBody($html, 'text/html');
@@ -54,13 +76,13 @@ $message->setBody($html, 'text/html');
 $message->setTo($to);
 $message->addPart($text, 'text/plain');
 
-print $message->getBody();
+print $message->getBody();//toString();
 
 
 // Parameter
 //echo $_GET['user'];
 
 // for sending your email
-//if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!'; } else { echo "There was an error:\n"; print_r($failures);}
+if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!'; } else { echo "There was an error:\n"; print_r($failures);}
 
 ?>
