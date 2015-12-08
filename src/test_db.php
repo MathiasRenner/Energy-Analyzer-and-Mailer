@@ -7,6 +7,6 @@
  */
 $mysqli = mysqli_connect('***REMOVED***', '***REMOVED***', '***REMOVED***', '***REMOVED***');
 $res = mysqli_query($mysqli, "SELECT * FROM b1user");
-$row = mysqli_fetch_assoc($res);
+$row = mysqli_fetch_all($res);
 echo $row['username'];
 ?>

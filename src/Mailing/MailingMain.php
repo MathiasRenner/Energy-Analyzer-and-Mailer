@@ -35,7 +35,7 @@ $mailer = Swift_Mailer::newInstance($transport);
 
 $text = "Here you can write plain Text";
 
-// Craete the Charts
+// Create the Charts
 $createChart = new CreateCharts();
 $createChart->CreateDummyChart();
 
@@ -50,7 +50,7 @@ $html = $htmlMailing->CreateHTMLMailing();
 $message->setFrom($from);
 $message->setBody($html, 'text/html');
 
-// furhter infos
+// further infos
 $message->setTo($to);
 $message->addPart($text, 'text/plain');
 
