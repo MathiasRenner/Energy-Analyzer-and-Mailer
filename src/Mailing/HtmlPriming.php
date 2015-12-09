@@ -62,10 +62,20 @@ class HtmlPriming
                     <td class="col" width="200" valign="top">
                         <table cellpadding="0" cellspacing="0">
                             <tr>
-                                <td class="hero_image"><img src="assets/logo.png" width="200" alt="" style="display: block; border: 0;" /></td>
-                            </tr>
-                             <tr>
+                                <td class="hero_image">
+
+                                <img src="assets/logo.png" width="200" alt="" style="display: block; border: 0;" />
+
+                                &nbsp;
+                                <hr/>
+                                '. $db->email .' <br/>
+                                '. $db->firstname . '  '. $db->familyname .' <br/>
+                                '. $db->address.' <br/>
+                                '. $db->city .' <br/>
+
                                <!-- link auf amphiro oder einer anderen health care seite -->
+
+                                </td>
                             </tr>
 
                         </table>

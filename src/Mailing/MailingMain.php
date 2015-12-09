@@ -18,7 +18,8 @@ include "DBAccess.php";
 
 // Init DB and get all relevant db entries
 $id = 9; // id will be set from outside
-$db = DBAccessSingleton::getInstance($id);
+$db = DBAccessSingleton::getInstance();
+$db->RunAll($id);  // init database // TODO: or we use the deviceId...??
 //echo $db->address;
 //echo $db->username;
 
@@ -43,6 +44,7 @@ $transport->setPassword('xxx;');
 $from = array('amphiro@live.com' =>'Amphiro_Absender');
 $to = array(
     'xx.xx@gmail.com'  => 'xx'
+    , $db->email => $db->firstname . ' ' . $db->familyname
 );
 
 // object for sending the finished mail
