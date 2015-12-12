@@ -17,9 +17,15 @@ include "DBAccess.php";
 //echo $_GET['user'];
 
 // Init DB and get all relevant db entries
-$id = 9; // id will be set from outside
+$id = 69; // id will be set from outside
 $db = DBAccessSingleton::getInstance();
 $db->RunAll($id);  // init database // TODO: or we use the deviceId...??
+
+// Wenn ueber alle iteriert werden muss reicht ein update der userDaten
+//foreach ($users as $id) {
+//    $db->Update($id);
+//}
+
 //echo $db->address;
 //echo $db->username;
 

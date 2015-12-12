@@ -13,8 +13,20 @@ class HtmlPriming
     {
         $db = DBAccessSingleton::getInstance();
         $name = $db->username;
-        //$message = SingletonMessage::Instance();
-        //$cid = $message->embed(Swift_Image::fromPath('pictures/test.png'));
+        $message = SingletonMessage::Instance();
+        $cid = $message->embed(Swift_Image::fromPath('pictures/test.png'));
+
+        $calc = new Calculations();
+
+        $eClass = $calc->GetEfficiencyClass($calc->CalcEnergyUsageUser());
+        if($eClass == 'a')
+        {
+            // take this picture
+        }
+        elseif($eClass == 'c')
+        {
+            // take that other picture
+        }
 
         return
 
