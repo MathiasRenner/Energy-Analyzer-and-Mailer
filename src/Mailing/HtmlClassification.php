@@ -14,6 +14,9 @@ class HtmlClassification
     public function GetHtmlClassification()
     {
 
+        $message = SingletonMessage::Instance();
+        $cid = $message->embed(Swift_Image::fromPath('assets/eklasse.png'));
+
         // feature badge
         $db = DBAccessSingleton::getInstance();
         $aryReportedOn = $db->extractionsUserReportedOn;
@@ -99,7 +102,9 @@ class HtmlClassification
        </td>
     </tr>
     <tr>
-     <td rowspan="8" width="250px"> <img width="200px" src="assets/eklasse.png" > </td>
+     <!-- <td rowspan="8" width="250px"> <img width="200px" src="assets/eklasse.png" > </td> -->
+
+     <td rowspan="8" width="250px"> <img width="200px" src="'.$cid.'" > </td>
      <td align="left"> ' . $aa . '  </td>
     </tr>
     <tr>

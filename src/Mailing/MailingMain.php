@@ -41,15 +41,15 @@ $html = $htmlMailing->CreateHTMLMailing();
 // the transport object
 // TODO: auf mail.uni.bamberg umstellen
 $transport = Swift_SmtpTransport::newInstance('smtp-mail.outlook.com', 587, 'tls');
-$transport->setUsername('xx.xx@live.com');
-$transport->setPassword('xxx;');
+$transport->setUsername('xx.maximilian@live.com');
+$transport->setPassword('xx;');
 //$transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de');
 
 // TODO: Absender anpassen
 // TODO: Dynamisch den addressaten abfragen über die db con
 $from = array('amphiro@live.com' =>'Amphiro_Absender');
 $to = array(
-    'xx.xx@gmail.com'  => 'xx'
+    '-renner.de'  => 'Hey hey'
     , $db->email => $db->firstname . ' ' . $db->familyname
 );
 

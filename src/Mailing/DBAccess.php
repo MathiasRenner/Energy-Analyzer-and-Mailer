@@ -124,7 +124,7 @@ class DBAccessSingleton
         {
             $query = $query . " OR id = ". $extractionId;
         }
-        $query = $query . " ORDER BY showerID DESC;";// Limit 10;";
+        $query = $query . " ORDER BY showerID;";// Limit 10;";
 
         $res = mysqli_query($this->db, $query);
         while($row = mysqli_fetch_object($res))
@@ -140,17 +140,19 @@ class DBAccessSingleton
             {
                 $he = $row->heatingEfficiency;
             }
-            // TODO: TIME
             if(!is_null($row->volume) && $row->volume > 0 &&
                 !is_null($row->temperature) && $row->temperature > 0 )
             {
                 array_push($this->energyUser, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he/ 100));
-                array_push($this->extractionsUserReportedOn, $this->GetDate($row->reportedOn));
+                if($this->GetDate('')!= $this->GetDate($row->reportedOn))
+                {
+                    array_push($this->extractionsUserReportedOn, $this->GetDate($row->reportedOn));
+                }
             }
         }
     }
 
-    public function SetAllUserEnergy()
+    private function SetAllUserEnergy()
     {
         $calc = new Calculations();
 
