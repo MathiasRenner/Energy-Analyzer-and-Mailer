@@ -49,7 +49,7 @@ class Calculations
     {
         $db = DBAccessSingleton::getInstance();
 
-        $avgEnergyUser = array_sum(array_slice($db->energyUser,0,10)) / count(array_slice($db->energyUser,0,10));
+        $avgEnergyUser = array_sum(array_slice($db->energyUser,-10,10)) / count(array_slice($db->energyUser,-10,10));
 
         return round($avgEnergyUser);
     }
@@ -97,13 +97,13 @@ class Calculations
     Grundtemperatur Wasser: Kann konfiguriert werden, ist aber standardmäßig auf 10°C festgeleget
     n:  Effizienz = 100% (ist standardmäßig so festgelegt, kann aber konfiguriert werden bei Bedarf)
 
-     * TODO: oder doch die andere berechnung
+     *
      *
      *
      */
     public function CalcEnergy($volume, $hotWater, $coldWater, $heat)
     {
-        $c = 1;
+        $c = 4200/3600; // 1
         $energy =  $c * $volume * ($hotWater - $coldWater) / $heat;
 
         $energy = round($energy);

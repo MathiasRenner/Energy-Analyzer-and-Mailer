@@ -104,7 +104,7 @@ class CreateCharts
 
         /* Create and populate the pData object */
         $MyData = new pData();
-        $MyData->addPoints($userExtractions,$usern);
+        $MyData->addPoints(array_slice($userExtractions,-10,10),$usern);
 
         $serieSettings = array("R"=>66,"G"=>106,"B"=>131);
         $MyData->setPalette($usern,$serieSettings);

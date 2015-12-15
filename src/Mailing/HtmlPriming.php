@@ -14,7 +14,7 @@ class HtmlPriming
         $db = DBAccessSingleton::getInstance();
         $name = $db->username;
         $message = SingletonMessage::Instance();
-        $cid = $message->embed(Swift_Image::fromPath('pictures/test.png'));
+        $cid = $message->embed(Swift_Image::fromPath('assets/priming_eisbaer.png'));
 
         $calc = new Calculations();
 
@@ -38,7 +38,8 @@ class HtmlPriming
                     <td class="col" width="200" valign="top">
                         <table cellpadding="0" cellspacing="0">
                             <tr>
-                                <td class="hero_image"><img src="assets/priming_eisbaer.png" width="200" alt="" style="display: block; border: 0;" /></td>
+                     <!--           <td class="hero_image"><img src="assets/priming_eisbaer.png" width="200" alt="" style="display: block; border: 0;" /></td> -->
+                                <td class="hero_image"><img src="'. $cid  .'" width="200" alt="" style="display: block; border: 0;" /></td>
                             </tr>
 
                         </table>
@@ -57,7 +58,7 @@ class HtmlPriming
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
                                     Hallo ' .  $name .' </br>
                                     We are pleased to provide you this personal report to help reduce energy consumption.
-                                    </br/>
+                                    <br/>
                                     The purpose of this report is to:
                                     <lu>
                                         <li><strong>provide information</strong></li>

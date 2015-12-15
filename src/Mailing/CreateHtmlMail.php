@@ -28,7 +28,7 @@ class CreateHtmlMail
         $timecomp = new HtmlTimeComp();
         $recommendations = new HtmlRecommendations();
 
-        $style = $this->GetStyle();
+        $htmlheadmeta = $this->GetHtmlHeadMeta();
 
         $priming_html =  $priming->GetHtmlPriming();
         $classification_html = $classification->GetHtmlClassification();
@@ -36,76 +36,18 @@ class CreateHtmlMail
         $timecomp_html = $timecomp->GetHtmlTimeComp();
         $recommendations_html = $recommendations->GetHtmlRecommendations();
 
-        //$dummytext = $this->GetDummyHtml();
-
-        return $style .''. $priming_html .''. $descinj_html  .''. $classification_html . '' . $timecomp_html . '' . $recommendations_html;
+        return $htmlheadmeta . '' . $priming_html .''. $descinj_html  .''. $classification_html . '' . $timecomp_html . '' . $recommendations_html . '</body></html>';
     }
 
-    public function GetCss()
+    private function GetHtmlHeadMeta()
     {
-        return $this->GetStyle();
-    }
-
-    private function GetStyle()
-    {
-       return
-           '<style>
-
-
-    .content-shadow {
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-  float: right;
-  margin: 0 0 10px;
-  min-height: 400px;
-  padding: 15px;
-  width: 800px;
-}
-
-    /* First Section (Header), 1 Column */
-	@media only screen and (max-width: 599px) {
-        td[class="hero1"] img {
-            width: 100%;
-            height: auto !important;
-        }
-	    td[class="pattern1"] td{
-	        width: 100%;
-	    }
-	}
-
-	/* Middle Section, 2 Columns */
-	@media only screen and (max-width: 599px) {
-        td[class="pattern2"] table { width: 100%; }
-        td[class="pattern2"] .hero_image img {
-            width: 100%;
-            height: auto !important;
-        }
-	}
-    @media only screen and (max-width: 450px) {
-        td[class="pattern2"] .spacer { display: none; }
-        td[class="pattern2"] .col{
-            width: 100%;
-            display: block;
-        }
-        td[class="pattern2"] .col:first-child { margin-bottom: 30px; }
-        td[class="pattern2"] .hero_image img { width: 100%; }
-    }
-
-     .buttonshare {
-        display: block;
-        width: 150px;
-        height: 20px;
-        background: #4E9CAF;
-        padding: 10px;
-        text-align: center;
-        border-radius: 5px;
-        color: white;
-        font-weight: bold;
-        }
-
-    </style>
-    ';
+        return '<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                    <title>Amphiro Report 0.1</title>
+                </head>
+                <body>';
     }
 
     private function GetDummyHtml()

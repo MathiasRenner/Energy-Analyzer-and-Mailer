@@ -6,6 +6,11 @@
  * Time: 17:42
  */
 
+require_once 'config.php';
+require_once __DIR__ . '/vendor/autoload.php';
+
+use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
+
 include_once "libs/swiftmailer/lib/swift_required.php";
 
 include "CreateCharts.php";
@@ -17,7 +22,7 @@ include "DBAccess.php";
 //echo $_GET['user'];
 
 // Init DB and get all relevant db entries
-$id = 69; // id will be set from outside
+$id = 1; // id will be set from outside
 $db = DBAccessSingleton::getInstance();
 $db->RunAll($id);  // init database // TODO: or we use the deviceId...??
 
@@ -25,9 +30,6 @@ $db->RunAll($id);  // init database // TODO: or we use the deviceId...??
 //foreach ($users as $id) {
 //    $db->Update($id);
 //}
-
-//echo $db->address;
-//echo $db->username;
 
 // create all charts
 $createChart = new CreateCharts();
@@ -37,19 +39,27 @@ $createChart->CreateAllCharts();
 $htmlMailing = new CreateHtmlMail();
 $html = $htmlMailing->CreateHTMLMailing();
 
+// inline css
+$cssToInlineStyles = new CssToInlineStyles();
+$css = file_get_contents(__DIR__ . '/mailing.css');
+$cssToInlineStyles->setHTML($html);
+$cssToInlineStyles->setCSS($css);
+// output
+$html = $cssToInlineStyles->convert();
+
 
 // the transport object
 // TODO: auf mail.uni.bamberg umstellen
 $transport = Swift_SmtpTransport::newInstance('smtp-mail.outlook.com', 587, 'tls');
-$transport->setUsername('xx.maximilian@live.com');
-$transport->setPassword('xx;');
+$transport->setUsername('xx.xx@live.com');
+$transport->setPassword('xxx');
 //$transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de');
 
 // TODO: Absender anpassen
 // TODO: Dynamisch den addressaten abfragen über die db con
 $from = array('amphiro@live.com' =>'Amphiro_Absender');
 $to = array(
-    '-renner.de'  => 'Hey hey'
+    'xx.xx@gmail.com'  => 'our dummy account to send the mail'
     , $db->email => $db->firstname . ' ' . $db->familyname
 );
 
@@ -64,10 +74,11 @@ $message->setFrom($from);
 $message->setBody($html, 'text/html');
 
 // further infos
-$text = "Here you can write plain Text and further infos...";
+$text = "This is your Amphiro report. Together we can save the planet!";
 
 $message->setTo($to);
 $message->addPart($text, 'text/plain');
+
 
 // display for debug
 print $message->getBody();//toString();
