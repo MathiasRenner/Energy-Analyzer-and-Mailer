@@ -17,7 +17,7 @@ include "DBAccess.php";
 //echo $_GET['user'];
 
 // Init DB and get all relevant db entries
-$id = 69; // id will be set from outside
+$id = 12; // id will be set from outside
 $db = DBAccessSingleton::getInstance();
 $db->RunAll($id);  // init database // TODO: or we use the deviceId...??
 
@@ -40,17 +40,17 @@ $html = $htmlMailing->CreateHTMLMailing();
 
 // the transport object
 // TODO: auf mail.uni.bamberg umstellen
-$transport = Swift_SmtpTransport::newInstance('smtp-mail.outlook.com', 587, 'tls');
-$transport->setUsername('xx.xx@live.com');
-$transport->setPassword('xxx;');
+$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 587, 'tls');
+$transport->setUsername('eesys.mcm.mailer@gmail.com');
+$transport->setPassword('eesys.mcm.mailer1516');
 //$transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de');
 
 // TODO: Absender anpassen
 // TODO: Dynamisch den addressaten abfragen über die db con
-$from = array('amphiro@live.com' =>'Amphiro_Absender');
+$from = array('eesys.mcm.mailer@gmail.com' =>'Amphiro_Absender');
 $to = array(
-    'xx.xx@gmail.com'  => 'xx'
-    , $db->email => $db->firstname . ' ' . $db->familyname
+    'eesys.mcm.mailer@gmail.com'  => 'our dummy account to send the mail'
+    //, $db->email => $db->firstname . ' ' . $db->familyname
 );
 
 // object for sending the finished mail
