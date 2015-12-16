@@ -56,7 +56,7 @@ class HtmlPriming
                             </tr>
                             <tr>
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                    Hallo ' .  $name .' </br>
+                                    Hallo ' .  $name .'! <br/>
                                     We are pleased to provide you this personal report to help reduce energy consumption.
                                     <br/>
                                     The purpose of this report is to:

@@ -60,7 +60,7 @@ $transport->setPassword('eesys.mcm.mailer1516');
 $from = array('eesys.mcm.mailer@gmail.com' =>'Amphiro_Absender');
 $to = array(
     'eesys.mcm.mailer@gmail.com'  => 'our dummy account to send the mail'
-    , $db->email => $db->firstname . ' ' . $db->familyname
+    //, $db->email => $db->firstname . ' ' . $db->familyname
 );
 
 // object for sending the finished mail

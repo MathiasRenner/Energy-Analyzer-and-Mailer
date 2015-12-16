@@ -26,15 +26,15 @@ class HtmlDescInj
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    Desc Heading
+                                    Your summary
                                 </td>
                             </tr>
                             <tr>
-                                <td class="hero_image"><img src="pictures/descChart.png" width="500" alt="" style="display: block; border: 0;" /></td>
+                                <td class="hero_image"><img src="pictures/descChart.png" width="500" alt="" style="display: block; border: 0;"> </td>
                             </tr>
                             <tr>
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                Genauerer beschreibung desc
+                                Genauere Beschreibung
                                 </td>
                             </tr>
                         </table>
@@ -42,17 +42,19 @@ class HtmlDescInj
                     <td class="spacer" width="20" style="font-size: 1px;">&nbsp;</td>
                     <td class="col" width="190" valign="top">
                       <table cellpadding="0" cellspacing="0">
+                           <!--
                             <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
                                    Inj heading
                                 </td>
                             </tr>
+                            -->
                             <tr>
                                 <td class="hero_image"><img src="pictures/injBelow.png.png" width="190" alt="" style="display: block; border: 0;" /></td>
                             </tr>
                             <tr>
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                Genauerer beschreibung des smileys
+                                Genauere Beschreibung des smileys
                                 </td>
                             </tr>
                         </table>

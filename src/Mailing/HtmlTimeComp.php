@@ -26,15 +26,15 @@ class HtmlTimeComp
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    Time Heading
+                                    See how you are you doing compared to your neighborhood
                                 </td>
                             </tr>
                             <tr>
-                                <td class="hero_image"><img src="pictures/timeCompChart.png" width="720" alt="" style="display: block; border: 0;" /></td>
+                                <td class="hero_image"><img src="pictures/timeCompChart.png" width="720" alt="" style="display: block; border: 0; padding-top: 10px;" /></td>
                             </tr>
                             <tr>
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                Genauerer beschreibung desc
+                                Genauere Beschreibung
                                 </td>
                             </tr>
                         </table>

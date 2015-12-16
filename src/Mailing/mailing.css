@@ -15,6 +15,8 @@
     td[class="pattern2"] .hero_image img {
         width: 100%;
         height: auto !important;
+
+
     }
 }
 @media only screen and (max-width: 450px) {
@@ -22,15 +24,16 @@
     td[class="pattern2"] .col{
         width: 100%;
         display: block;
+
     }
-    td[class="pattern2"] .col:first-child { margin-bottom: 30px; }
+    td[class="pattern2"] .col:first-child { margin-bottom: 30px;}
     td[class="pattern2"] .hero_image img { width: 100%; }
 }
 
 .buttonshare {
     display: block;
     width: 150px;
-    height: 20px;
+    height: 35px;
     background: #4E9CAF;
     padding: 10px;
     text-align: center;

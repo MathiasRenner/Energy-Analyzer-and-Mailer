@@ -59,28 +59,28 @@ class HtmlClassification
 
 
         if ($class == 'aa') {
-            $aa = '<h2>Your here</h2>';
+            $aa = '<h2>You&apos;re here</h2>';
         }
         if ($class == 'a') {
-            $a = '<h2>Your here</h2>';
+            $a = '<h2>You&apos;re here</h2>';
         }
         if ($class == 'b') {
-            $b = '<h2>Your here</h2>';
+            $b = '<h2>You&apos;re here</h2>';
         }
         if ($class == 'c') {
-            $c = '<h2>Your here</h2>';
+            $c = '<h2>You&apos;re here</h2>';
         }
         if ($class == 'd') {
-            $d = '<h2>Your here</h2>';
+            $d = '<h2>You&apos;re here</h2>';
         }
         if ($class == 'e') {
-            $e = '<h2>Your here</h2>';
+            $e = '<h2>You&apos;re here</h2>';
         }
         if ($class == 'f') {
-            $f = '<h2>Your here</h2>';
+            $f = '<h2>You&apos;re here</h2>';
         }
         if ($class == 'g') {
-            $g = '<h2>Your here</h2>';
+            $g = '<h2>You&apos;re here</h2>';
         }
 
         // feature twitter
@@ -99,13 +99,13 @@ class HtmlClassification
   <table class="content-shadow" cellpadding="0" cellspacing="0" width="500">
     <tr>
        <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
-       efficiency clustering
+       Your position on the efficiency scale
        </td>
     </tr>
     <tr>
      <!-- <td rowspan="8" width="250px"> <img width="200px" src="assets/eklasse.png" > </td> -->
 
-     <td rowspan="8" width="250px"> <img width="200px" src="'.$cid.'" > </td>
+     <td rowspan="8" width="250px"> <img width="200px" src="'.$cid.'"> </td>
      <td align="left"> ' . $aa . '  </td>
     </tr>
     <tr>
@@ -139,7 +139,7 @@ class HtmlClassification
 
                             <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    Infos
+                                    Share your achievement!
                                 </td>
                             </tr>
                             <tr>
@@ -156,7 +156,7 @@ class HtmlClassification
 
                               <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    Gamification
+                                    Your wall of badges
                                 </td>
                             </tr>
                             <tr>
