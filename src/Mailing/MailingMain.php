@@ -6,6 +6,11 @@
  * Time: 17:42
  */
 
+require_once 'config.php';
+require_once __DIR__ . '/vendor/autoload.php';
+
+use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
+
 include_once "libs/swiftmailer/lib/swift_required.php";
 
 include "CreateCharts.php";
@@ -17,7 +22,7 @@ include "DBAccess.php";
 //echo $_GET['user'];
 
 // Init DB and get all relevant db entries
-$id = 12; // id will be set from outside
+$id = 1; // id will be set from outside
 $db = DBAccessSingleton::getInstance();
 $db->RunAll($id);  // init database // TODO: or we use the deviceId...??
 
@@ -26,9 +31,6 @@ $db->RunAll($id);  // init database // TODO: or we use the deviceId...??
 //    $db->Update($id);
 //}
 
-//echo $db->address;
-//echo $db->username;
-
 // create all charts
 $createChart = new CreateCharts();
 $createChart->CreateAllCharts();
@@ -36,6 +38,14 @@ $createChart->CreateAllCharts();
 // Create the html mail including all pictures + html + style
 $htmlMailing = new CreateHtmlMail();
 $html = $htmlMailing->CreateHTMLMailing();
+
+// inline css
+$cssToInlineStyles = new CssToInlineStyles();
+$css = file_get_contents(__DIR__ . '/mailing.css');
+$cssToInlineStyles->setHTML($html);
+$cssToInlineStyles->setCSS($css);
+// output
+$html = $cssToInlineStyles->convert();
 
 
 // the transport object
@@ -50,7 +60,7 @@ $transport->setPassword('eesys.mcm.mailer1516');
 $from = array('eesys.mcm.mailer@gmail.com' =>'Amphiro_Absender');
 $to = array(
     'eesys.mcm.mailer@gmail.com'  => 'our dummy account to send the mail'
-    //, $db->email => $db->firstname . ' ' . $db->familyname
+    , $db->email => $db->firstname . ' ' . $db->familyname
 );
 
 // object for sending the finished mail
@@ -64,10 +74,11 @@ $message->setFrom($from);
 $message->setBody($html, 'text/html');
 
 // further infos
-$text = "Here you can write plain Text and further infos...";
+$text = "This is your Amphiro report. Together we can save the planet!";
 
 $message->setTo($to);
 $message->addPart($text, 'text/plain');
+
 
 // display for debug
 print $message->getBody();//toString();

@@ -14,6 +14,9 @@ class HtmlClassification
     public function GetHtmlClassification()
     {
 
+        $message = SingletonMessage::Instance();
+        $cid = $message->embed(Swift_Image::fromPath('assets/eklasse.png'));
+
         // feature badge
         $db = DBAccessSingleton::getInstance();
         $aryReportedOn = $db->extractionsUserReportedOn;
@@ -42,6 +45,7 @@ class HtmlClassification
         echo '<hr>';
         echo $energytw;
         echo $classtw;
+        echo '<hr>';
 
 
         $aa = '&nbsp;';
@@ -55,28 +59,28 @@ class HtmlClassification
 
 
         if ($class == 'aa') {
-            $aa = 'Your here';
+            $aa = '<h2>Your here</h2>';
         }
         if ($class == 'a') {
-            $a = 'Your here';
+            $a = '<h2>Your here</h2>';
         }
         if ($class == 'b') {
-            $b = 'Your here';
+            $b = '<h2>Your here</h2>';
         }
         if ($class == 'c') {
-            $c = 'Your here';
+            $c = '<h2>Your here</h2>';
         }
         if ($class == 'd') {
-            $d = 'Your here';
+            $d = '<h2>Your here</h2>';
         }
         if ($class == 'e') {
-            $e = 'Your here';
+            $e = '<h2>Your here</h2>';
         }
         if ($class == 'f') {
-            $f = 'Your here';
+            $f = '<h2>Your here</h2>';
         }
         if ($class == 'g') {
-            $g = 'Your here';
+            $g = '<h2>Your here</h2>';
         }
 
         // feature twitter
@@ -92,14 +96,16 @@ class HtmlClassification
     <tr>
         <td class="pattern" width="500" align="center">
 
-  <table class="content-shadow" cellpadding="0" cellspacing="0" style="width: 500px" >
+  <table class="content-shadow" cellpadding="0" cellspacing="0" width="500">
     <tr>
        <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
        efficiency clustering
        </td>
     </tr>
     <tr>
-     <td rowspan="8" width="250px"> <img width="200px" src="assets/eklasse.png" > </td>
+     <!-- <td rowspan="8" width="250px"> <img width="200px" src="assets/eklasse.png" > </td> -->
+
+     <td rowspan="8" width="250px"> <img width="200px" src="'.$cid.'" > </td>
      <td align="left"> ' . $aa . '  </td>
     </tr>
     <tr>

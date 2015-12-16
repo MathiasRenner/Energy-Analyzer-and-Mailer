@@ -28,6 +28,9 @@ class CreateCharts
 
     public function CreateDescChart()
     {
+        $db = DBAccessSingleton::getInstance();
+        $usern = $db->username;
+
         $calculations = new Calculations();
 
         $energy_user = $calculations->CalcEnergyUsageUser();
@@ -37,10 +40,12 @@ class CreateCharts
         //$font1 = "libs/charts/pChart2_1_4/fonts/calibri.ttf";
         $font2 = "libs/charts/pChart2_1_4/fonts/calibri.ttf";
 
-        $myDescData = new pData();
+        //Farbschema
         $color_top20 = array("R"=>11,"G"=>71,"B"=>101,"Alpha"=>100);
         $color_average = array("R"=>48,"G"=>107,"B"=>136,"Alpha"=>100);
         $color_user = array("R"=>95,"G"=>142,"B"=>164,"Alpha"=>100);
+
+        $myDescData = new pData();
 
         // Fallunterscheidung: Anordnung der Balken
         if($energy_user < $energy_top20){
@@ -75,26 +80,17 @@ class CreateCharts
         }
 
         $myDescData->setAbscissa("Labels");
-
-
-// 3. Ein image Objekt erzeugen, um $myData zu visualisieren
+        // Ein image Objekt erzeugen, um $myDescData zu visualisieren
         $myDescChart = new pImage(500, 300, $myDescData);
-
-// 4. Hier ggf. die Schriftart und Größe ändern
+        // Hier ggf. die Schriftart und Größe ändern
         $myDescChart->setFontProperties(array("FontName"=>$font2,"FontSize"=>11,"R"=>80,"G"=>80,"B"=>80));
-
-
-// 5. Die Daten-Area in der Grafik muss kleiner sein, als die Grafik selbst
+        // Die Daten-Area in der Grafik muss kleiner sein, als die Grafik selbst
         $myDescChart->setGraphArea(70,35, 475, 275);
-
-// 6. Horizontale und vertikale Skalierung (in diesem Fall ohne Parameter = Standard)
+        // Horizontale und vertikale Skalierung (in diesem Fall ohne Parameter = Standard)
         $myDescChart->drawScale(array("CycleBackground"=>TRUE,"DrawSubTicks"=>TRUE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>10, "Pos"=>SCALE_POS_TOPBOTTOM));
-
-
-// 7. Chart erzeugen
+        // Chart erzeugen
         $myDescChart->drawBarChart(array("DisplayValues"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$Palette));
-
-        //8. Bilddatei ausgeben
+        // Bilddatei ausgeben
         $myDescChart->render("pictures/descChart.png");
     }
 
@@ -102,6 +98,74 @@ class CreateCharts
     {
         $db = DBAccessSingleton::getInstance();
         $usern = $db->username;
+        $userExtractions = $db-> energyUser;
+
+        $font2 = "libs/charts/pChart2_1_4/fonts/calibri.ttf";
+
+        /* Create and populate the pData object */
+        $MyData = new pData();
+        $MyData->addPoints(array_slice($userExtractions,-10,10),$usern);
+
+        $serieSettings = array("R"=>66,"G"=>106,"B"=>131);
+        $MyData->setPalette($usern,$serieSettings);
+
+        $MyData->setSerieWeight($usern, 1);
+        //$MyData->setSerieTicks("Probe 2",4);
+        $MyData->setAxisName(0,"");
+        //TODO: x-Achsenbezeichnung an Daten anpassen
+        $MyData->addPoints(range(1,10),"Labels");
+        //$MyData->setSerieDescription("Labels","Months");
+        $MyData->setAbscissa("Labels");
+
+        /* Create the pChart object */
+        $myPicture = new pImage(700,230,$MyData);
+
+        /* Turn of Antialiasing */
+        $myPicture->Antialias = TRUE;
+
+        /* Draw the background */
+        $Settings = array("R"=>150, "G"=>169, "B"=>180, "Dash"=>0, "DashR"=>36, "DashG"=>81, "DashB"=>107);
+        $myPicture->drawFilledRectangle(0,0,700,230,$Settings);
+
+        /* Overlay with a gradient */
+        //$Settings = array("StartR"=>219, "StartG"=>231, "StartB"=>139, "EndR"=>1, "EndG"=>138, "EndB"=>68, "Alpha"=>50);
+        //$myPicture->drawGradientArea(0,0,700,230,DIRECTION_VERTICAL,$Settings);
+        //$myPicture->drawGradientArea(0,0,700,20,DIRECTION_VERTICAL,array("StartR"=>0,"StartG"=>0,"StartB"=>0,"EndR"=>50,"EndG"=>50,"EndB"=>50,"Alpha"=>80));
+
+        /* Add a border to the picture */
+        $myPicture->drawRectangle(0,0,699,229,array("R"=>0,"G"=>0,"B"=>0));
+
+        /* Write the chart title */
+        $myPicture->setFontProperties(array("FontName"=>$font2,"FontSize"=>8,"R"=>255,"G"=>255,"B"=>255));
+        $myPicture->drawText(10,16,"Energy Consumption per Shower",array("FontSize"=>13,"Align"=>TEXT_ALIGN_BOTTOMLEFT));
+
+        /* Set the default font */
+        $myPicture->setFontProperties(array("FontName"=>$font2,"FontSize"=>11,"R"=>0,"G"=>0,"B"=>0));
+
+        /* Define the chart area */
+        $myPicture->setGraphArea(60,40,650,200);
+
+        /* Draw the scale */
+        $scaleSettings = array("XMargin"=>10,"YMargin"=>10,"Floating"=>TRUE,"GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
+        $myPicture->drawScale($scaleSettings);
+
+        /* Turn on Antialiasing */
+        $myPicture->Antialias = TRUE;
+
+        /* Enable shadow computing */
+        $myPicture->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+
+        /* Draw the line chart */
+        $myPicture->drawLineChart(array("DisplayColor"=>DISPLAY_MANUAL));
+        $myPicture->drawPlotChart(array("DisplayValues"=>TRUE,"PlotBorder"=>TRUE,"BorderSize"=>2,"Surrounding"=>-60,"BorderAlpha"=>80));
+
+        /* Write the chart legend */
+        $myPicture->drawLegend(590,9,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL,"FontR"=>255,"FontG"=>255,"FontB"=>255));
+
+        /* Render the picture (choose the best way) */
+        $myPicture->render("pictures/timeCompChart.png");
+
+
     }
 
 
