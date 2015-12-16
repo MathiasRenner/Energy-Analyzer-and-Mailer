@@ -80,7 +80,7 @@ class HtmlClassification
         }
 
         // feature twitter
-        $ttext = 'Together+we+save+the+planet!+My+efficiencyclass+for+the+last+showers+were+' . strtoupper($class) . '+with+' . $energy . '+kWh+per+shower!';
+        $ttext = 'Let\'s+save+the+planet!+My+efficiency+class+for+the+last+showers+were+' . strtoupper($class) . '+with+' . $energy . '+Wh+per+shower!';
         $twittertext = 'https://twitter.com/intent/tweet?url=http%3A%2F%2Famphiro.com&text='. $ttext .'&via=AmphiroAG';
 
 
@@ -138,7 +138,7 @@ class HtmlClassification
                             </tr>
                             <tr>
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                   Your average efficiency-class for the last 10 <br/> showers were <b>'. strtoupper($class) .' </b> with <b>'. $energy .' </b>  kWh per shower!
+                                   Your average efficiency-class for the last 10 <br/> showers were <b>'. strtoupper($class) .' </b> with <b>'. $energy .' </b>  Wh per shower!
                                     </td>
                             </tr>
                             <tr>
