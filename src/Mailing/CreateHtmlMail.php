@@ -95,7 +95,7 @@ class CreateHtmlMail
      .buttonshare {
         display: block;
         width: 150px;
-        height: 20px;
+        height: 30px;
         background: #4E9CAF;
         padding: 10px;
         text-align: center;
