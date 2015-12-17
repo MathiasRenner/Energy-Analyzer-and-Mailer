@@ -35,6 +35,7 @@ class DBAccessSingleton
     public $country;
 
     public $extractionsUserReportedOn = array();
+    public $extractionUserCount;
 
     public $energyUser = array();
     public $energyAllUser = array();
@@ -129,6 +130,7 @@ class DBAccessSingleton
         $res = mysqli_query($this->db, $query);
         while($row = mysqli_fetch_object($res))
         {
+            $this->extractionUserCount = $this->extractionUserCount + 1;
 
             $cwT = 10;
             if(!is_null($row->coldWaterTemperature) && $row->coldWaterTemperature > 10)

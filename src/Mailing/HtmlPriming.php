@@ -38,8 +38,8 @@ class HtmlPriming
                     <td class="col" width="200" valign="top">
                         <table cellpadding="0" cellspacing="0">
                             <tr>
-                     <!--           <td class="hero_image"><img src="assets/priming_eisbaer.png" width="200" alt="" style="display: block; border: 0;" /></td> -->
-                                <td class="hero_image"><img src="'. $cid  .'" width="200" alt="" style="display: block; border: 0;" /></td>
+                                <td class="hero_image"><img src="assets/priming_eisbaer.png" width="200" alt="" style="display: block; border: 0;" /></td>
+                     <!--           <td class="hero_image"><img src="'. $cid  .'" width="200" alt="" style="display: block; border: 0;" /></td> -->
                             </tr>
 
                         </table>

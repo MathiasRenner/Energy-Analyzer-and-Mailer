@@ -15,14 +15,50 @@ class HtmlClassification
     {
 
         $message = SingletonMessage::Instance();
-        $cid = $message->embed(Swift_Image::fromPath('assets/eklasse.png'));
+        //$cid = $message->embed(Swift_Image::fromPath('assets/eklasse.png'));
 
         // feature badge
         $db = DBAccessSingleton::getInstance();
         $aryReportedOn = $db->extractionsUserReportedOn;
         $aryUniqueReportOn = array_unique($aryReportedOn);
         $reportCount = count($aryUniqueReportOn);
+        $upload = 0;
+
+        if($db->extractionUserCount < 50)
+        {
+            $extractionUserCount = $db->extractionUserCount;
+        }
+        else
+        {
+            $extractionUserCount = 50;
+        }
         // select the right badge
+        if($reportCount < 10)
+        {
+            $badge = '<td><img width="140" height="82" src="assets/badges/g1.png"></td>';
+            $upload = 10;
+        }
+        elseif($reportCount >= 10 && $reportCount < 50)
+        {
+            $badge = '<td><img src="assets/badges/g2.png"></td>';
+            $upload = 50;
+        }
+        elseif($reportCount >= 50 && $reportCount < 100)
+        {
+            $badge = '<td><img src="assets/badges/g3.png"></td>';
+            $upload = 100;
+        }
+        elseif($reportCount >= 100 && $reportCount < 200)
+        {
+            $badge = '<td><img src="assets/badges/g4.png"></td>';
+            $upload = 200;
+        }
+        elseif($reportCount >= 200)
+        {
+            $badge = '<td><img src="assets/badges/g5.png"></td>';
+            $upload = 400;
+        }
+
 
         // feature classification
         $calc = new Calculations();
@@ -47,40 +83,38 @@ class HtmlClassification
         echo $classtw;
         echo '<hr>';
 
-
-        $aa = '&nbsp;';
-        $a = '&nbsp;';
-        $b = '&nbsp;';
-        $c = '&nbsp;';
-        $d = '&nbsp;';
-        $e = '&nbsp;';
-        $f = '&nbsp;';
-        $g = '&nbsp;';
-
+        $rowAA = '<td> <img width="auto" height="40px" src="assets/classifications/AA.png" > </td>';
+        $rowA = '<td> <img width="auto" height="40px" src="assets/classifications/A.png" > </td>';
+        $rowB = '<td> <img width="auto" height="40px" src="assets/classifications/B.png" > </td>';
+        $rowC = '<td> <img width="auto" height="40px" src="assets/classifications/C.png" > </td>';
+        $rowD = '<td> <img width="auto" height="40px" src="assets/classifications/D.png" > </td>';
+        $rowE = '<td> <img width="auto" height="40px" src="assets/classifications/E.png" > </td>';
+        $rowF = '<td> <img width="auto" height="40px" src="assets/classifications/F.png" > </td>';
+        $rowG = '<td> <img width="auto" height="40px" src="assets/classifications/G.png" > </td>';
 
         if ($class == 'aa') {
-            $aa = '<h2>You&apos;re here</h2>';
+            $rowAA = '<td> <img width="auto" height="40px" src="assets/classifications/AAY.png" > </td>';
         }
         if ($class == 'a') {
-            $a = '<h2>You&apos;re here</h2>';
+            $rowA = '<td> <img width="auto" height="40px" src="assets/classifications/AY.png" > </td>';
         }
         if ($class == 'b') {
-            $b = '<h2>You&apos;re here</h2>';
+            $rowB = '<td> <img width="auto" height="40px" src="assets/classifications/BY.png" > </td>';
         }
         if ($class == 'c') {
-            $c = '<h2>You&apos;re here</h2>';
+            $rowC = '<td> <img width="auto" height="40px" src="assets/classifications/CY.png" > </td>';
         }
         if ($class == 'd') {
-            $d = '<h2>You&apos;re here</h2>';
+            $rowD = '<td> <img width="auto" height="40px" src="assets/classifications/DY.png" > </td>';
         }
         if ($class == 'e') {
-            $e = '<h2>You&apos;re here</h2>';
+            $rowE = '<td> <img width="auto" height="40px" src="assets/classifications/EY.png" > </td>';
         }
         if ($class == 'f') {
-            $f = '<h2>You&apos;re here</h2>';
+            $rowF = '<td> <img width="auto" height="40px" src="assets/classifications/FY.png" > </td>';
         }
         if ($class == 'g') {
-            $g = '<h2>You&apos;re here</h2>';
+            $rowG = '<td> <img width="auto" height="40px" src="assets/classifications/GY.png" > </td>';
         }
 
         // feature twitter
@@ -90,100 +124,95 @@ class HtmlClassification
 
 
         return
-
-            '
+'
 <table cellpadding="0" cellspacing="0">
     <tr>
-        <td class="pattern" width="500" align="center">
+        <td class="pattern" width="450px" align="center">
 
-  <table class="content-shadow" cellpadding="0" cellspacing="0" width="500">
-    <tr>
-       <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
-       Your position on the efficiency scale
-       </td>
-    </tr>
-    <tr>
-     <!-- <td rowspan="8" width="250px"> <img width="200px" src="assets/eklasse.png" > </td> -->
-
-     <td rowspan="8" width="250px"> <img width="200px" src="'.$cid.'"> </td>
-     <td align="left"> ' . $aa . '  </td>
-    </tr>
-    <tr>
-        <td> ' . $a . '</td>
-
-    </tr>
-    <tr>
-        <td>' . $b . '</td>
-
-    </tr>
-    <tr>
-        <td>' . $c . '</td>
-
-    </tr>
-    <tr>
-        <td>' . $d . '</td>
-    </tr>
-    <tr>
-    <td>' . $e . '</td>
-    </tr>
-    <tr>
-    <td>' . $f . '</td>
-    </tr>
-    <tr>
-    <td>' . $g . '</td>
-    </tr>
-</table>
+        <table cellpadding="0" cellspacing="0" style="padding-left: 10px; width: 450px;">
+        <tr>
+        <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
+        Your position on the efficiency scale
+        </td>
+        </tr>
+        <tr>
+        <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+        for the average energy consumption off the last <b>'. $extractionUserCount .'</b> showers.
+        </td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        '. $rowAA .'
+        </tr>
+        <tr>
+        '. $rowA .'
+        </tr>
+        <tr>
+        '. $rowB .'
+        </tr>
+        <tr>
+        '. $rowC .'
+        </tr>
+        <tr>
+        '. $rowD .'
+        </tr>
+        <tr>
+        '. $rowE .'
+        </tr>
+        <tr>
+        '. $rowF .'
+        </tr>
+        <tr>
+        '. $rowG .'
+        </tr>
+    </table>
 </td>
- <td class="col" width="290" valign="top">
-                        <table class="content-shadow" cellpadding="0" cellspacing="0">
+  <td class="pattern" width="400px" align="center">
+        <table cellpadding="0" cellspacing="0" style="padding-left: 10px; width: 400;">
+        <tr>
+            <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
+            Share that you are saving the planet!
+            </td>
+        </tr>
+        <tr>
+        <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+        Your average energy consumption by the last <b>'. $extractionUserCount .'</b> showers was <b>'. $energy .' </b>  Wh per shower. <br/>
+        With this energy usage your energy efficiency class is <b>'. strtoupper($class) .'</b>. <br/> &nbsp;
+        </td>
+        </tr>
+        <tr>
+        <td >
+            <a href="' . $twittertext . '">
+                <img width="140px" height="80px"   src="assets/twitter/twitter_share.png">
+            </a>
+        </td>
+        </tr>
+        <tr>
+        <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
+        Your reward!
+        </td>
+        </tr>
 
-                            <tr>
-                                <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    Share your achievement!
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                   Your average efficiency-class for the last 10 <br/> showers were <b>'. strtoupper($class) .' </b> with <b>'. $energy .' </b>  Wh per shower!
-                                    </td>
-                            </tr>
-                            <tr>
-                                <td > <a class="buttonshare" href="' . $twittertext . '"> Share your efficiency </a>  </td>
-                            </tr>
-                            <tr>
-                                <td align="left" style="padding-top: 15px;"><img src="http://placehold.it/118x34/333&text=Learn+More" alt="Learn More" style="display: block; border: 0;" /></td>
-                            </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            '. $badge .'
+        </tr>
 
-                              <tr>
-                                <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    Your wall of badges
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                   Upload more data via the app to get more badges!
-                                    </td>
-                            </tr>
-                            <tr>
-                                <td > <a style="display: block;
-    width: 150px;
-    height: 50px;
-    background: #4E9CAF;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;"> You have uploaded your data '. $reportCount . ' times!</a>  </td>
-                            </tr>
-                            <tr>
-                                <td align="left" style="padding-top: 15px;"><img src="http://placehold.it/118x34/333&text=Learn+More" alt="Learn More" style="display: block; border: 0;" /></td>
-                            </tr>
+        <tr>
+        <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+        You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
+        If you upload your shower data <b>'. $upload .'</b> times, the living place of your icebear will increase!<br/>
+        </td>
+        </tr>
 
-                        </table>
-                    </td>
+     </table>
+     </td>
 </tr>
 </table>
-<hr>';
+<hr>
+';
     }
 }
 

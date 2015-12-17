@@ -49,7 +49,17 @@ class Calculations
     {
         $db = DBAccessSingleton::getInstance();
 
-        $avgEnergyUser = array_sum(array_slice($db->energyUser,-10,10)) / count(array_slice($db->energyUser,-10,10));
+        if($db->extractionUserCount < 50)
+        {
+            $extractionUserCount = $db->extractionUserCount;
+        }
+        else
+        {
+            $extractionUserCount = 50;
+        }
+
+        $avgEnergyUser = array_sum(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount));
 
         return round($avgEnergyUser);
     }
