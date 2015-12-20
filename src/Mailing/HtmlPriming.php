@@ -19,12 +19,12 @@ class HtmlPriming
         if($db->extractionUserCount >= 200)
         {
             $energyConsumption = round(array_sum($db->energyUser) / 1000,1);
-            $textConsumption = 'with your last <b>200</b> showers you have consumed <b>' . $energyConsumption .'</b> kWh energy. ';
+            $textConsumption = 'With your last <b>200</b> showers you have consumed <b>' . $energyConsumption .'</b> kWh energy. ';
         }
         else
         {
             $energyConsumption = (array_sum($db->energyUser) / count($db->energyUser)) * 200 / 1000;
-            $textConsumption = "with your predicted <b>200</b> showers you will consume <b>" . round($energyConsumption,1) ."</b> kWh energy. ";
+            $textConsumption = "With your predicted <b>200</b> showers you will consume <b>" . round($energyConsumption,1) ."</b> kWh energy. ";
         }
 
 

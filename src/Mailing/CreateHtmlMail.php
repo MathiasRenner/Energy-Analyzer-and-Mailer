@@ -14,6 +14,7 @@ include "HtmlClassification.php";
 include "HtmlDescInj.php";
 include "HtmlTimeComp.php";
 include "HtmlRecommendations.php";
+include "HtmlFooter.php";
 
 class CreateHtmlMail
 {
@@ -27,6 +28,7 @@ class CreateHtmlMail
         $descinj = new HtmlDescInj();
         $timecomp = new HtmlTimeComp();
         $recommendations = new HtmlRecommendations();
+        $footer = new HtmlFooter();
 
         $htmlheadmeta = $this->GetHtmlHeadMeta();
 
@@ -35,8 +37,10 @@ class CreateHtmlMail
         $descinj_html = $descinj->GetHtmlDescInj();
         $timecomp_html = $timecomp->GetHtmlTimeComp();
         $recommendations_html = $recommendations->GetHtmlRecommendations();
+        $footer_html = $footer->GetHtmlFooter();
 
-        return $htmlheadmeta . '' . $priming_html .''. $descinj_html  .''. $classification_html . '' . $timecomp_html . '' . $recommendations_html . '</body></html>';
+        return $htmlheadmeta . '' . $priming_html .''. $descinj_html  .''. $classification_html . '
+        ' . $timecomp_html . '' . $recommendations_html . '' . $footer_html . '</body></html>';
     }
 
     private function GetHtmlHeadMeta()
@@ -45,7 +49,7 @@ class CreateHtmlMail
                 <html lang="en">
                 <head>
                     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                    <title>Amphiro Report 0.1</title>
+                    <title>Amphiro Report 0.2</title>
                 </head>
                 <body>';
     }
