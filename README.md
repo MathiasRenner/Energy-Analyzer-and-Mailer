@@ -16,4 +16,5 @@ CREATE TABLE `***REMOVED***`.`bires_mcm_mailing` (   `ID` INT NOT NULL auto_incr
   - to insert data in the table, execute:
   ```
   insert into bires_mcm_mailing (b1user_ID,lastMailingSent) values (10,NOW());
+  insert into bires_mcm_mailing (b1user_ID,lastMailingSent) values (11,'2015-11-13');
   ```
