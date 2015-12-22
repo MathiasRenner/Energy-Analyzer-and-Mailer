@@ -78,6 +78,7 @@ class HtmlClassification
         $energytw = $calc->CalcEnergyUsageTopTwentyPercentUser();
         $classtw = $calc->GetEfficiencyClass($energytw);
 
+
         echo '<hr>';
         echo $energytw;
         echo $classtw;

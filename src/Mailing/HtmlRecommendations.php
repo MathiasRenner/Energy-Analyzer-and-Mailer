@@ -78,7 +78,7 @@ class HtmlRecommendations
     </tr>
 </table>
 
-<hr>
+<br/>
 ';
     }
 }

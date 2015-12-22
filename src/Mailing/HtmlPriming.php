@@ -74,7 +74,7 @@ class HtmlPriming
                                 <td align="center" width="200" class="hero_image"><img src="assets/badges/_baer.png" height="40" width="auto" alt="" style="display: block; border: 0;" />
                                 </td>
                             </tr>
-                            <tr><td colspan="2" ><hr/></td></tr>
+                            <tr><td colspan="2" ><br/></td></tr>
                             <tr>
                                 <td width="400" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
                                     Hallo ' . $db->firstname .'! <br/>

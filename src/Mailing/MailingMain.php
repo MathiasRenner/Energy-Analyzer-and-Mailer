@@ -22,7 +22,7 @@ include "DBAccess.php";
 //echo $_GET['user'];
 
 // Init DB and get all relevant db entries
-$id = 1; // id will be set from outside
+$id = 8; // id will be set from outside
 $db = DBAccessSingleton::getInstance();
 $db->RunAll($id);  // init database // TODO: or we use the deviceId...??
 
