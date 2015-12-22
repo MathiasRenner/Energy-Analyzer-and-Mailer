@@ -2,15 +2,19 @@
 
 A tool that takes energy consumption data as input and visualizes the data in a way that motivates the user to reduce his energy consumption.
 
-## Setup with Docker
-- `Git clone` this repo
-- Install Docker
-- Navigate into repository folder and run `docker run -p 80:80  -d -v $(pwd)/src:/var/www/html php:5.6-apache`
-- Check `localhost:80` with your browser. You should see a PHP info page.
+## Documentation
 
-## Setup with XAMPP
-- `Git clone` this repo
-- Install XAMPP
-- Create a symbolic link from this repo/src to .../XAMPP/htdocs
-- In GUI of YAMPP, start webserver
-- Check `localhost:80` with your browser. You should see a PHP info page.
+### How to to create a required table for mcm-mailer
+
+  - connect via SSH on server and with `mysql -u root -p` to mysql DB
+  - change to database `***REMOVED***` with
+    `use ***REMOVED***`
+  - Create new table:
+  ```
+CREATE TABLE `***REMOVED***`.`bires_mcm_mailing` (   `ID` INT NOT NULL auto_increment,    `b1user_ID` INT,   `lastMailingSent` DATE NULL,   UNIQUE INDEX `ID_UNIQUE` (`ID` ASC),   PRIMARY KEY (`ID`),   CONSTRAINT `b1user`     FOREIGN KEY (`b1user_ID`)         REFERENCES `***REMOVED***`.`b1user` (`id`)     ON DELETE NO ACTION     ON UPDATE NO ACTION);
+  ```
+  - to insert data in the table, execute:
+  ```
+  insert into bires_mcm_mailing (b1user_ID,lastMailingSent) values (10,NOW());
+  insert into bires_mcm_mailing (b1user_ID,lastMailingSent) values (11,'2015-11-13');
+  ```
