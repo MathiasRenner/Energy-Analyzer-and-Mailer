@@ -26,7 +26,7 @@ class HtmlDescInj
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    Your summary
+                                    How are you doing compared to your neighbors?
                                 </td>
                             </tr>
                             <tr>
@@ -64,7 +64,7 @@ class HtmlDescInj
         </td>
     </tr>
 </table>
-<hr>
+<br/>
 ';
 
     }

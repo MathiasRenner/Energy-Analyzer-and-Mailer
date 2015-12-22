@@ -27,7 +27,7 @@ class HtmlRecommendations
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    Let\'s take action! These are your personal tips of how you can improve:
+                                    Let\'s take action! These are your personal tips of how you can improve
                                 </td>
                             </tr>
                             <tr>

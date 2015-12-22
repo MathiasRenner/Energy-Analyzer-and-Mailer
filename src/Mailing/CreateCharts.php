@@ -104,7 +104,7 @@ class CreateCharts
 
         /* Create and populate the pData object */
         $MyData = new pData();
-        $MyData->addPoints(array_slice($userExtractions,-10,10),$usern);
+        $MyData->addPoints(array_slice($userExtractions,-30,30),$usern);
 
         $serieSettings = array("R"=>66,"G"=>106,"B"=>131);
         $MyData->setPalette($usern,$serieSettings);
@@ -113,8 +113,8 @@ class CreateCharts
         //$MyData->setSerieTicks("Probe 2",4);
         $MyData->setAxisName(0,"");
         //TODO: x-Achsenbezeichnung an Daten anpassen
-        $MyData->addPoints(range(1,10),"Labels");
-        //$MyData->setSerieDescription("Labels","Months");
+        $MyData->addPoints(range(-30,-1),"Labels");
+        $MyData->setSerieDescription("Labels","Months");
         $MyData->setAbscissa("Labels");
 
         /* Create the pChart object */
@@ -124,8 +124,9 @@ class CreateCharts
         $myPicture->Antialias = TRUE;
 
         /* Draw the background */
-        $Settings = array("R"=>150, "G"=>169, "B"=>180, "Dash"=>0, "DashR"=>36, "DashG"=>81, "DashB"=>107);
-        $myPicture->drawFilledRectangle(0,0,700,230,$Settings);
+        // do not draw a background
+        //$Settings = array("R"=>255, "G"=>255, "B"=>255, "Dash"=>0, "DashR"=>36, "DashG"=>81, "DashB"=>107);
+        //$myPicture->drawFilledRectangle(0,0,700,230,$Settings);
 
         /* Overlay with a gradient */
         //$Settings = array("StartR"=>219, "StartG"=>231, "StartB"=>139, "EndR"=>1, "EndG"=>138, "EndB"=>68, "Alpha"=>50);
@@ -133,11 +134,13 @@ class CreateCharts
         //$myPicture->drawGradientArea(0,0,700,20,DIRECTION_VERTICAL,array("StartR"=>0,"StartG"=>0,"StartB"=>0,"EndR"=>50,"EndG"=>50,"EndB"=>50,"Alpha"=>80));
 
         /* Add a border to the picture */
-        $myPicture->drawRectangle(0,0,699,229,array("R"=>0,"G"=>0,"B"=>0));
+        // Border is not shown
+        //$myPicture->drawRectangle(0,0,699,229,array("R"=>0,"G"=>0,"B"=>0));
 
         /* Write the chart title */
         $myPicture->setFontProperties(array("FontName"=>$font2,"FontSize"=>8,"R"=>255,"G"=>255,"B"=>255));
-        $myPicture->drawText(10,16,"Energy Consumption per Shower",array("FontSize"=>13,"Align"=>TEXT_ALIGN_BOTTOMLEFT));
+        // header is already there
+        //$myPicture->drawText(10,16,"Energy Consumption per Shower",array("FontSize"=>13,"Align"=>TEXT_ALIGN_BOTTOMLEFT));
 
         /* Set the default font */
         $myPicture->setFontProperties(array("FontName"=>$font2,"FontSize"=>11,"R"=>0,"G"=>0,"B"=>0));
@@ -160,7 +163,8 @@ class CreateCharts
         $myPicture->drawPlotChart(array("DisplayValues"=>TRUE,"PlotBorder"=>TRUE,"BorderSize"=>2,"Surrounding"=>-60,"BorderAlpha"=>80));
 
         /* Write the chart legend */
-        $myPicture->drawLegend(590,9,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL,"FontR"=>255,"FontG"=>255,"FontB"=>255));
+        // legend is just the email of the user, which is already  shown in the header of the mailing
+        //$myPicture->drawLegend(590,9,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL,"FontR"=>255,"FontG"=>255,"FontB"=>255));
 
         /* Render the picture (choose the best way) */
         $myPicture->render("pictures/timeCompChart.png");

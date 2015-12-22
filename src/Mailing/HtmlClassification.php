@@ -211,7 +211,7 @@ class HtmlClassification
      </td>
 </tr>
 </table>
-<hr>
+<br/>
 ';
     }
 }

@@ -26,7 +26,7 @@ class HtmlTimeComp
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    See how you are you doing compared to your neighborhood
+                                    See the consumption of your last 30 showers
                                 </td>
                             </tr>
                             <tr>
@@ -45,7 +45,7 @@ class HtmlTimeComp
         </td>
     </tr>
 </table>
-<hr>
+<br/>
 ';
     }
 }

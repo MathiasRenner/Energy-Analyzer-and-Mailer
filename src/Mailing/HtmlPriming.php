@@ -111,7 +111,7 @@ class HtmlPriming
         </td>
     </tr>
 </table>
-<hr>';
+<br/>';
 
     }
 }
