@@ -8,6 +8,29 @@
 
 class Calculations
 {
+    /**
+     * Calculates the Efficiency for the user of the last 10 showers
+     *
+    1) Berechnung der Energie pro Dusche:
+    E =  c * Volumen * (Durchschnittstemp. - 10°C) / n
+    c: spezifische Wärmekapazität von Wasser
+    Grundtemperatur Wasser: Kann konfiguriert werden, ist aber standardmäßig auf 10°C festgeleget
+    n:  Effizienz = 100% (ist standardmäßig so festgelegt, kann aber konfiguriert werden bei Bedarf)
+
+     *
+     *
+     *
+     */
+    public function CalcEnergy($volume, $hotWater, $coldWater, $heat)
+    {
+        $c = 4200/3600; // 1
+        $energy =  $c * $volume * ($hotWater - $coldWater) / $heat;
+
+        $energy = round($energy);
+
+        return $energy;
+    }
+
     public function GetEfficiencyClass($energy)
     {
         if($energy < 350)
@@ -43,7 +66,6 @@ class Calculations
             return 'g';
         }
     }
-
 
     public function CalcEnergyUsageUser()
     {
@@ -98,26 +120,101 @@ class Calculations
         return round($avgEnergyAllUser);
     }
 
-    /**
-     * Calculates the Efficiency for the user of the last 10 showers
-     *
-    1) Berechnung der Energie pro Dusche:
-    E =  c * Volumen * (Durchschnittstemp. - 10°C) / n
-    c: spezifische Wärmekapazität von Wasser
-    Grundtemperatur Wasser: Kann konfiguriert werden, ist aber standardmäßig auf 10°C festgeleget
-    n:  Effizienz = 100% (ist standardmäßig so festgelegt, kann aber konfiguriert werden bei Bedarf)
-
-     *
-     *
-     *
-     */
-    public function CalcEnergy($volume, $hotWater, $coldWater, $heat)
+    public function CalcSavingTimeForBetterEnergyClass($actualConsumption)
     {
-        $c = 4200/3600; // 1
-        $energy =  $c * $volume * ($hotWater - $coldWater) / $heat;
+        $db = DBAccessSingleton::getInstance();
 
-        $energy = round($energy);
+        $betterConsumption = $this->GetConsumptionForBetterEfficiencyClass($actualConsumption);
 
-        return $energy;
+        $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
+
+        $extractionUserCount = $this->GetExtractionUserCount();
+
+        $avgUserVolume = array_sum(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount));
+
+        $flowRate = $this->CalcUserFlowRate();
+
+        $time = $avgUserVolume / $flowRate;
+
+        $time = $time * 60 * $percent;
+
+        return round($time,1);
+    }
+
+
+
+    public function CalcSavingVolumeForBetterEnergyClass($actualConsumption)
+    {
+        $db = DBAccessSingleton::getInstance();
+
+        $betterConsumption = $this->GetConsumptionForBetterEfficiencyClass($actualConsumption);
+
+        $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
+
+        $extractionUserCount = $this->GetExtractionUserCount();
+
+        $avgUserVolume = array_sum(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount));
+
+        return round($avgUserVolume * $percent,1);
+    }
+
+    public function CalcUserFlowRate()
+    {
+        $db = DBAccessSingleton::getInstance();
+        $extractionUserCount = $this->GetExtractionUserCount();
+
+        $avgUserFlowRate = array_sum(array_slice($db->extractionsUserFlowRate,$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->extractionsUserFlowRate,$extractionUserCount*(-1),$extractionUserCount));
+
+        return round($avgUserFlowRate,1);
+    }
+
+    private function GetExtractionUserCount()
+    {
+        $db = DBAccessSingleton::getInstance();
+        if($db->extractionUserCount < 50)
+        {
+            $extractionUserCount = $db->extractionUserCount;
+        }
+        else
+        {
+            $extractionUserCount = 50;
+        }
+        return $extractionUserCount;
+    }
+
+    private function GetConsumptionForBetterEfficiencyClass($actualConsumption)
+    {
+        if($actualConsumption >= 350 && $actualConsumption <= 700)
+        {
+            $betterConsumption = 349;
+        }
+        elseif($actualConsumption > 700 && $actualConsumption <= 1225)
+        {
+            $betterConsumption = 699;
+        }
+        elseif($actualConsumption > 1225 && $actualConsumption <= 1750)
+        {
+            $betterConsumption = 1224;
+        }
+        elseif($actualConsumption > 1750 && $actualConsumption <= 2275)
+        {
+            $betterConsumption = 1749;
+        }
+        elseif($actualConsumption > 2275 && $actualConsumption <= 2800)
+        {
+            $betterConsumption = 2274;
+        }
+        elseif($actualConsumption > 2800 && $actualConsumption <= 3325)
+        {
+            $betterConsumption = 2799;
+        }
+        elseif($actualConsumption > 3325)
+        {
+            $betterConsumption = 3324;
+        }
+        return $betterConsumption;
     }
 }

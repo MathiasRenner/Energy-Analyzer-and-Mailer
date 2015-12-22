@@ -24,7 +24,7 @@ class HtmlPriming
         else
         {
             $energyConsumption = (array_sum($db->energyUser) / count($db->energyUser)) * 200 / 1000;
-            $textConsumption = "With your predicted <b>200</b> showers you will consume <b>" . round($energyConsumption,1) ."</b> kWh energy. ";
+            $textConsumption = "You have uploaded ". $db->extractionUserCount ." showers. When you have showered <b>200</b> times you will have consumed <b>" . round($energyConsumption,1) ."</b> kWh energy. ";
         }
 
 
@@ -69,9 +69,18 @@ class HtmlPriming
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td width="400" class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    Together we are can save his world!
+                                    Your personal Amphiro report
                                 </td>
-                                <td align="center" width="200" class="hero_image"><img src="assets/badges/_baer.png" height="40" width="auto" alt="" style="display: block; border: 0;" />
+                                <td align="center" width="200" >
+                                <table>
+                                <tr>
+                                <td align="left" style="font-family: arial,sans-serif; font-size: 13px; line-height: 17px !important; color: #7f7f7f; padding-top: 5px; padding-left: 5px">
+                                Together we can <br/><b>save</b> his world!</td>
+                                <td>
+                                <img src="assets/badges/_baer.png" height="40" width="auto" alt="" style="display: block; border: 0;" />
+                                </td>
+                                </tr>
+                                </table>
                                 </td>
                             </tr>
                             <tr><td colspan="2" ><br/></td></tr>

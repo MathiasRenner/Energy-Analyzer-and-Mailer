@@ -118,6 +118,9 @@ class HtmlClassification
             $rowG = '<td> <img width="auto" height="40px" src="assets/classifications/GY.png" > </td>';
         }
 
+        $savingVolume = $calc->CalcSavingVolumeForBetterEnergyClass($energy);
+        $savingTime = $calc->CalcSavingTimeForBetterEnergyClass($energy);
+
         // feature twitter
         $ttext = 'Let\'s+save+the+planet!+My+efficiency+class+for+the+last+showers+were+' . strtoupper($class) . '+with+' . $energy . '+Wh+per+shower!';
         $twittertext = 'https://twitter.com/intent/tweet?url=http%3A%2F%2Famphiro.com&text='. $ttext .'&via=AmphiroAG';
@@ -139,6 +142,9 @@ class HtmlClassification
         <tr>
         <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
         for the average energy consumption off the last <b>'. $extractionUserCount .'</b> showers.
+        <br/>
+        If you lower your average water consumption by <b>'. $savingVolume  .' liter</b>
+        or you shorten your showertime by <b>'. $savingTime .' seconds</b> for each shower you will reach the next better efficiency class!
         </td>
         </tr>
         <tr>
@@ -191,12 +197,16 @@ class HtmlClassification
         </td>
         </tr>
         <tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td></tr>
+
         <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
         Your reward!
         </td>
         </tr>
 
-        <tr><td>&nbsp;</td></tr>
         <tr>
             '. $badge .'
         </tr>

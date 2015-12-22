@@ -35,6 +35,9 @@ class DBAccessSingleton
     public $country;
 
     public $extractionsUserReportedOn = array();
+    public $extractionsUserVolume = array();
+    public $extractionsUserFlowRate = array();
+
     public $extractionUserCount;
 
     public $energyUser = array();
@@ -143,8 +146,12 @@ class DBAccessSingleton
                 $he = $row->heatingEfficiency;
             }
             if(!is_null($row->volume) && $row->volume > 0 &&
-                !is_null($row->temperature) && $row->temperature > 0 )
+                !is_null($row->temperature) && $row->temperature > 0 &&
+                !is_null($row->flowRate && $row->flowRate > 0))
             {
+                array_push($this->extractionsUserVolume, $row->volume);
+                array_push($this->extractionsUserFlowRate, $row->flowRate);
+
                 array_push($this->energyUser, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he/ 100));
                 if($this->GetDate('')!= $this->GetDate($row->reportedOn))
                 {
@@ -218,7 +225,6 @@ class DBAccessSingleton
         $date = $reportTime;
         $ts   = strtotime($date);
         return date('Y-m-d', $ts);
-
     }
 
 
