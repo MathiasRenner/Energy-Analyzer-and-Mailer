@@ -28,9 +28,6 @@ class CreateCharts
 
     public function CreateDescChart()
     {
-        $db = DBAccessSingleton::getInstance();
-        $usern = $db->username;
-
         $calculations = new Calculations();
 
         $energy_user = $calculations->CalcEnergyUsageUser();
@@ -38,7 +35,7 @@ class CreateCharts
         $energy_top20 = $calculations->CalcEnergyUsageTopTwentyPercentUser();
 
         //$font1 = "libs/charts/pChart2_1_4/fonts/calibri.ttf";
-        $font2 = "libs/charts/pChart2_1_4/fonts/calibri.ttf";
+        $font2 = "libs/charts/pChart2_1_4/fonts/verdana.ttf";
 
         //Farbschema
         $color_top20 = array("R"=>11,"G"=>71,"B"=>101,"Alpha"=>100);
@@ -46,13 +43,14 @@ class CreateCharts
         $color_user = array("R"=>95,"G"=>142,"B"=>164,"Alpha"=>100);
 
         $myDescData = new pData();
+        //$myDescData->setAxisName(0,"consumption in wH");
 
         // Fallunterscheidung: Anordnung der Balken
         if($energy_user < $energy_top20){
 
             $descValuesArray = array($energy_user, $energy_top20, $energy_all );
             $myDescData-> addPoints($descValuesArray, "Compare yourself!");
-            $myDescData->addPoints(array("You", "Top 20%", "Average"),"Labels");
+            $myDescData->addPoints(array("You ", "Top 20% ", "Average "),"Labels");
 
             $Palette = array(   "0"=> $color_user,
                                 "1"=> $color_top20,
@@ -62,7 +60,7 @@ class CreateCharts
 
             $descValuesArray = array($energy_top20,$energy_user, $energy_all );
             $myDescData-> addPoints($descValuesArray, "Compare yourself!");
-            $myDescData->addPoints(array("Top 20%","You", "Average"),"Labels");
+            $myDescData->addPoints(array("Top 20% ","You ", "Average "),"Labels");
 
             $Palette = array(   "0"=>$color_top20,
                                 "1"=>$color_user,
@@ -72,22 +70,27 @@ class CreateCharts
 
             $descValuesArray = array($energy_top20, $energy_all, $energy_user);
             $myDescData-> addPoints($descValuesArray, "Compare yourself!");
-            $myDescData->addPoints(array("Top 20%", "Average","You" ),"Labels");
+            $myDescData->addPoints(array("Top 20% ", "Average ","You " ),"Labels");
 
             $Palette = array(   "0"=>$color_top20,
                                 "1"=>$color_average,
                                 "2"=>$color_user);
         }
 
+
+
         $myDescData->setAbscissa("Labels");
         // Ein image Objekt erzeugen, um $myDescData zu visualisieren
-        $myDescChart = new pImage(500, 300, $myDescData);
+        $myDescChart = new pImage(1000, 600, $myDescData);
         // Hier ggf. die Schriftart und Größe ändern
-        $myDescChart->setFontProperties(array("FontName"=>$font2,"FontSize"=>11,"R"=>80,"G"=>80,"B"=>80));
+        $myDescChart->setFontProperties(array("FontName"=>$font2,"FontSize"=>21,"R"=>80,"G"=>80,"B"=>80));
         // Die Daten-Area in der Grafik muss kleiner sein, als die Grafik selbst
-        $myDescChart->setGraphArea(70,35, 475, 275);
+        $myDescChart->setGraphArea(140,70, 950, 550);
         // Horizontale und vertikale Skalierung (in diesem Fall ohne Parameter = Standard)
-        $myDescChart->drawScale(array("CycleBackground"=>TRUE,"DrawSubTicks"=>TRUE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>10, "Pos"=>SCALE_POS_TOPBOTTOM));
+        $myDescChart->drawScale(array('XAxisTitleMargin'=>10,"MinDivHeight"=>60,"CycleBackground"=>FALSE,"DrawSubTicks"=>FALSE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>1, "Pos"=>SCALE_POS_TOPBOTTOM));
+
+        $myDescChart->drawText(550,27,"consumption in wH",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+
         // Chart erzeugen
         $myDescChart->drawBarChart(array("DisplayValues"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$Palette));
         // Bilddatei ausgeben

@@ -65,24 +65,11 @@ class HtmlClassification
         $energy = $calc->CalcEnergyUsageUser();
         $class =  $calc->GetEfficiencyClass($energy);
 
-        echo $energy;
-        echo $class;
-
         $energyAll = $calc->CalcEnergyUsageAllUser();
         $classAll = $calc->GetEfficiencyClass($energyAll);
 
-        echo '<hr>';
-        echo $energyAll;
-        echo $classAll;
-
         $energytw = $calc->CalcEnergyUsageTopTwentyPercentUser();
         $classtw = $calc->GetEfficiencyClass($energytw);
-
-
-        echo '<hr>';
-        echo $energytw;
-        echo $classtw;
-        echo '<hr>';
 
         $rowAA = '<td> <img width="auto" height="40px" src="assets/classifications/AA.png" > </td>';
         $rowA = '<td> <img width="auto" height="40px" src="assets/classifications/A.png" > </td>';
@@ -93,28 +80,28 @@ class HtmlClassification
         $rowF = '<td> <img width="auto" height="40px" src="assets/classifications/F.png" > </td>';
         $rowG = '<td> <img width="auto" height="40px" src="assets/classifications/G.png" > </td>';
 
-        if ($class == 'aa') {
+        if ($class == 'A+') {
             $rowAA = '<td> <img width="auto" height="40px" src="assets/classifications/AAY.png" > </td>';
         }
-        if ($class == 'a') {
+        if ($class == 'A') {
             $rowA = '<td> <img width="auto" height="40px" src="assets/classifications/AY.png" > </td>';
         }
-        if ($class == 'b') {
+        if ($class == 'B') {
             $rowB = '<td> <img width="auto" height="40px" src="assets/classifications/BY.png" > </td>';
         }
-        if ($class == 'c') {
+        if ($class == 'C') {
             $rowC = '<td> <img width="auto" height="40px" src="assets/classifications/CY.png" > </td>';
         }
-        if ($class == 'd') {
+        if ($class == 'D') {
             $rowD = '<td> <img width="auto" height="40px" src="assets/classifications/DY.png" > </td>';
         }
-        if ($class == 'e') {
+        if ($class == 'E') {
             $rowE = '<td> <img width="auto" height="40px" src="assets/classifications/EY.png" > </td>';
         }
-        if ($class == 'f') {
+        if ($class == 'F') {
             $rowF = '<td> <img width="auto" height="40px" src="assets/classifications/FY.png" > </td>';
         }
-        if ($class == 'g') {
+        if ($class == 'G') {
             $rowG = '<td> <img width="auto" height="40px" src="assets/classifications/GY.png" > </td>';
         }
 
@@ -122,7 +109,7 @@ class HtmlClassification
         $savingTime = $calc->CalcSavingTimeForBetterEnergyClass($energy);
 
         // feature twitter
-        $ttext = 'Let\'s+save+the+planet!+My+efficiency+class+for+the+last+showers+were+' . strtoupper($class) . '+with+' . $energy . '+Wh+per+shower!';
+        $ttext = 'Let\'s+save+the+planet!+My+efficiency+class+for+the+last+showers+were+' . $class . '+with+' . $energy . '+Wh+per+shower!';
         $twittertext = 'https://twitter.com/intent/tweet?url=http%3A%2F%2Famphiro.com&text='. $ttext .'&via=AmphiroAG';
 
 
@@ -186,7 +173,7 @@ class HtmlClassification
         <tr>
         <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
         Your average energy consumption by the last <b>'. $extractionUserCount .'</b> showers was <b>'. $energy .' </b>  Wh per shower. <br/>
-        With this energy usage your energy efficiency class is <b>'. strtoupper($class) .'</b>. <br/> &nbsp;
+        With this energy usage your energy efficiency class is <b>'. $class .'</b>. <br/> &nbsp;
         </td>
         </tr>
         <tr>
@@ -206,6 +193,8 @@ class HtmlClassification
         Your reward!
         </td>
         </tr>
+
+        <tr><td>&nbsp;</td></tr>
 
         <tr>
             '. $badge .'

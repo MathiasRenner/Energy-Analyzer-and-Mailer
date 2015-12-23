@@ -43,7 +43,7 @@ class HtmlPriming
         }
         elseif($energyConsumption >= 330 && $energyConsumption < 460)
         {
-            $textConsEqual = $textConsEqual . '<b>2 laptops</b>.';
+            $textConsEqual = $textConsEqual . '<b>3 laptops</b>.';
         }
         elseif($energyConsumption >= 460)
         {
@@ -74,11 +74,11 @@ class HtmlPriming
                                 <td align="center" width="200" >
                                 <table>
                                 <tr>
-                                <td align="left" style="font-family: arial,sans-serif; font-size: 13px; line-height: 17px !important; color: #7f7f7f; padding-top: 5px; padding-left: 5px">
-                                Together we can <br/><b>save</b> his world!</td>
                                 <td>
                                 <img src="assets/badges/_baer.png" height="40" width="auto" alt="" style="display: block; border: 0;" />
                                 </td>
+                                <td align="left" style="font-family: arial,sans-serif; font-size: 13px; line-height: 17px !important; color: #7f7f7f; padding-top: 5px; padding-left: 5px">
+                                Together we can <br/><b>save</b> his world!</td>
                                 </tr>
                                 </table>
                                 </td>

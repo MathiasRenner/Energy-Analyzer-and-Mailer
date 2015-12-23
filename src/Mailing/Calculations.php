@@ -35,35 +35,35 @@ class Calculations
     {
         if($energy < 350)
         {
-            return 'aa';
+            return 'A+';
         }
         elseif($energy < 700)
         {
-            return 'a';
+            return 'A';
         }
         elseif ($energy < 1225)
         {
-            return 'b';
+            return 'B';
         }
         elseif ($energy < 1750)
         {
-            return 'c';
+            return 'C';
         }
         elseif ($energy < 2275)
         {
-            return 'd';
+            return 'D';
         }
         elseif ($energy < 2800)
         {
-            return 'e';
+            return 'E';
         }
         elseif ($energy < 3325)
         {
-            return 'f';
+            return 'F';
         }
         elseif ($energy >= 3325)
         {
-            return 'g';
+            return 'G';
         }
     }
 
@@ -122,16 +122,11 @@ class Calculations
 
     public function CalcSavingTimeForBetterEnergyClass($actualConsumption)
     {
-        $db = DBAccessSingleton::getInstance();
-
         $betterConsumption = $this->GetConsumptionForBetterEfficiencyClass($actualConsumption);
 
         $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
 
-        $extractionUserCount = $this->GetExtractionUserCount();
-
-        $avgUserVolume = array_sum(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount))
-            / count(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount));
+        $avgUserVolume = $this->CalcVolumeAvgUser();
 
         $flowRate = $this->CalcUserFlowRate();
 
@@ -142,20 +137,26 @@ class Calculations
         return round($time,1);
     }
 
-
-
-    public function CalcSavingVolumeForBetterEnergyClass($actualConsumption)
+    public function CalcVolumeAvgUser()
     {
         $db = DBAccessSingleton::getInstance();
-
-        $betterConsumption = $this->GetConsumptionForBetterEfficiencyClass($actualConsumption);
-
-        $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
 
         $extractionUserCount = $this->GetExtractionUserCount();
 
         $avgUserVolume = array_sum(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount))
             / count(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount));
+
+        return $avgUserVolume;
+    }
+
+
+    public function CalcSavingVolumeForBetterEnergyClass($actualConsumption)
+    {
+        $betterConsumption = $this->GetConsumptionForBetterEfficiencyClass($actualConsumption);
+
+        $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
+
+        $avgUserVolume = $this->CalcVolumeAvgUser();
 
         return round($avgUserVolume * $percent,1);
     }

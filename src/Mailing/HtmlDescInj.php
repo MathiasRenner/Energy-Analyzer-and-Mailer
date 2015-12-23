@@ -11,10 +11,40 @@ class HtmlDescInj
 
     public function GetHtmlDescInj()
     {
-        $db = DBAccessSingleton::getInstance();
-        $name = $db->username;
         //$message = SingletonMessage::Instance();
         //$cid = $message->embed(Swift_Image::fromPath('pictures/test.png'));
+
+        $calc = new Calculations();
+        $avgUser = $calc->CalcEnergyUsageUser();
+        $avgAll = $calc->CalcEnergyUsageAllUser();
+        $avgTop20 = $calc->CalcEnergyUsageTopTwentyPercentUser();
+
+        if($avgUser <= $avgTop20 * 1.15)
+        {
+            $inj = '<td class="hero_image"><img src="assets/injunctive/inj1.png" width="65%" alt="" style="display: block; border: 0;" /></td>';
+            $injtext = "Nice work! You are great, but do not stop being an environment saver!";
+            if($avgUser <= $avgTop20)
+            {
+                $descText = "You are one of the Top 20% user. That's great!";
+            }
+            else
+            {
+                $descText = "Your average energy consumption for your last shower was near the Top 20% user. That's great!";
+            }
+        }
+        elseif($avgUser <= $avgAll)
+        {
+            $inj = '<td class="hero_image"><img src="assets/injunctive/inj2.png" width="65%" alt="" style="display: block; border: 0;" /></td>';
+            $injtext = "Nice work! You are good, but do not stop being an water saver!";
+            $descText = "Your average energy consumption for your last shower was above the average. That's good!";
+        }
+        else
+        {
+            $inj = '<td class="hero_image"><img src="assets/injunctive/inj3.png" width="65%" alt="" style="display: block; border: 0;" /></td>';
+            $injtext = "You are good, but we know you can do better!";
+            $descText = "Your average energy consumption for your last shower was below the average.";
+        }
+
 
         return '
 <table cellpadding="0" cellspacing="0">
@@ -26,7 +56,12 @@ class HtmlDescInj
                         <table cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                    How are you doing compared to your neighbors?
+                                    How are you doing compared to all amphiro users?
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                &nbsp; <br/>
                                 </td>
                             </tr>
                             <tr>
@@ -34,7 +69,7 @@ class HtmlDescInj
                             </tr>
                             <tr>
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                Genauere Beschreibung
+                                We compared you with all amphio users. '. $descText .'
                                 </td>
                             </tr>
                         </table>
@@ -42,19 +77,23 @@ class HtmlDescInj
                     <td class="spacer" width="20" style="font-size: 1px;">&nbsp;</td>
                     <td class="col" width="190" valign="top">
                       <table cellpadding="0" cellspacing="0">
-                           <!--
                             <tr>
                                 <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-                                   Inj heading
+                                   &nbsp;
                                 </td>
                             </tr>
-                            -->
+                              <tr>
+                                <td>
+                                &nbsp; <br/><br/><br/><br/>
+                                </td>
+                            </tr>
+
                             <tr>
-                                <td class="hero_image"><img src="pictures/injBelow.png" width="190" alt="" style="display: block; border: 0;" /></td>
+                           '. $inj .'
                             </tr>
                             <tr>
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                Genauere Beschreibung des smileys
+                                '. $injtext .'
                                 </td>
                             </tr>
                         </table>
