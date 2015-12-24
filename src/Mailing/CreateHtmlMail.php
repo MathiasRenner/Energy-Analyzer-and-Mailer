@@ -15,6 +15,7 @@ include "HtmlDescInj.php";
 include "HtmlTimeComp.php";
 include "HtmlRecommendations.php";
 include "HtmlFooter.php";
+include "HtmlSummary.php";
 
 class CreateHtmlMail
 {
@@ -29,6 +30,7 @@ class CreateHtmlMail
         $timecomp = new HtmlTimeComp();
         $recommendations = new HtmlRecommendations();
         $footer = new HtmlFooter();
+        $summary = new HtmlSummary();
 
         $htmlheadmeta = $this->GetHtmlHeadMeta();
 
@@ -38,8 +40,9 @@ class CreateHtmlMail
         $timecomp_html = $timecomp->GetHtmlTimeComp();
         $recommendations_html = $recommendations->GetHtmlRecommendations();
         $footer_html = $footer->GetHtmlFooter();
+        $summary_html = $summary->GetHtmlSummary();
 
-        return $htmlheadmeta . '' . $priming_html .''. $descinj_html  .''. $classification_html . '
+        return $htmlheadmeta . '' . $priming_html .''. $descinj_html .''. $summary_html  .''. $classification_html . '
         ' . $timecomp_html . '' . $recommendations_html . '' . $footer_html . '</body></html>';
     }
 

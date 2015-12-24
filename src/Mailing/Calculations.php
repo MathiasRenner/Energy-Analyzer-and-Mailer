@@ -67,18 +67,11 @@ class Calculations
         }
     }
 
-    public function CalcEnergyUsageUser()
+    public function CalcEnergyUsageUser($ignoreLimit = FALSE)
     {
         $db = DBAccessSingleton::getInstance();
 
-        if($db->extractionUserCount < 50)
-        {
-            $extractionUserCount = $db->extractionUserCount;
-        }
-        else
-        {
-            $extractionUserCount = 50;
-        }
+        $extractionUserCount = $this->GetExtractionUserCount($ignoreLimit);
 
         $avgEnergyUser = array_sum(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount))
             / count(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount));
@@ -137,16 +130,16 @@ class Calculations
         return round($time,1);
     }
 
-    public function CalcVolumeAvgUser()
+    public function CalcVolumeAvgUser($ignoreLimit = FALSE)
     {
         $db = DBAccessSingleton::getInstance();
 
-        $extractionUserCount = $this->GetExtractionUserCount();
+        $extractionUserCount = $this->GetExtractionUserCount($ignoreLimit);
 
         $avgUserVolume = array_sum(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount))
             / count(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount));
 
-        return $avgUserVolume;
+        return round($avgUserVolume,1);
     }
 
 
@@ -161,10 +154,10 @@ class Calculations
         return round($avgUserVolume * $percent,1);
     }
 
-    public function CalcUserFlowRate()
+    public function CalcUserFlowRate($ignoreLimit = FALSE)
     {
         $db = DBAccessSingleton::getInstance();
-        $extractionUserCount = $this->GetExtractionUserCount();
+        $extractionUserCount = $this->GetExtractionUserCount($ignoreLimit);
 
         $avgUserFlowRate = array_sum(array_slice($db->extractionsUserFlowRate,$extractionUserCount*(-1),$extractionUserCount))
             / count(array_slice($db->extractionsUserFlowRate,$extractionUserCount*(-1),$extractionUserCount));
@@ -172,9 +165,41 @@ class Calculations
         return round($avgUserFlowRate,1);
     }
 
-    private function GetExtractionUserCount()
+    public function CalcUserTemperature($ignoreLimit = FALSE)
     {
         $db = DBAccessSingleton::getInstance();
+        $extractionUserCount = $this->GetExtractionUserCount($ignoreLimit);
+
+        $avgUserTemperature = array_sum(array_slice($db->extractionsUserTemperature,$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->extractionsUserTemperature,$extractionUserCount*(-1),$extractionUserCount));
+
+        return round($avgUserTemperature,1);
+    }
+
+    public function CalcUserTime($ignoreLimit = FALSE)
+    {
+        $vol = $this->CalcVolumeAvgUser($ignoreLimit);
+        $flowRate = $this->CalcUserFlowRate($ignoreLimit);
+
+        $time = round($vol / $flowRate, 1);
+        return $time;
+    }
+
+
+    /**
+     * Gets the number of extractions for this user
+     *
+     * @param $ignoreLimit FALSE for getting only 50 extractions
+     *                     TRUE for getting all extraction counts
+     * @return int count of extractions
+     */
+    private function GetExtractionUserCount($ignoreLimit)
+    {
+        $db = DBAccessSingleton::getInstance();
+        if($ignoreLimit)
+        {
+            return $db->extractionUserCount;
+        }
         if($db->extractionUserCount < 50)
         {
             $extractionUserCount = $db->extractionUserCount;

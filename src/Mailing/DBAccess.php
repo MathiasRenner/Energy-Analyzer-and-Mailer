@@ -37,6 +37,7 @@ class DBAccessSingleton
     public $extractionsUserReportedOn = array();
     public $extractionsUserVolume = array();
     public $extractionsUserFlowRate = array();
+    public $extractionsUserTemperature = array();
 
     public $extractionUserCount;
 
@@ -145,12 +146,16 @@ class DBAccessSingleton
             {
                 $he = $row->heatingEfficiency;
             }
-            if(!is_null($row->volume) && $row->volume > 0 &&
+            // Data Cleaning
+            if(!is_null($row->volume) && $row->volume >= 5 && $row->volume <= 150 &&
                 !is_null($row->temperature) && $row->temperature > 0 &&
-                !is_null($row->flowRate && $row->flowRate > 0))
+                !is_null($row->flowRate) && $row->flowRate > 0 &&
+                !is_null($row->temperature) && $row->temperature > 10
+            )
             {
                 array_push($this->extractionsUserVolume, $row->volume);
                 array_push($this->extractionsUserFlowRate, $row->flowRate);
+                array_push($this->extractionsUserTemperature, $row->temperature);
 
                 array_push($this->energyUser, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he/ 100));
                 if($this->GetDate('')!= $this->GetDate($row->reportedOn))
