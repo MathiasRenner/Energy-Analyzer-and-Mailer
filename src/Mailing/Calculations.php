@@ -113,6 +113,22 @@ class Calculations
         return round($avgEnergyAllUser);
     }
 
+    public function CalcFlowRateAllUser()
+    {
+        $db = DBAccessSingleton::getInstance();
+        $temp = array();
+
+        foreach ($db->userFlowRate as $item)
+        {
+            $avgFlowRateUser = array_sum($item) / count($item);
+            array_push($temp, $avgFlowRateUser);
+        }
+
+        $avgFlowRateUser = array_sum($temp) / count($temp);
+
+        return round($avgFlowRateUser);
+    }
+
     public function CalcSavingTimeForBetterEnergyClass($actualConsumption)
     {
         $betterConsumption = $this->GetConsumptionForBetterEfficiencyClass($actualConsumption);

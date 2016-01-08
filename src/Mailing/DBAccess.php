@@ -44,6 +44,8 @@ class DBAccessSingleton
     public $energyUser = array();
     public $energyAllUser = array();
 
+    public $userFlowRate;
+
     static private $instance = null;
 
     static public function getInstance()
@@ -76,8 +78,19 @@ class DBAccessSingleton
         $this->SetUserEnergy($id);
     }
 
+    private function CalcDaysSinceLastReport($id)
+    {
+        $lastReport = mysqli_query($this->db, "SELECT * FROM bires_mcm_mailing WHERE id =" . $id . " ORDER BY lastMailingSent DESC;");
+        $dateLastReport = new DateTime($lastReport);
 
-    private function SetAllUserIds()
+        $today = new DateTime('now');
+
+        $diff = $datetime1->diff($today)->days;
+        return $diff;
+    }
+
+
+private function SetAllUserIds()
     {
         $query = "SELECT id FROM b1user";
         $res = mysqli_query($this->db, $query);
@@ -217,6 +230,14 @@ class DBAccessSingleton
                 {
                     array_push($userEnergyTemp, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he/ 100));
                 }
+
+                if(!is_null($row->flowRate) && $row->flowRate> 0 &&
+                    !is_null($row->temperature) && $row->temperature > 0 )
+                {
+                    $userFlowRate= array();
+                    array_push($userFlowRate, $row->flowRate);
+                }
+
             }
             if(count($userEnergyTemp) > 0)
             {
@@ -224,6 +245,8 @@ class DBAccessSingleton
             }
         }
     }
+
+
 
     private function GetDate($reportTime)
     {

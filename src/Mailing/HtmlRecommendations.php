@@ -11,6 +11,13 @@ class HtmlRecommendations
 
     public function GetHtmlRecommendations()
     {
+        $calc = new Calculations();
+
+        $avgflowRate = $calc->CalcFlowRateAllUser();
+        $UserflowRate = $calc->CalcUserFlowRate(TRUE);
+        echo 'user flow rate:' . $UserflowRate;
+        echo ' avg flow rate:' . $avgflowRate;
+        
         $array = array("");
 
         if (FALSE){
