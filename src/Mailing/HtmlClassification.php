@@ -122,23 +122,28 @@ class HtmlClassification
 
         return
 '
-<table cellpadding="0" cellspacing="0">
+<table cellpadding="0" cellspacing="0" width="800px">
     <tr>
-        <td class="pattern" width="450px" align="center">
-
-        <table cellpadding="0" cellspacing="0" style="padding-left: 10px; width: 450px;">
-        <tr>
-        <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
+        <td colspan="2" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
         Your position on the efficiency scale
         </td>
-        </tr>
-        <tr>
-        <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+    </tr>
+
+    <tr>
+        <td colspan="2" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;
+        padding-left: 30px; padding-right: 30px;">
         for the average energy consumption off the last <b>'. $extractionUserCount .'</b> showers.
-        <br/>
-        '. $savingText .'
+
+        Your average energy consumption was <b>'. $energy .' </b>  Wh per shower.
+        With this energy usage your energy efficiency class is <b>'. $class .'</b>. <br/> &nbsp;
         </td>
-        </tr>
+    </tr>
+
+    <tr>
+        <td>
+
+        <table cellpadding="0" cellspacing="0" width="500" style="padding-left: 20px;">
+
         <tr>
         <td>&nbsp;</td>
         </tr>
@@ -166,56 +171,94 @@ class HtmlClassification
         <tr>
         '. $rowG .'
         </tr>
-    </table>
-</td>
-  <td class="pattern" width="400px" align="center">
-        <table cellpadding="0" cellspacing="0" style="padding-left: 10px; width: 400;">
+        </table>
+
+        </td>
+
+
+        <td>
+
+        <table cellpadding="0" cellspacing="0" width="300">
+
+      <!--
         <tr>
-            <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-            Share that you are saving the planet!
+            <td class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            <b>Share on Twitter!</b>
             </td>
         </tr>
+        -->
+
         <tr>
-        <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-        Your average energy consumption by the last <b>'. $extractionUserCount .'</b> showers was <b>'. $energy .' </b>  Wh per shower. <br/>
-        With this energy usage your energy efficiency class is <b>'. $class .'</b>. <br/> &nbsp;
-        </td>
+        <td>&nbsp;</td>
         </tr>
+
         <tr>
-        <td >
+            <td align="center">
             <a href="' . $twittertext . '">
                 <img width="140px" height="80px"   src="assets/twitter/twitter_share.png">
             </a>
-        </td>
-        </tr>
-        <tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-        <tr><td>&nbsp;</td></tr>
-
-        <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-        Your reward!
-        </td>
+            </td>
         </tr>
 
-        <tr><td>&nbsp;</td></tr>
 
         <tr>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            <b>Your reward!</b>
+            </td>
+        </tr>
+
+        <tr>
+        <td>&nbsp;</td>
+        </tr>
+
+        <tr align="center">
             '. $badge .'
         </tr>
 
         <tr>
-        <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-        You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
-        If you upload your shower data <b>'. $upload .'</b> times, the living place of your icebear will increase!<br/>
-        </td>
+            <td class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
+            If you upload your shower data <b>'. $upload .'</b> times, the living place of your icebear will increase!<br/>
+            </td>
         </tr>
 
-     </table>
-     </td>
-</tr>
+        </table>
+
+        </td>
+    </tr>
+
+    <tr>
+        <td>&nbsp;<br/></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+        <b>Your Goal for the next report!</b>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;
+        padding-left: 30px; padding-right: 30px;">
+        '. $savingText .'
+        </td>
+    </tr>
+
 </table>
+
 <br/>
 ';
     }

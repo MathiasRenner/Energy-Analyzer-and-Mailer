@@ -26,47 +26,63 @@ class HtmlSummary
         $time = $calc->CalcUserTime(TRUE);
 
         return
-'<table cellpadding="3" cellspacing="3" bgcolor="white">
+'<table cellpadding="3" cellspacing="3" width="800" bgcolor="white">
        <tr>
-            <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-            Your summary
+            <td colspan="4" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
+            In a nutshell
             </td>
         </tr>
 
      <tr>
-     <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="assets/overview/pupload_2.png">
-      </td>
+
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
       <img width="40" src="assets/overview/pvolume_2.png">
       </td>
-      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="assets/overview/pflow.png">
-      </td>
-      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="50" src="assets/overview/ptemp.png">
-      </td>
+
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
       <img width="40" src="assets/overview/ptime.png">
       </td>
+
+      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+      <img width="40" src="assets/overview/pflow.png">
+      </td>
+
+      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+      <img width="50" src="assets/overview/ptemp.png">
+      </td>
+
+<!--
+      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+      <img width="40" src="assets/overview/pupload_2.png">
+      </td>
+-->
+
     </tr>
 
     <tr>
-      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      '. $uploads .' uploads
-      </td>
+
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
       &empty; '. $volume .' liter
       </td>
-      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      &empty; '. $flowRate .' liter/min
-      </td>
-      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      &empty; '. $temperature .' C&deg;
-      </td>
+
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
       &empty; '. $time .' min
       </td>
+
+      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+      &empty; '. $flowRate .' liter/min
+      </td>
+
+      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+      &empty; '. $temperature .' C&deg;
+      </td>
+
+<!--
+      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+      '. $uploads .' uploads
+      </td>
+-->
+
     </tr>
 </table>
 ';
