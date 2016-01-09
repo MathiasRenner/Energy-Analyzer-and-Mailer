@@ -65,12 +65,6 @@ class HtmlClassification
         $energy = $calc->CalcEnergyUsageUser();
         $class =  $calc->GetEfficiencyClass($energy);
 
-        $energyAll = $calc->CalcEnergyUsageAllUser();
-        $classAll = $calc->GetEfficiencyClass($energyAll);
-
-        $energytw = $calc->CalcEnergyUsageTopTwentyPercentUser();
-        $classtw = $calc->GetEfficiencyClass($energytw);
-
         $rowAA = '<td> <img width="auto" height="40px" src="assets/classifications/AA.png" > </td>';
         $rowA = '<td> <img width="auto" height="40px" src="assets/classifications/A.png" > </td>';
         $rowB = '<td> <img width="auto" height="40px" src="assets/classifications/B.png" > </td>';

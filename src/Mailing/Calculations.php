@@ -118,15 +118,15 @@ class Calculations
         $db = DBAccessSingleton::getInstance();
         $temp = array();
 
-        foreach ($db->userFlowRate as $item)
+        foreach ($db->flowRateAllUser as $item)
         {
             $avgFlowRateUser = array_sum($item) / count($item);
             array_push($temp, $avgFlowRateUser);
         }
 
-        $avgFlowRateUser = array_sum($temp) / count($temp);
+        $avgFlowRateAllUser = array_sum($temp) / count($temp);
 
-        return round($avgFlowRateUser);
+        return round($avgFlowRateAllUser,1);
     }
 
     public function CalcSavingTimeForBetterEnergyClass($actualConsumption)

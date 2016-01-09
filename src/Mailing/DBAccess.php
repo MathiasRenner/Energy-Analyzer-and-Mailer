@@ -44,7 +44,7 @@ class DBAccessSingleton
     public $energyUser = array();
     public $energyAllUser = array();
 
-    public $userFlowRate;
+    public $flowRateAllUser = array();
 
     static private $instance = null;
 
@@ -196,6 +196,7 @@ private function SetAllUserIds()
 
             $userExtractionIds = array();
             $userEnergyTemp = array();
+            $userFlowRateTemp = array();
             $query = "SELECT b1extraction_id FROM b1users_b1extractions WHERE b1user_id = " . $uID;
             $res = mysqli_query($this->db, $query);
             while($row = mysqli_fetch_object($res))
@@ -222,27 +223,28 @@ private function SetAllUserIds()
                 $he = 100;
                 if(!is_null($row->heatingEfficiency) && $row->heatingEfficiency < 100 && $row->heatingEfficiency > 80)
                 {
-                    $he = $row->heatingEfficiency;
+                    $he = $row->heatingEfficiency / 100;
                 }
 
+                // TODO: Data Cleaning missing
                 if(!is_null($row->volume) && $row->volume > 0 &&
                     !is_null($row->temperature) && $row->temperature > 0 )
                 {
-                    array_push($userEnergyTemp, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he/ 100));
+                    array_push($userEnergyTemp, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he));
                 }
 
                 if(!is_null($row->flowRate) && $row->flowRate> 0 &&
                     !is_null($row->temperature) && $row->temperature > 0 )
                 {
-                    $userFlowRate= array();
-                    array_push($userFlowRate, $row->flowRate);
+                    array_push($userFlowRateTemp, $row->flowRate);
                 }
 
             }
-            if(count($userEnergyTemp) > 0)
-            {
-                array_push($this->energyAllUser, $userEnergyTemp);
-            }
+
+
+            array_push($this->flowRateAllUser, $userFlowRateTemp);
+            array_push($this->energyAllUser, $userEnergyTemp);
+
         }
     }
 
