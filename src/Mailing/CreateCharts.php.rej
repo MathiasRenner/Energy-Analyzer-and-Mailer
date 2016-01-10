@@ -1,0 +1,86 @@
+diff a/src/Mailing/CreateCharts.php b/src/Mailing/CreateCharts.php	(rejected hunks)
+@@ -21,17 +21,81 @@
+ 
+     public function CreateAllCharts()
+     {
+-        $this->CreateDummyChart();
++        //$this->CreateDummyChart();
+         $this->CreateDescChart();
+         $this->CreateTimeCompChart();
+     }
+ 
+     public function CreateDescChart()
+     {
+-        $db = DBAccessSingleton::getInstance();
+-        $usern = $db->username;
++        $calculations = new Calculations();
++
++        $energy_user = $calculations->CalcEnergyUsageUser();
++        $energy_all = $calculations->CalcEnergyUsageAllUser();
++        $energy_top20 = $calculations->CalcEnergyUsageTopTwentyPercentUser();
++
++        //$font1 = "libs/charts/pChart2_1_4/fonts/calibri.ttf";
++        $font2 = "libs/charts/pChart2_1_4/fonts/calibri.ttf";
++
++        $myDescData = new pData();
++        $color_top20 = array("R"=>11,"G"=>71,"B"=>101,"Alpha"=>100);
++        $color_average = array("R"=>48,"G"=>107,"B"=>136,"Alpha"=>100);
++        $color_user = array("R"=>95,"G"=>142,"B"=>164,"Alpha"=>100);
++
++        // Fallunterscheidung: Anordnung der Balken
++        if($energy_user < $energy_top20){
++
++            $descValuesArray = array($energy_user, $energy_top20, $energy_all );
++            $myDescData-> addPoints($descValuesArray, "Compare yourself!");
++            $myDescData->addPoints(array("You", "Top 20%", "Average"),"Labels");
++
++            $Palette = array(   "0"=> $color_user,
++                                "1"=> $color_top20,
++                                "2"=> $color_average);
++
++        }elseif($energy_user > $energy_top20 & $energy_user < $energy_all){
++
++            $descValuesArray = array($energy_top20,$energy_user, $energy_all );
++            $myDescData-> addPoints($descValuesArray, "Compare yourself!");
++            $myDescData->addPoints(array("Top 20%","You", "Average"),"Labels");
++
++            $Palette = array(   "0"=>$color_top20,
++                                "1"=>$color_user,
++                                "2"=>$color_average);
++
++        }elseif($energy_user > $energy_all){
++
++            $descValuesArray = array($energy_top20, $energy_all, $energy_user);
++            $myDescData-> addPoints($descValuesArray, "Compare yourself!");
++            $myDescData->addPoints(array("Top 20%", "Average","You" ),"Labels");
++
++            $Palette = array(   "0"=>$color_top20,
++                                "1"=>$color_average,
++                                "2"=>$color_user);
++        }
++
++        $myDescData->setAbscissa("Labels");
++
++
++// 3. Ein image Objekt erzeugen, um $myData zu visualisieren
++        $myDescChart = new pImage(500, 300, $myDescData);
++
++// 4. Hier ggf. die Schriftart und Größe ändern
++        $myDescChart->setFontProperties(array("FontName"=>$font2,"FontSize"=>11,"R"=>80,"G"=>80,"B"=>80));
++
++
++// 5. Die Daten-Area in der Grafik muss kleiner sein, als die Grafik selbst
++        $myDescChart->setGraphArea(70,35, 475, 275);
++
++// 6. Horizontale und vertikale Skalierung (in diesem Fall ohne Parameter = Standard)
++        $myDescChart->drawScale(array("CycleBackground"=>TRUE,"DrawSubTicks"=>TRUE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>10, "Pos"=>SCALE_POS_TOPBOTTOM));
++
+ 
++// 7. Chart erzeugen
++        $myDescChart->drawBarChart(array("DisplayValues"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$Palette));
+ 
++        //8. Bilddatei ausgeben
++        $myDescChart->render("pictures/descChart.png");
+     }
+ 
+     public function CreateTimeCompChart()
