@@ -32,32 +32,58 @@ class HtmlClassification
         {
             $extractionUserCount = 50;
         }
+
+        $rewardHeading = "Your reward!";
         // select the right badge
         if($reportCount < 10)
         {
-            $badge = '<td><img width="140" height="82" src="assets/badges/g1.png"></td>';
+            $badge = "";
             $upload = 10;
+            $rewardHeading = "Here will be your next award!";
         }
-        elseif($reportCount >= 10 && $reportCount < 50)
+        elseif($reportCount >= 10 && $reportCount < 25)
         {
-            $badge = '<td><img src="assets/badges/g2.png"></td>';
-            $upload = 50;
+            $badge = '<td><img width="140" height="82" src="assets/badges/g1.png"></td>';
+            $upload = 25;
         }
-        elseif($reportCount >= 50 && $reportCount < 100)
+        elseif($reportCount >= 25 && $reportCount < 75)
         {
-            $badge = '<td><img src="assets/badges/g3.png"></td>';
-            $upload = 100;
+            $badge = '<td><img width="140" height="82" src="assets/badges/g2.png"></td>';
+            $upload = 75;
         }
-        elseif($reportCount >= 100 && $reportCount < 200)
+        elseif($reportCount >= 75 && $reportCount < 150)
         {
-            $badge = '<td><img src="assets/badges/g4.png"></td>';
-            $upload = 200;
+            $badge = '<td><img width="140" height="82" src="assets/badges/g3.png"></td>';
+            $upload = 150;
         }
-        elseif($reportCount >= 200)
+        elseif($reportCount >= 150 && $reportCount < 300)
         {
-            $badge = '<td><img src="assets/badges/g5.png"></td>';
-            $upload = 400;
+            $badge = '<td><img width="140" height="82"  src="assets/badges/g4.png"></td>';
+            $upload = 300;
         }
+        elseif($reportCount >= 300)
+        {
+            $badge = '<td><img width="140" height="82" src="assets/badges/g5.png"></td>';
+        }
+
+        $rewardText = "";
+        if($reportCount < 10)
+        {
+            $rewardText = 'You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
+            If you upload your shower data <b>'. $upload .'</b> times you will get your first reward!<br/>';
+        }
+        elseif($reportCount < 300)
+        {
+            $rewardText = 'You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
+            If you upload your shower data <b>'. $upload .'</b> times the living place of your icebear will increase!<br/>';
+        }
+        elseif($reportCount >= 300)
+        {
+            $rewardText = 'You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
+            We thank you very much for being such an awesome customer!<br/>';
+        }
+
+
 
 
         // feature classification
@@ -103,8 +129,10 @@ class HtmlClassification
         {
             $savingVolume = $calc->CalcSavingVolumeForBetterEnergyClass($energy);
             $savingTime = $calc->CalcSavingTimeForBetterEnergyClass($energy);
-            $savingText =  'If you lower your average water consumption by <b>'. $savingVolume  .' liter</b>
-                            or you shorten your showertime by <b>'. $savingTime .' seconds</b> for each shower you will reach the next better efficiency class!';
+            $savingText =  'If you lower your average water consumption by <b>'. round($savingVolume)  .' liter</b>
+                            or you shorten your showertime by <b>'. round($savingTime) .' seconds</b> for each shower you will reach the next better efficiency class!
+                            You can also combine both and lower your warter consumption by <b>'. round($savingVolume / 2) .' liter</b>
+                            and shorten your showertime by <b>'. round($savingTime / 2) .' seconds</b> for each shower';
         }
 
 
@@ -210,7 +238,7 @@ class HtmlClassification
 
         <tr>
             <td class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-            <b>Your reward!</b>
+            <b>'. $rewardHeading . '</b>
             </td>
         </tr>
 
@@ -224,8 +252,9 @@ class HtmlClassification
 
         <tr>
             <td class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-            You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
-            If you upload your shower data <b>'. $upload .'</b> times, the living place of your icebear will increase!<br/>
+
+            '. $rewardText .'
+
             </td>
         </tr>
 
@@ -240,7 +269,8 @@ class HtmlClassification
 
     <tr>
         <td colspan="2" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-        <b>Your Goal for the next report!</b>
+        <!--<b>Your Goal for the next report!</b> -->
+        <b>You can reach the next better efficiency class!</b>
         </td>
     </tr>
 

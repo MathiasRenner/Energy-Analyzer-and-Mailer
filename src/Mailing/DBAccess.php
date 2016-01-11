@@ -223,14 +223,14 @@ private function SetAllUserIds()
                 $he = 100;
                 if(!is_null($row->heatingEfficiency) && $row->heatingEfficiency < 100 && $row->heatingEfficiency > 80)
                 {
-                    $he = $row->heatingEfficiency / 100;
+                    $he = $row->heatingEfficiency;
                 }
 
                 // TODO: Data Cleaning missing
                 if(!is_null($row->volume) && $row->volume > 0 &&
                     !is_null($row->temperature) && $row->temperature > 0 )
                 {
-                    array_push($userEnergyTemp, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he));
+                    array_push($userEnergyTemp, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he / 100));
                 }
 
                 if(!is_null($row->flowRate) && $row->flowRate> 0 &&
@@ -241,10 +241,8 @@ private function SetAllUserIds()
 
             }
 
-
             array_push($this->flowRateAllUser, $userFlowRateTemp);
             array_push($this->energyAllUser, $userEnergyTemp);
-
         }
     }
 

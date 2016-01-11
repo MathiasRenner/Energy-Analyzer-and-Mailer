@@ -77,7 +77,15 @@ class CreateCharts
                                 "2"=>$color_user);
         }
 
-
+        // TODO besser darstellen und i
+        if($energy_top20 >= 2000 || $energy_all >= 2000 || $energy_user >= 2000)
+        {
+            $minDivHeight = 100;
+        }
+        else
+        {
+            $minDivHeight = 60;
+        }
 
         $myDescData->setAbscissa("Labels");
         // Ein image Objekt erzeugen, um $myDescData zu visualisieren
@@ -85,9 +93,13 @@ class CreateCharts
         // Hier ggf. die Schriftart und Größe ändern
         $myDescChart->setFontProperties(array("FontName"=>$font2,"FontSize"=>21,"R"=>80,"G"=>80,"B"=>80));
         // Die Daten-Area in der Grafik muss kleiner sein, als die Grafik selbst
-        $myDescChart->setGraphArea(140,70, 950, 550);
+        $myDescChart->setGraphArea(140,70, 920, 550);
         // Horizontale und vertikale Skalierung (in diesem Fall ohne Parameter = Standard)
-        $myDescChart->drawScale(array('XAxisTitleMargin'=>10,"MinDivHeight"=>60,"CycleBackground"=>FALSE,"DrawSubTicks"=>FALSE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>1, "Pos"=>SCALE_POS_TOPBOTTOM));
+        $myDescChart->drawScale(array('XAxisTitleMargin'=>10,"MinDivHeight"=>$minDivHeight,
+            "CycleBackground"=>FALSE,"DrawSubTicks"=>FALSE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>1,
+            "Pos"=>SCALE_POS_TOPBOTTOM,
+            // start from zero
+            "Mode" => SCALE_MODE_START0));
 
         $myDescChart->drawText(550,27,"consumption in wH",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 
@@ -173,53 +185,5 @@ class CreateCharts
         $myPicture->render("pictures/timeCompChart.png");
 
 
-    }
-
-
-    private function CreateDummyChart() {
-
-        $db = DBAccessSingleton::getInstance();
-        $usern = $db->username;
-        
-        $MyData = new pData();
-        $MyData->addPoints(array(13251,4118,3087,1460,1248,156,26,9,8),"Hits");
-        $MyData->setAxisName(0,"Hits");
-        $MyData->addPoints(array("Firefox","Chrome","Internet Explorer","Opera","Safari","Mozilla","SeaMonkey","Camino","Lunascape"),"Browsers");
-        $MyData->setSerieDescription("Browsers","Browsers");
-        $MyData->setAbscissa("Browsers");
-        $MyData->setAbscissaName("Browsers");
-
-        /* Create the pChart object */
-        $myPicture = new pImage(500,500,$MyData);
-        $myPicture->drawGradientArea(0,0,500,500,DIRECTION_VERTICAL,array("StartR"=>240,"StartG"=>240,"StartB"=>240,"EndR"=>180,"EndG"=>180,"EndB"=>180,"Alpha"=>100));
-        $myPicture->drawGradientArea(0,0,500,500,DIRECTION_HORIZONTAL,array("StartR"=>240,"StartG"=>240,"StartB"=>240,"EndR"=>180,"EndG"=>180,"EndB"=>180,"Alpha"=>20));
-        $myPicture->setFontProperties(array("FontName"=>"libs/charts/pChart2_1_4/fonts/pf_arma_five.ttf","FontSize"=>6));
-
-        /* Draw the chart scale */
-        $myPicture->setGraphArea(100,30,480,480);
-        $myPicture->drawScale(array("CycleBackground"=>TRUE,"DrawSubTicks"=>TRUE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>10,"Pos"=>SCALE_POS_TOPBOTTOM));
-
-        /* Turn on shadow computing */
-        $myPicture->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
-
-        /* Create the per bar palette */
-        $Palette = array("0"=>array("R"=>188,"G"=>224,"B"=>46,"Alpha"=>100),
-            "1"=>array("R"=>224,"G"=>100,"B"=>46,"Alpha"=>100),
-            "2"=>array("R"=>224,"G"=>214,"B"=>46,"Alpha"=>100),
-            "3"=>array("R"=>46,"G"=>151,"B"=>224,"Alpha"=>100),
-            "4"=>array("R"=>176,"G"=>46,"B"=>224,"Alpha"=>100),
-            "5"=>array("R"=>224,"G"=>46,"B"=>117,"Alpha"=>100),
-            "6"=>array("R"=>92,"G"=>224,"B"=>46,"Alpha"=>100),
-            "7"=>array("R"=>224,"G"=>176,"B"=>46,"Alpha"=>100));
-
-        /* Draw the chart */
-        $myPicture->drawBarChart(array("DisplayPos"=>LABEL_POS_INSIDE,"DisplayValues"=>TRUE,"Rounded"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$Palette));
-
-        /* Write the legend */
-        $myPicture->drawLegend(570,215,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL));
-
-        /* Render the picture (choose the best way) */
-        //$myPicture->autoOutput("pictures/test.png");
-        $myPicture->render("pictures/test.png");
     }
 }

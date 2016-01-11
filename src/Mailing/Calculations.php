@@ -91,7 +91,7 @@ class Calculations
         }
         asort($temp);
 
-        $energyAvgTwentyPercent = array_sum(array_slice($temp,0, count($temp)*0.2)) / count($temp)*0.2;
+        $energyAvgTwentyPercent = array_sum(array_slice($temp,0, count($temp)*0.2)) / (count($temp)*0.2);
 
         return round($energyAvgTwentyPercent);
 
