@@ -14,7 +14,7 @@ class HtmlPriming
         $db = DBAccessSingleton::getInstance();
 
         $message = SingletonMessage::Instance();
-        $cid = $message->embed(Swift_Image::fromPath('assets/priming_eisbaer.png'));
+        //$cid = $message->embed(Swift_Image::fromPath('assets/priming_eisbaer.png'));
 
         if($db->extractionUserCount >= 200)
         {
@@ -69,7 +69,7 @@ class HtmlPriming
                 <td width="800" align="center" valign="top">
                     <table cellpadding="0" cellspacing="0">
                     <tr>
-                    <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="assets/logo.png" width="200" alt="" style="display: block; border: 0;" /> </a>
+                    <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="assets/badges/logo.png" width="200" alt="" style="display: block; border: 0;" /> </a>
                     </td>
                     <td>
                         <img src="assets/badges/_baer.png" height="40" width="auto" alt="" style="display: block; border: 0;" />

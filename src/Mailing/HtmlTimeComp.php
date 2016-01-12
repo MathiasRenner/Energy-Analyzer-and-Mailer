@@ -14,7 +14,7 @@ class HtmlTimeComp
         $db = DBAccessSingleton::getInstance();
         $name = $db->username;
         //$message = SingletonMessage::Instance();
-        //$cid = $message->embed(Swift_Image::fromPath('pictures/test.png'));
+        //$cid = $message->embed(Swift_Image::fromPath('pictures/descChart.png'));
 
         return '
 <table cellpadding="0" cellspacing="0">
