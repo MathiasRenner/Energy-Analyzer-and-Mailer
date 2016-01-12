@@ -35,7 +35,7 @@ class HtmlRecommendations
         $avgflowRate = $calc->CalcFlowRateAllUser();
         $UserflowRate = $calc->CalcUserFlowRate(TRUE);
 
-        if ( $UserflowRate > $avgflowRate ){
+        if ($UserflowRate > $avgflowRate){
             $textReduceWater="<b>Turning on the tap only half way - for the sake for the environment! (+ special tip!)</b><br />Showering accounts for about 25% of total water consumption in a household. A lower flow rate saves reasonable a amount of water and takes you in control on conservating the most valuable resource for life of our planet. Special tip: Investing in a water efficient shower head makes this goal as easy as it gets!";
             array_push($array, $textReduceWater);
         }
@@ -49,17 +49,19 @@ class HtmlRecommendations
             array_push($array, $textReduceFrequency);
         }
 
-        // this is not yet available from the data, show randomly instead
+
+        $textReduceShampooing='<b>Hold on! Do you need water during shampooing?</b><br />Stop the water when putting soap on your skin. Better take some seconds and give your body a little massage rather than letting the soap immediately rubbing down again.';
+        // analysing shower breaks is not yet available from the data, show randomly instead
         if ( round(rand(0, 1)) ){
-            $textReduceShampooing="<b>Hold on! Do you need water during shampooing?</b><br />Stop the water when putting soap on your skin. Better take some seconds and give your body a little massage rather than letting the soap immediately rubbing down again.";
-            array_push($array, $textReduceShampooing);
+          array_push($array, $textReduceShampooing);
         }
 
-        // if data say that no recommendations are necessary, do not show recommendation section at all
+         //if data say that no recommendations are necessary, do not show recommendation section at all
         if(count($array)-1 == 0){
             array_push($array, $textReduceShampooing);
         }
 
+        $recommendations="";
         // get and show all user specific recommendations from the array
         for ($i = 1; $i <= count($array)-1; $i++) {
             $recommendations.='
