@@ -12,7 +12,7 @@ class HtmlDescInj
     public function GetHtmlDescInj()
     {
         //$message = SingletonMessage::Instance();
-        //$cid = $message->embed(Swift_Image::fromPath('pictures/test.png'));
+        //$cid = $message->embed(Swift_Image::fromPath('pictures/descChart.png'));
 
         $calc = new Calculations();
         $avgUser = $calc->CalcEnergyUsageUser();
