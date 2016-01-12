@@ -217,7 +217,7 @@ class HtmlClassification
         <tr>
             <td align="center">
             <a href="' . $twittertext . '">
-                <img width="140px" height="80px"   src="assets/twitter/twitter_share.png">
+                <img width="140px" height="80px"   src="assets/twitter/twitter_share_2.png">
             </a>
             </td>
         </tr>

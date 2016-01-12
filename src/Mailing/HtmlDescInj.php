@@ -19,7 +19,7 @@ class HtmlDescInj
         $avgAll = $calc->CalcEnergyUsageAllUser();
         $avgTop20 = $calc->CalcEnergyUsageTopTwentyPercentUser();
 
-        if($avgUser <= $avgTop20 * 1.15)
+        if($avgUser <= $avgTop20)
         {
             $inj = '<td align="center" class="hero_image"><img src="assets/injunctive/inj1.png" width="65%" alt="" style="display: block; border: 0;" /></td>';
             $injtext = "Nice work! You are great, but do not stop being an environment saver!";

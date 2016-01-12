@@ -36,7 +36,7 @@ class HtmlSummary
      <tr>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="assets/overview/pvolume_2.png">
+      <img width="40" src="assets/overview/pvolume.png">
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">

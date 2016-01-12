@@ -21,7 +21,6 @@ class CreateCharts
 
     public function CreateAllCharts()
     {
-        //$this->CreateDummyChart();
         $this->CreateDescChart();
         $this->CreateTimeCompChart();
     }
@@ -34,13 +33,14 @@ class CreateCharts
         $energy_all = $calculations->CalcEnergyUsageAllUser();
         $energy_top20 = $calculations->CalcEnergyUsageTopTwentyPercentUser();
 
-        //$font1 = "libs/charts/pChart2_1_4/fonts/calibri.ttf";
         $font2 = "libs/charts/pChart2_1_4/fonts/verdana.ttf";
 
-        //Farbschema
-        $color_top20 = array("R"=>11,"G"=>71,"B"=>101,"Alpha"=>100);
-        $color_average = array("R"=>48,"G"=>107,"B"=>136,"Alpha"=>100);
-        $color_user = array("R"=>95,"G"=>142,"B"=>164,"Alpha"=>100);
+
+        $col_dark = array("R"=>79,"G"=>122,"B"=>149,"Alpha"=>100);
+        $col_mid = array("R"=>138,"G"=>171,"B"=>188,"Alpha"=>100);
+        $col_light = array("R"=>205,"G"=>219,"B"=>226,"Alpha"=>100);
+
+        $Palette = array("0"=>$col_light, "1"=>$col_mid, "2"=>$col_dark);
 
         $myDescData = new pData();
         //$myDescData->setAxisName(0,"consumption in wH");
@@ -52,19 +52,11 @@ class CreateCharts
             $myDescData-> addPoints($descValuesArray, "Compare yourself!");
             $myDescData->addPoints(array("You ", "Top 20% ", "Average "),"Labels");
 
-            $Palette = array(   "0"=> $color_user,
-                                "1"=> $color_top20,
-                                "2"=> $color_average);
-
         }elseif($energy_user > $energy_top20 & $energy_user < $energy_all){
 
             $descValuesArray = array($energy_top20,$energy_user, $energy_all );
             $myDescData-> addPoints($descValuesArray, "Compare yourself!");
             $myDescData->addPoints(array("Top 20% ","You ", "Average "),"Labels");
-
-            $Palette = array(   "0"=>$color_top20,
-                                "1"=>$color_user,
-                                "2"=>$color_average);
 
         }elseif($energy_user > $energy_all){
 
@@ -72,40 +64,37 @@ class CreateCharts
             $myDescData-> addPoints($descValuesArray, "Compare yourself!");
             $myDescData->addPoints(array("Top 20% ", "Average ","You " ),"Labels");
 
-            $Palette = array(   "0"=>$color_top20,
-                                "1"=>$color_average,
-                                "2"=>$color_user);
-        }
-
-        // TODO besser darstellen und i
-        if($energy_top20 >= 2000 || $energy_all >= 2000 || $energy_user >= 2000)
-        {
-            $minDivHeight = 100;
-        }
-        else
-        {
-            $minDivHeight = 60;
         }
 
         $myDescData->setAbscissa("Labels");
+
+        $myDescData->setAxisDisplay(0,AXIS_FORMAT_CUSTOM,"YAxisFormat");
+
         // Ein image Objekt erzeugen, um $myDescData zu visualisieren
-        $myDescChart = new pImage(1000, 600, $myDescData);
+        $myDescChart = new pImage(1000, 500, $myDescData);
         // Hier ggf. die Schriftart und Größe ändern
         $myDescChart->setFontProperties(array("FontName"=>$font2,"FontSize"=>21,"R"=>80,"G"=>80,"B"=>80));
         // Die Daten-Area in der Grafik muss kleiner sein, als die Grafik selbst
-        $myDescChart->setGraphArea(140,70, 920, 550);
+        $myDescChart->setGraphArea(140,70, 860, 450);
         // Horizontale und vertikale Skalierung (in diesem Fall ohne Parameter = Standard)
-        $myDescChart->drawScale(array('XAxisTitleMargin'=>10,"MinDivHeight"=>$minDivHeight,
+        $myDescChart->drawScale(array('XAxisTitleMargin'=>10,//"MinDivHeight"=>$minDivHeight,
             "CycleBackground"=>FALSE,"DrawSubTicks"=>FALSE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridAlpha"=>1,
             "Pos"=>SCALE_POS_TOPBOTTOM,
             // start from zero
             "Mode" => SCALE_MODE_START0));
 
-        $myDescChart->drawText(550,27,"consumption in wH",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+
+        function YAxisFormat($Value) { return(" ".  $Value ." Wh"); }
+
+        $myDescChart->drawText(450,28,"consumption in wH",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 
         // Chart erzeugen
         $myDescChart->drawBarChart(array("DisplayValues"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$Palette));
         // Bilddatei ausgeben
+
+        $RectangleSettings = array("R"=>255,"G"=>255,"B"=>255);
+        $myDescChart->drawFilledRectangle(10,30, 1000,80,$RectangleSettings);
+
         $myDescChart->render("pictures/descChart.png");
     }
 
