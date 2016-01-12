@@ -97,6 +97,18 @@ class Calculations
 
     }
 
+    public function CalcVolumeAllUser(){
+        $db = DBAccessSingleton::getInstance();
+
+        $temp = array();
+        foreach ($db->volumeAllUser as $item){
+            $avgVolume = array_sum($item) / count($item);
+            array_push($temp, $avgVolume);
+        }
+        $avgVolumeTotal = array_sum($temp) / count($temp);
+        return round($avgVolumeTotal,1);
+    }
+
     public function CalcEnergyUsageAllUser()
     {
         $db = DBAccessSingleton::getInstance();
@@ -159,6 +171,8 @@ class Calculations
     }
 
 
+
+
     public function CalcSavingVolumeForBetterEnergyClass($actualConsumption)
     {
         $betterConsumption = $this->GetConsumptionForBetterEfficiencyClass($actualConsumption);
@@ -201,6 +215,22 @@ class Calculations
         return $time;
     }
 
+    public function CalcAllUserTime()
+    {
+        $vol = $this->CalcVolumeAllUser();
+        $flowRate = $this->CalcFlowRateAllUser();
+
+        $time = round($vol / $flowRate, 1);
+        return $time;
+    }
+
+    public function CalcAvgNumberOfShowers(){
+        $db = DBAccessSingleton::getInstance();
+
+        return  ($db->GetNumberOfExtractions() / $db->GetNumberOfUsers() );
+    }
+
+
 
     /**
      * Gets the number of extractions for this user
@@ -209,7 +239,7 @@ class Calculations
      *                     TRUE for getting all extraction counts
      * @return int count of extractions
      */
-    private function GetExtractionUserCount($ignoreLimit)
+    public function GetExtractionUserCount($ignoreLimit)
     {
         $db = DBAccessSingleton::getInstance();
         if($ignoreLimit)

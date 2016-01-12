@@ -39,12 +39,14 @@ class DBAccessSingleton
     public $extractionsUserFlowRate = array();
     public $extractionsUserTemperature = array();
 
+
     public $extractionUserCount;
+
 
     public $energyUser = array();
     public $energyAllUser = array();
-
     public $flowRateAllUser = array();
+    public $volumeAllUser = array();
 
     static private $instance = null;
 
@@ -90,7 +92,7 @@ class DBAccessSingleton
     }
 
 
-private function SetAllUserIds()
+    private function SetAllUserIds()
     {
         $query = "SELECT id FROM b1user";
         $res = mysqli_query($this->db, $query);
@@ -124,6 +126,22 @@ private function SetAllUserIds()
         $this->familyname = $row['familyName'];
     }
 
+
+    public function GetNumberOfExtractions(){
+       // get all extractions
+        $allExtractions = mysqli_query($this->db, "SELECT COUNT(id) as count FROM b1extraction");
+        $row = mysqli_fetch_assoc($allExtractions);
+
+        return $row['count'];
+    }
+
+    public function GetNumberOfUsers(){
+        // get all users
+        $queryAllUsers = mysqli_query($this->db, "SELECT COUNT(id) as count FROM b1user");
+        $row = mysqli_fetch_assoc($queryAllUsers);
+
+        return $row['count'];
+    }
 
     private function SetUserEnergy($id)
     {
@@ -161,7 +179,6 @@ private function SetAllUserIds()
             }
             // Data Cleaning
             if(!is_null($row->volume) && $row->volume >= 5 && $row->volume <= 150 &&
-                !is_null($row->temperature) && $row->temperature > 0 &&
                 !is_null($row->flowRate) && $row->flowRate > 0 &&
                 !is_null($row->temperature) && $row->temperature > 10
             )
@@ -178,6 +195,7 @@ private function SetAllUserIds()
             }
         }
     }
+
 
     private function SetAllUserEnergy()
     {
@@ -197,6 +215,7 @@ private function SetAllUserIds()
             $userExtractionIds = array();
             $userEnergyTemp = array();
             $userFlowRateTemp = array();
+            $userVolumeTemp = array();
             $query = "SELECT b1extraction_id FROM b1users_b1extractions WHERE b1user_id = " . $uID;
             $res = mysqli_query($this->db, $query);
             while($row = mysqli_fetch_object($res))
@@ -227,20 +246,20 @@ private function SetAllUserIds()
                 }
 
                 // TODO: Data Cleaning missing
-                if(!is_null($row->volume) && $row->volume > 0 &&
-                    !is_null($row->temperature) && $row->temperature > 0 )
+                if(!is_null($row->volume) && $row->volume >= 5 && $row->volume <= 150 &&
+                    !is_null($row->flowRate) && $row->flowRate > 0 &&
+                    !is_null($row->temperature) && $row->temperature > 10)
                 {
                     array_push($userEnergyTemp, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he / 100));
+                    array_push($userFlowRateTemp, $row->flowRate);
+                    array_push($userVolumeTemp, $row->volume);
+
                 }
 
-                if(!is_null($row->flowRate) && $row->flowRate> 0 &&
-                    !is_null($row->temperature) && $row->temperature > 0 )
-                {
-                    array_push($userFlowRateTemp, $row->flowRate);
-                }
 
             }
 
+            array_push($this->volumeAllUser, $userVolumeTemp);
             array_push($this->flowRateAllUser, $userFlowRateTemp);
             array_push($this->energyAllUser, $userEnergyTemp);
         }
