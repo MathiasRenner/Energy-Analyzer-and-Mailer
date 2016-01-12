@@ -115,7 +115,7 @@ class CreateCharts
         $usern = $db->username;
         $userExtractions = $db-> energyUser;
 
-        $font2 = "libs/charts/pChart2_1_4/fonts/calibri.ttf";
+        $font2 = "libs/charts/pChart2_1_4/fonts/verdana.ttf";
 
         /* Create and populate the pData object */
         $MyData = new pData();
@@ -125,62 +125,53 @@ class CreateCharts
         $MyData->setPalette($usern,$serieSettings);
 
         $MyData->setSerieWeight($usern, 1);
-        //$MyData->setSerieTicks("Probe 2",4);
+
+        //Einheit "Wh" anzeigen
+        $MyData->setAxisUnit(0,"Wh");
+
         $MyData->setAxisName(0,"");
         //TODO: x-Achsenbezeichnung an Daten anpassen
-        $MyData->addPoints(range(-30,-1),"Labels");
-        $MyData->setSerieDescription("Labels","Months");
-        $MyData->setAbscissa("Labels");
+        //$MyData->addPoints(range(-30,-1),"Labels");
+        //$MyData->setSerieDescription("Labels","Months");
+        //$MyData->setAbscissa("Labels");
 
         /* Create the pChart object */
         $myPicture = new pImage(700,230,$MyData);
 
         /* Turn of Antialiasing */
-        $myPicture->Antialias = TRUE;
+        $myPicture->Antialias = FALSE;
 
-        /* Draw the background */
-        // do not draw a background
-        //$Settings = array("R"=>255, "G"=>255, "B"=>255, "Dash"=>0, "DashR"=>36, "DashG"=>81, "DashB"=>107);
-        //$myPicture->drawFilledRectangle(0,0,700,230,$Settings);
-
-        /* Overlay with a gradient */
-        //$Settings = array("StartR"=>219, "StartG"=>231, "StartB"=>139, "EndR"=>1, "EndG"=>138, "EndB"=>68, "Alpha"=>50);
-        //$myPicture->drawGradientArea(0,0,700,230,DIRECTION_VERTICAL,$Settings);
-        //$myPicture->drawGradientArea(0,0,700,20,DIRECTION_VERTICAL,array("StartR"=>0,"StartG"=>0,"StartB"=>0,"EndR"=>50,"EndG"=>50,"EndB"=>50,"Alpha"=>80));
-
-        /* Add a border to the picture */
-        // Border is not shown
-        //$myPicture->drawRectangle(0,0,699,229,array("R"=>0,"G"=>0,"B"=>0));
-
-        /* Write the chart title */
-        $myPicture->setFontProperties(array("FontName"=>$font2,"FontSize"=>8,"R"=>255,"G"=>255,"B"=>255));
-        // header is already there
-        //$myPicture->drawText(10,16,"Energy Consumption per Shower",array("FontSize"=>13,"Align"=>TEXT_ALIGN_BOTTOMLEFT));
 
         /* Set the default font */
-        $myPicture->setFontProperties(array("FontName"=>$font2,"FontSize"=>11,"R"=>0,"G"=>0,"B"=>0));
+        $myPicture->setFontProperties(array("FontName"=>$font2,"FontSize"=>9,"R"=>0,"G"=>0,"B"=>0));
 
         /* Define the chart area */
-        $myPicture->setGraphArea(60,40,650,200);
+        //$myPicture->setGraphArea(60,40,650,200);
+        $myPicture->setGraphArea(60,30,680,200);
+
+        //$myPicture->drawText(40,20,"Wh");
 
         /* Draw the scale */
         $scaleSettings = array("XMargin"=>10,"YMargin"=>10,"Floating"=>TRUE,"GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
-        $myPicture->drawScale($scaleSettings);
-
-        /* Turn on Antialiasing */
-        $myPicture->Antialias = TRUE;
+        //$myPicture->drawScale($scaleSettings);
+        $AxisBoundaries = array(0=>array("Min"=>0,"Max"=>max(array_slice($userExtractions,-30,30))));
+        $myPicture->drawScale(array("InnerTickWidth"=>-1,"OuterTickWidth"=>5,"TickR"=>255,"TickG"=>255,"TickB"=>255,"Mode"=>SCALE_MODE_MANUAL,"ManualScale"=>$AxisBoundaries,"LabelRotation"=>45,"DrawXLines"=>FALSE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridTicks"=>0,"GridAlpha"=>30,"AxisAlpha"=>0));
 
         /* Enable shadow computing */
         $myPicture->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
 
-        /* Draw the line chart */
+        /* Draw the line chart
         $myPicture->drawLineChart(array("DisplayColor"=>DISPLAY_MANUAL));
         $myPicture->drawPlotChart(array("DisplayValues"=>TRUE,"PlotBorder"=>TRUE,"BorderSize"=>2,"Surrounding"=>-60,"BorderAlpha"=>80));
+        */
 
+        $myPicture->drawBarChart();
         /* Write the chart legend */
         // legend is just the email of the user, which is already  shown in the header of the mailing
         //$myPicture->drawLegend(590,9,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL,"FontR"=>255,"FontG"=>255,"FontB"=>255));
 
+        $RectangleSettings = array("R"=>255,"G"=>255,"B"=>255);
+        $myPicture->drawFilledRectangle(61,201,720,230,$RectangleSettings);
         /* Render the picture (choose the best way) */
         $myPicture->render("pictures/timeCompChart.png");
 
