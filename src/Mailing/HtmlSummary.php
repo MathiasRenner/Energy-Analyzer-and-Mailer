@@ -37,24 +37,24 @@ class HtmlSummary
      <tr>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="'.UtilHelper::InlinePicture("assets/overview/pvolume.png").'">
+      <img width="40" src="'.UtilSingleton::getInstance()->InlinePicture("assets/overview/pvolume.png").'">
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="'.UtilHelper::InlinePicture("assets/overview/ptime.png").'">
+      <img width="40" src="'.UtilSingleton::getInstance()->InlinePicture("assets/overview/ptime.png").'">
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="'.UtilHelper::InlinePicture("assets/overview/pflow.png").'">
+      <img width="40" src="'.UtilSingleton::getInstance()->InlinePicture("assets/overview/pflow.png").'">
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="'.UtilHelper::InlinePicture("assets/overview/ptemp.png").'">
+      <img width="40" src="'.UtilSingleton::getInstance()->InlinePicture("assets/overview/ptemp.png").'">
       </td>
 
 <!--
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="UtilHelper::InlinePicture("assets/overview/pupload_2.png")">
+      <img width="40" src="UtilSingleton::getInstance()->InlinePicture("assets/overview/pupload_2.png")">
       </td>
 -->
 

@@ -73,10 +73,10 @@ class HtmlPriming
                 <td width="800" align="center" valign="top">
                     <table cellpadding="0" cellspacing="0">
                     <tr>
-                    <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="'. UtilHelper::InlinePicture("assets/badges/logo.png") .'" width="200" alt="" style="display: block; border: 0;" /> </a>
+                    <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="'. UtilSingleton::getInstance()->InlinePicture("assets/badges/logo.png") .'" width="200" alt="" style="display: block; border: 0;" /> </a>
                     </td>
                     <td>
-                        <img src="'. UtilHelper::InlinePicture("assets/badges/_baer.png") .'" height="40" width="auto" alt="" style="display: block; border: 0;" />
+                        <img src="'. UtilSingleton::getInstance()->InlinePicture("assets/badges/_baer.png") .'" height="40" width="auto" alt="" style="display: block; border: 0;" />
                     </td>
                     <td align="left" style="font-family: arial,sans-serif; font-size: 13px; line-height: 17px !important; color: #7f7f7f; padding-top: 5px;">
                        Together we can <br/><b>save</b> his world!

@@ -19,16 +19,29 @@ include "DatabaseAccess.php";
 include "UtilHelper.php";
 
 // Parameter
-$id = $_GET['user'];
+//$id = $_GET['user'];
+
+// create the chart object
+$createChart = new CreateCharts();
+$db = DBAccessSingleton::getInstance();
 
 // Init DB and get all relevant db entries
-//$id = 1; // id will be set from outside
-$db = DBAccessSingleton::getInstance();
 $db->Init();  // init database
+
+$allUser = array(3); // array(3,6);
+//$allUser = $db->userIdsWithExtractions;
+
+foreach($allUser as $id)
+{
+
+// set the user db information
 $db->Update($id);
 
+// Create the message object
+$message = new Swift_Message("This is your Amphiro report. Together we can save the planet!");
+UtilSingleton::getInstance()->SetSwiftMailerInstance($message);
+
 // create all charts
-$createChart = new CreateCharts();
 $createChart->CreateAllCharts();
 
 // Create the html mail including all pictures + html + style
@@ -43,38 +56,28 @@ $cssToInlineStyles->setCSS($css);
 // output
 $html = $cssToInlineStyles->convert();
 
-
 // the transport object
-// TODO: auf mail.uni.bamberg umstellen
-$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 587, 'tls');
-$transport->setUsername('eesys.mcm.mailer@gmail.com');
-$transport->setPassword('eesys.mcm.mailer1516');
-$transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de');
+$transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de', 587, 'tls');
+$transport->setLocalDomain('[127.0.0.1]');
 
-
-// TODO: Absender anpassen
-$from = array('eesys.mcm.mailer@gmail.com' => 'Amphiro_Absender');
+//TODO: Absender anpassen
+$from = array('a@b.com' => 'Your Amphiro Team');
 $to = array(
-    'dummy@gmail.com'  => 'our dummy account to send the mail',
     //, $db->email => $db->firstname . ' ' . $db->familyname
 );
 
 // object for sending the finished mail
 $mailer = Swift_Mailer::newInstance($transport);
 
-// Create the message object
-$message = SingletonMessage::Instance();
-
 // build your mail
 $message->setFrom($from);
 $message->setBody($html, 'text/html');
 
 // further infos
-$text = "This is your Amphiro report. Together we can save the planet!";
+//$text = "This is your Amphiro report. Together we can save the planet!";
 
 $message->setTo($to);
-$message->addPart($text, 'text/plain');
-
+//$message->addPart($text, 'text/plain');
 
 // display for debug
 print $message->getBody();
@@ -82,4 +85,5 @@ print $message->getBody();
 // for sending your email
 //if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!'; } else { echo "There was an error:\n"; print_r($failures);}
 
+}
 ?>

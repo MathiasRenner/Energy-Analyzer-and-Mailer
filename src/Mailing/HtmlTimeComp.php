@@ -31,7 +31,7 @@ class HtmlTimeComp
                                 </td>
                             </tr>
                             <tr>
-                                <td class="hero_image"><img src="'.UtilHelper::InlinePicture("pictures/timeCompChart.png").'" width="720" alt="" style="display: block; border: 0; padding-top: 10px;" /></td>
+                                <td class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("pictures/timeCompChart.png").'" width="720" alt="" style="display: block; border: 0; padding-top: 10px;" /></td>
                             </tr>
                             <tr>
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">

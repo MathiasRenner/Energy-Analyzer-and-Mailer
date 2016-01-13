@@ -24,9 +24,9 @@ class HtmlFooter
     </tr>
     <tr>
         <td  width="800" align="center">
-        <a href="https://twitter.com/amphiroag"><img height="25" width="25" src="'.UtilHelper::InlinePicture("assets/footer/twitter.png").'"></a>
-        <a href="https://plus.google.com/101220642639072243787"><img height="25" width="25" src="'.UtilHelper::InlinePicture("assets/footer/gplus.png").'"></a>
-        <a href="https://www.youtube.com/channel/UC4FJ_KyDmXu4TCGk5Tl33QA"><img height="25" width="25" src="'.UtilHelper::InlinePicture("assets/footer/youtube.png").'"></a>
+        <a href="https://twitter.com/amphiroag"><img height="25" width="25" src="'.UtilSingleton::getInstance()->InlinePicture("assets/footer/twitter.png").'"></a>
+        <a href="https://plus.google.com/101220642639072243787"><img height="25" width="25" src="'.UtilSingleton::getInstance()->InlinePicture("assets/footer/gplus.png").'"></a>
+        <a href="https://www.youtube.com/channel/UC4FJ_KyDmXu4TCGk5Tl33QA"><img height="25" width="25" src="'.UtilSingleton::getInstance()->InlinePicture("assets/footer/youtube.png").'"></a>
         </td>
     </tr>
     <tr>

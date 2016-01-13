@@ -44,27 +44,27 @@ class HtmlClassification
         elseif($reportCount >= 10 && $reportCount < 25)
         {
 
-            $badge = '<td><img width="140" height="82" src="'.UtilHelper::InlinePicture("assets/badges/g1.png").'"></td>';
+            $badge = '<td><img width="140" height="82" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g1.png").'"></td>';
             $upload = 25;
         }
         elseif($reportCount >= 25 && $reportCount < 75)
         {
-            $badge = '<td><img width="140" height="82" src="'.UtilHelper::InlinePicture("assets/badges/g2.png").'"></td>';
+            $badge = '<td><img width="140" height="82" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g2.png").'"></td>';
             $upload = 75;
         }
         elseif($reportCount >= 75 && $reportCount < 150)
         {
-            $badge = '<td><img width="140" height="82" src="'.UtilHelper::InlinePicture("assets/badges/g3.png").'"></td>';
+            $badge = '<td><img width="140" height="82" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g3.png").'"></td>';
             $upload = 150;
         }
         elseif($reportCount >= 150 && $reportCount < 300)
         {
-            $badge = '<td><img width="140" height="82"  src="'.UtilHelper::InlinePicture("assets/badges/g4.png").'"></td>';
+            $badge = '<td><img width="140" height="82"  src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g4.png").'"></td>';
             $upload = 300;
         }
         elseif($reportCount >= 300)
         {
-            $badge = '<td><img width="140" height="82" src="'.UtilHelper::InlinePicture("assets/badges/g5.png").'"></td>';
+            $badge = '<td><img width="140" height="82" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g5.png").'"></td>';
         }
 
         $rewardText = "";
@@ -90,101 +90,91 @@ class HtmlClassification
         $energy = $calc->CalcEnergyUser();
         $class =  UtilHelper::GetEfficiencyClass($energy);
 
-        // add the corresponding picture to the scale
-        //$rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
-        //$rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
-        //$rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
-        //$rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
-        //$rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
-        //$rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
-        //$rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
-        //$rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
-
         // set the user row
         if ($class == 'A+') {
-            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AAY.png").'" > </td>';
-            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
-            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
-            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
-            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
-            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
-            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
-            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AAY.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
 
         }
         if ($class == 'A') {
-            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AY.png").'" > </td>';
-            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
-            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
-            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
-            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
-            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
-            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
-            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
 
         }
         if ($class == 'B') {
-            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/BY.png").'" > </td>';
-            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
-            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
-            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
-            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
-            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
-            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
-            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/BY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
 
         }
         if ($class == 'C') {
-            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/CY.png").'" > </td>';
-            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
-            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
-            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
-            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
-            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
-            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
-            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/CY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
 
         }
         if ($class == 'D') {
-            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/DY.png").'" > </td>';
-            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
-            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
-            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
-            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
-            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
-            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
-            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/DY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
         }
         if ($class == 'E') {
-            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/EY.png").'" > </td>';
-            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
-            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
-            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
-            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
-            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
-            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
-            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/EY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
         }
         if ($class == 'F') {
-            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/FY.png").'" > </td>';
-            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
-            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
-            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
-            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
-            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
-            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
-            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/FY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
 
         }
         if ($class == 'G') {
-            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/GY.png").'" > </td>';
-            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
-            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
-            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
-            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
-            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
-            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
-            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/GY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/F.png").'" > </td>';
         }
 
         // feature goal setting
@@ -294,7 +284,7 @@ class HtmlClassification
         <tr>
             <td align="center">
             <a href="' . $twittertext . '">
-                <img width="140px" height="80px"   src="'.UtilHelper::InlinePicture("assets/twitter/twitter_share_2.png").'"/>
+                <img width="140px" height="80px"   src="'.UtilSingleton::getInstance()->InlinePicture("assets/twitter/twitter_share_2.png").'"/>
             </a>
             </td>
         </tr>

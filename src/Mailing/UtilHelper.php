@@ -14,22 +14,6 @@
 class UtilHelper
 {
     /**
-     * Helper to encode pictures to base64
-     *
-     * @param $pathToPicture
-     * @return mixed the encoded picture
-     */
-    public static function InlinePicture($pathToPicture)
-    {
-        // uncommend the line when you send a mail
-        //$message = SingletonMessage::Instance();
-        //return $cid = $message->embed(Swift_Image::fromPath($pathToPicture));
-
-        // for debug to see the pictures in the browser
-        return $pathToPicture;
-    }
-
-    /**
      * Gets the corresponding efficiency class
      *
      * @param $energy actual energy consumption
@@ -134,6 +118,67 @@ class UtilHelper
             $betterConsumption = 3324;
         }
         return $betterConsumption;
+    }
+}
+
+class UtilSingleton
+{
+    /**
+     * instance
+     *
+     * Statische Variable, um die aktuelle (einzige!) Instanz dieser Klasse zu halten
+     *
+     * @var Singleton
+     */
+    private $message;
+
+    // singleton instance
+    static private $instance = null;
+
+    // instance creation and get instance
+    static public function getInstance()
+    {
+        if (null === self::$instance)
+        {
+            self::$instance = new self;
+        }
+        return self::$instance;
+    }
+
+    /**
+     * clone
+     *
+     * Kopieren der Instanz von aussen ebenfalls verbieten
+     */
+    protected function __clone() {}
+
+    /**
+     * constructor
+     *
+     * externe Instanzierung verbieten
+     */
+    protected function __construct() {}
+
+    public function SetSwiftMailerInstance($m)
+    {
+        $this->message = $m;
+    }
+
+    /**
+     * Helper to encode pictures to base64
+     *
+     * @param $pathToPicture
+     * @return mixed the encoded picture
+     */
+    public function InlinePicture($pathToPicture)
+    {
+        // uncommend the line when you send a mail
+        //$picture = Swift_Image::fromPath($pathToPicture);
+        //$picture->setDisposition('inline');
+        //return $cid = $this->message->embed($picture);
+
+        // for debug to see the pictures in the browser
+        return $pathToPicture;
     }
 }
 

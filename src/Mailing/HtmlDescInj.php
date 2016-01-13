@@ -25,7 +25,7 @@ class HtmlDescInj
         // descriptive text for lowest / average / highest consumption
         if($avgUser <= $avgTop20)
         {
-            $inj = '<td align="center" class="hero_image"><img src="'.UtilHelper::InlinePicture("assets/injunctive/inj1.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
+            $inj = '<td align="center" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj1.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
             $injtext = "Nice work! You are great, but do not stop being an environment saver!";
             if($avgUser <= $avgTop20)
             {
@@ -38,13 +38,13 @@ class HtmlDescInj
         }
         elseif($avgUser <= $avgAll)
         {
-            $inj = '<td align="center" class="hero_image"><img src="'.UtilHelper::InlinePicture("assets/injunctive/inj2.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
+            $inj = '<td align="center" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj2.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
             $injtext = "Nice work! You are good, but do not stop being an water saver!";
             $descText = "Your average energy consumption for your last shower was above the average. That's good!";
         }
         else
         {
-            $inj = '<td align="center" class="hero_image"><img src="'.UtilHelper::InlinePicture("assets/injunctive/inj3.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
+            $inj = '<td align="center" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj3.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
             $injtext = "You are good, but we know you can do better!";
             $descText = "Your average energy consumption for your last shower was below the average.";
         }
@@ -73,7 +73,7 @@ class HtmlDescInj
                </td>
                </tr>
                <tr>
-                   <td class="hero_image"><img src="'.UtilHelper::InlinePicture("pictures/descChart.png").'" width="500" alt="" style="display: block; border: 0;"> </td>
+                   <td class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("pictures/descChart.png").'" width="500" alt="" style="display: block; border: 0;"> </td>
                </tr>
 
                <tr>

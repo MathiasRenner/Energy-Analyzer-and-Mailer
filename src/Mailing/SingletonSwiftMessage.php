@@ -12,7 +12,7 @@
  *
  * encapsulate the Swift_message instace
  * needed to insert inline pictures
- *
+ * TODO: OUTDATED
  */
 final class SingletonMessage extends Swift_Message
 {

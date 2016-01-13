@@ -8,9 +8,9 @@
  */
 
 /* pChart library inclusions */
-include("libs/charts/pChart2_1_4/class/pData.class.php");
-include("libs/charts/pChart2_1_4/class/pDraw.class.php");
-include("libs/charts/pChart2_1_4/class/pImage.class.php");
+include_once("libs/charts/pChart2_1_4/class/pData.class.php");
+include_once("libs/charts/pChart2_1_4/class/pDraw.class.php");
+include_once("libs/charts/pChart2_1_4/class/pImage.class.php");
 
 /**
  * Class CreateCharts
@@ -107,7 +107,10 @@ class CreateCharts
             "Mode" => SCALE_MODE_START0));
 
         // funtion for a custom y axis format
-        function YAxisFormat($Value) { return(" ".  $Value ." Wh"); }
+        if (!function_exists('YAxisFormat')) {
+            function YAxisFormat($Value) { return(" ".  $Value ." Wh"); }
+            // ... proceed to declare your function
+        }
 
         // draws an headin text
         $myDescChart->drawText(450,28,"consumption in wH",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
