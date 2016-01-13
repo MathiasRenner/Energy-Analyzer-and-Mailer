@@ -6,22 +6,26 @@
  * Date: 08/12/15
  * Time: 14:33
  */
+
+/**
+ * Class HtmlDescInj
+ * Creates the Descriptive and Injunctive feature
+ */
 class HtmlDescInj
 {
 
     public function GetHtmlDescInj()
     {
-        //$message = SingletonMessage::Instance();
-        //$cid = $message->embed(Swift_Image::fromPath('pictures/descChart.png'));
-
+        // calc all the needed energy consumptions
         $calc = new Calculations();
-        $avgUser = $calc->CalcEnergyUsageUser();
-        $avgAll = $calc->CalcEnergyUsageAllUser();
-        $avgTop20 = $calc->CalcEnergyUsageTopTwentyPercentUser();
+        $avgUser = $calc->CalcEnergyUser();
+        $avgAll = $calc->CalcEnergyAllUser();
+        $avgTop20 = $calc->CalcEnergyTopTwentyPercentUsers();
 
+        // descriptive text for lowest / average / highest consumption
         if($avgUser <= $avgTop20)
         {
-            $inj = '<td align="center" class="hero_image"><img src="assets/injunctive/inj1.png" width="65%" alt="" style="display: block; border: 0;" /></td>';
+            $inj = '<td align="center" class="hero_image"><img src="'.UtilHelper::InlinePicture("assets/injunctive/inj1.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
             $injtext = "Nice work! You are great, but do not stop being an environment saver!";
             if($avgUser <= $avgTop20)
             {
@@ -34,13 +38,13 @@ class HtmlDescInj
         }
         elseif($avgUser <= $avgAll)
         {
-            $inj = '<td align="center" class="hero_image"><img src="assets/injunctive/inj2.png" width="65%" alt="" style="display: block; border: 0;" /></td>';
+            $inj = '<td align="center" class="hero_image"><img src="'.UtilHelper::InlinePicture("assets/injunctive/inj2.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
             $injtext = "Nice work! You are good, but do not stop being an water saver!";
             $descText = "Your average energy consumption for your last shower was above the average. That's good!";
         }
         else
         {
-            $inj = '<td align="center" class="hero_image"><img src="assets/injunctive/inj3.png" width="65%" alt="" style="display: block; border: 0;" /></td>';
+            $inj = '<td align="center" class="hero_image"><img src="'.UtilHelper::InlinePicture("assets/injunctive/inj3.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
             $injtext = "You are good, but we know you can do better!";
             $descText = "Your average energy consumption for your last shower was below the average.";
         }
@@ -69,7 +73,7 @@ class HtmlDescInj
                </td>
                </tr>
                <tr>
-                   <td class="hero_image"><img src="pictures/descChart.png" width="500" alt="" style="display: block; border: 0;"> </td>
+                   <td class="hero_image"><img src="'.UtilHelper::InlinePicture("pictures/descChart.png").'" width="500" alt="" style="display: block; border: 0;"> </td>
                </tr>
 
                <tr>

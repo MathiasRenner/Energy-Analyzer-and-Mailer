@@ -6,6 +6,8 @@
  * Time: 20:48
  */
 
+// needed for inline css
+
 // datetime
 if (ini_get('date.timezone') == '') {
     date_default_timezone_set('Europe/Brussels');

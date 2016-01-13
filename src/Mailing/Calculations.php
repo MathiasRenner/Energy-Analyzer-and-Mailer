@@ -6,24 +6,32 @@
  * Time: 13:58
  */
 
+
+/**
+ * Class Calculations
+ *
+ * all calculations for the report
+ */
 class Calculations
 {
     /**
-     * Calculates the Efficiency for the user of the last 10 showers
      *
-    1) Berechnung der Energie pro Dusche:
-    E =  c * Volumen * (Durchschnittstemp. - 10°C) / n
-    c: spezifische Wärmekapazität von Wasser
-    Grundtemperatur Wasser: Kann konfiguriert werden, ist aber standardmäßig auf 10°C festgeleget
-    n:  Effizienz = 100% (ist standardmäßig so festgelegt, kann aber konfiguriert werden bei Bedarf)
-
+     *  Calculates the Efficiency for the user
      *
+     *  E =  c * Volumen * (Durchschnittstemp. - 10°C) / n
+     *  c: spezifische Wärmekapazität von Wasser
+     *  Grundtemperatur Wasser: Kann konfiguriert werden, ist aber standardmäßig auf 10°C festgeleget
+     *  n:  Effizienz = 100% (ist standardmäßig so festgelegt, kann aber konfiguriert werden bei Bedarf)
      *
-     *
+     * @param $volume
+     * @param $hotWater
+     * @param $coldWater
+     * @param $heat
+     * @return float the calculated energy consumption of one shower
      */
     public function CalcEnergy($volume, $hotWater, $coldWater, $heat)
     {
-        $c = 4200/3600; // 1
+        $c = 4200/3600;
         $energy =  $c * $volume * ($hotWater - $coldWater) / $heat;
 
         $energy = round($energy);
@@ -31,47 +39,18 @@ class Calculations
         return $energy;
     }
 
-    public function GetEfficiencyClass($energy)
-    {
-        if($energy < 350)
-        {
-            return 'A+';
-        }
-        elseif($energy < 700)
-        {
-            return 'A';
-        }
-        elseif ($energy < 1225)
-        {
-            return 'B';
-        }
-        elseif ($energy < 1750)
-        {
-            return 'C';
-        }
-        elseif ($energy < 2275)
-        {
-            return 'D';
-        }
-        elseif ($energy < 2800)
-        {
-            return 'E';
-        }
-        elseif ($energy < 3325)
-        {
-            return 'F';
-        }
-        elseif ($energy >= 3325)
-        {
-            return 'G';
-        }
-    }
 
-    public function CalcEnergyUsageUser($ignoreLimit = FALSE)
+    /**
+     * Calculates the average energy usage for the user
+     *
+     * @param bool $ignoreLimit false to calculate only the last 50 showers, true for all
+     * @return float the average energy usage
+     */
+    public function CalcEnergyUser($ignoreLimit = FALSE)
     {
         $db = DBAccessSingleton::getInstance();
 
-        $extractionUserCount = $this->GetExtractionUserCount($ignoreLimit);
+        $extractionUserCount = UtilHelper::GetExtractionUserCount($ignoreLimit);
 
         $avgEnergyUser = array_sum(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount))
             / count(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount));
@@ -79,7 +58,13 @@ class Calculations
         return round($avgEnergyUser);
     }
 
-    public function CalcEnergyUsageTopTwentyPercentUser()
+
+    /**
+     * the average energy usage for the top 20 % user
+     *
+     * @return float the average energy usage for the top 20 % user
+     */
+    public function CalcEnergyTopTwentyPercentUsers()
     {
         $db = DBAccessSingleton::getInstance();
         $temp = array();
@@ -94,22 +79,15 @@ class Calculations
         $energyAvgTwentyPercent = array_sum(array_slice($temp,0, count($temp)*0.2)) / (count($temp)*0.2);
 
         return round($energyAvgTwentyPercent);
-
     }
 
-    public function CalcVolumeAllUser(){
-        $db = DBAccessSingleton::getInstance();
 
-        $temp = array();
-        foreach ($db->volumeAllUser as $item){
-            $avgVolume = array_sum($item) / count($item);
-            array_push($temp, $avgVolume);
-        }
-        $avgVolumeTotal = array_sum($temp) / count($temp);
-        return round($avgVolumeTotal,1);
-    }
-
-    public function CalcEnergyUsageAllUser()
+    /**
+     * the average energy usage for all user
+     *
+     * @return float the average energy usage for all user
+     */
+    public function CalcEnergyAllUser()
     {
         $db = DBAccessSingleton::getInstance();
         $temp = array();
@@ -125,6 +103,68 @@ class Calculations
         return round($avgEnergyAllUser);
     }
 
+    /**
+     * Calculates the average volume usage for the user
+     *
+     * @param bool $ignoreLimit false to calculate only the last 50 showers, true for all
+     * @return float the average volume usage
+     */
+    public function CalcVolumeAvgUser($ignoreLimit = FALSE)
+    {
+        $db = DBAccessSingleton::getInstance();
+
+        $extractionUserCount = UtilHelper::GetExtractionUserCount($ignoreLimit);
+
+        $avgUserVolume = array_sum(array_slice($db->volumeUser,$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->volumeUser,$extractionUserCount*(-1),$extractionUserCount));
+
+        return round($avgUserVolume,1);
+    }
+
+    /**
+     * the average water usage for all user
+     *
+     * @return float the average water usage for all user
+     */
+    public function CalcVolumeAllUser()
+    {
+        $db = DBAccessSingleton::getInstance();
+
+        $temp = array();
+        foreach ($db->volumeAllUser as $item)
+        {
+            $avgVolume = array_sum($item) / count($item);
+            array_push($temp, $avgVolume);
+        }
+
+        $avgVolumeTotal = array_sum($temp) / count($temp);
+
+        return round($avgVolumeTotal,1);
+    }
+
+
+    /**
+     * Calculates the average flow rate for the user
+     *
+     * @param bool $ignoreLimit false to calculate only the last 50 showers, true for all
+     * @return float the average flow rate
+     */
+    public function CalcFlowRateUser($ignoreLimit = FALSE)
+    {
+        $db = DBAccessSingleton::getInstance();
+        $extractionUserCount = UtilHelper::GetExtractionUserCount($ignoreLimit);
+
+        $avgUserFlowRate = array_sum(array_slice($db->flowRateUser,$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->flowRateUser,$extractionUserCount*(-1),$extractionUserCount));
+
+        return round($avgUserFlowRate,1);
+    }
+
+    /**
+     * the average flow rate for all user
+     *
+     * @return float the average flow rate for all user
+     */
     public function CalcFlowRateAllUser()
     {
         $db = DBAccessSingleton::getInstance();
@@ -141,80 +181,45 @@ class Calculations
         return round($avgFlowRateAllUser,1);
     }
 
-    public function CalcSavingTimeForBetterEnergyClass($actualConsumption)
-    {
-        $betterConsumption = $this->GetConsumptionForBetterEfficiencyClass($actualConsumption);
-
-        $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
-
-        $avgUserVolume = $this->CalcVolumeAvgUser();
-
-        $flowRate = $this->CalcUserFlowRate();
-
-        $time = $avgUserVolume / $flowRate;
-
-        $time = $time * 60 * $percent;
-
-        return round($time,1);
-    }
-
-    public function CalcVolumeAvgUser($ignoreLimit = FALSE)
-    {
-        $db = DBAccessSingleton::getInstance();
-
-        $extractionUserCount = $this->GetExtractionUserCount($ignoreLimit);
-
-        $avgUserVolume = array_sum(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount))
-            / count(array_slice($db->extractionsUserVolume,$extractionUserCount*(-1),$extractionUserCount));
-
-        return round($avgUserVolume,1);
-    }
-
-
-
-
-    public function CalcSavingVolumeForBetterEnergyClass($actualConsumption)
-    {
-        $betterConsumption = $this->GetConsumptionForBetterEfficiencyClass($actualConsumption);
-
-        $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
-
-        $avgUserVolume = $this->CalcVolumeAvgUser();
-
-        return round($avgUserVolume * $percent,1);
-    }
-
-    public function CalcUserFlowRate($ignoreLimit = FALSE)
-    {
-        $db = DBAccessSingleton::getInstance();
-        $extractionUserCount = $this->GetExtractionUserCount($ignoreLimit);
-
-        $avgUserFlowRate = array_sum(array_slice($db->extractionsUserFlowRate,$extractionUserCount*(-1),$extractionUserCount))
-            / count(array_slice($db->extractionsUserFlowRate,$extractionUserCount*(-1),$extractionUserCount));
-
-        return round($avgUserFlowRate,1);
-    }
-
+    /**
+     * Calculates the average temperature for the user
+     *
+     * @param bool $ignoreLimit false to calculate only the last 50 showers, true for all
+     * @return float the average temperature
+     */
     public function CalcUserTemperature($ignoreLimit = FALSE)
     {
         $db = DBAccessSingleton::getInstance();
-        $extractionUserCount = $this->GetExtractionUserCount($ignoreLimit);
+        $extractionUserCount = UtilHelper::GetExtractionUserCount($ignoreLimit);
 
-        $avgUserTemperature = array_sum(array_slice($db->extractionsUserTemperature,$extractionUserCount*(-1),$extractionUserCount))
-            / count(array_slice($db->extractionsUserTemperature,$extractionUserCount*(-1),$extractionUserCount));
+        $avgUserTemperature = array_sum(array_slice($db->temperatureUser,$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->temperatureUser,$extractionUserCount*(-1),$extractionUserCount));
 
         return round($avgUserTemperature,1);
     }
 
+
+    /**
+     * Calculates the average shower time for the user
+     *
+     * @param bool $ignoreLimit false to calculate only the last 50 showers, true for all
+     * @return float the average shower time
+     */
     public function CalcUserTime($ignoreLimit = FALSE)
     {
         $vol = $this->CalcVolumeAvgUser($ignoreLimit);
-        $flowRate = $this->CalcUserFlowRate($ignoreLimit);
+        $flowRate = $this->CalcFlowRateUser($ignoreLimit);
 
         $time = round($vol / $flowRate, 1);
         return $time;
     }
 
+
+    /**
+     * the average shower time for all user
+     *
+     * @return float the average shower time for all user
+     */
     public function CalcAllUserTime()
     {
         $vol = $this->CalcVolumeAllUser();
@@ -224,69 +229,58 @@ class Calculations
         return $time;
     }
 
-    public function CalcAvgNumberOfShowers(){
+
+    /**
+     * calc the average number of showers by all user
+     *
+     * @return float average shower all user
+     */
+    public function CalcAvgNumberOfShowers()
+    {
         $db = DBAccessSingleton::getInstance();
 
         return  ($db->GetNumberOfExtractions() / $db->GetNumberOfUsers() );
     }
 
 
-
     /**
-     * Gets the number of extractions for this user
+     * Cals the saving time to reache the next better energy class
      *
-     * @param $ignoreLimit FALSE for getting only 50 extractions
-     *                     TRUE for getting all extraction counts
-     * @return int count of extractions
+     * @param $actualConsumption
+     * @return float time so save
      */
-    public function GetExtractionUserCount($ignoreLimit)
+    public function CalcSavingTimeForBetterEnergyClass($actualConsumption)
     {
-        $db = DBAccessSingleton::getInstance();
-        if($ignoreLimit)
-        {
-            return $db->extractionUserCount;
-        }
-        if($db->extractionUserCount < 50)
-        {
-            $extractionUserCount = $db->extractionUserCount;
-        }
-        else
-        {
-            $extractionUserCount = 50;
-        }
-        return $extractionUserCount;
+        $betterConsumption = UtilHelper::GetConsumptionForBetterEfficiencyClass($actualConsumption);
+
+        $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
+
+        $avgUserVolume = $this->CalcVolumeAvgUser();
+
+        $flowRate = $this->CalcFlowRateUser();
+
+        $time = $avgUserVolume / $flowRate;
+
+        $time = $time * 60 * $percent;
+
+        return round($time,1);
     }
 
-    private function GetConsumptionForBetterEfficiencyClass($actualConsumption)
+
+    /**
+     * Cals the volume to save to reache the next better energy class
+     *
+     * @param $actualConsumption
+     * @return float volume to save
+     */
+    public function CalcSavingVolumeForBetterEnergyClass($actualConsumption)
     {
-        if($actualConsumption >= 350 && $actualConsumption <= 700)
-        {
-            $betterConsumption = 349;
-        }
-        elseif($actualConsumption > 700 && $actualConsumption <= 1225)
-        {
-            $betterConsumption = 699;
-        }
-        elseif($actualConsumption > 1225 && $actualConsumption <= 1750)
-        {
-            $betterConsumption = 1224;
-        }
-        elseif($actualConsumption > 1750 && $actualConsumption <= 2275)
-        {
-            $betterConsumption = 1749;
-        }
-        elseif($actualConsumption > 2275 && $actualConsumption <= 2800)
-        {
-            $betterConsumption = 2274;
-        }
-        elseif($actualConsumption > 2800 && $actualConsumption <= 3325)
-        {
-            $betterConsumption = 2799;
-        }
-        elseif($actualConsumption > 3325)
-        {
-            $betterConsumption = 3324;
-        }
-        return $betterConsumption;
+        $betterConsumption = UtilHelper::GetConsumptionForBetterEfficiencyClass($actualConsumption);
+
+        $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
+
+        $avgUserVolume = $this->CalcVolumeAvgUser();
+
+        return round($avgUserVolume * $percent,1);
     }
 }

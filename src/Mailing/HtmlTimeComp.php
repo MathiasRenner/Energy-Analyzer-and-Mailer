@@ -6,16 +6,17 @@
  * Date: 08/12/15
  * Time: 14:33
  */
+
+/**
+ * Class HtmlTimeComp
+ *
+ * creates the comparison over time feature
+ */
 class HtmlTimeComp
 {
 
     public function GetHtmlTimeComp()
     {
-        $db = DBAccessSingleton::getInstance();
-        $name = $db->username;
-        //$message = SingletonMessage::Instance();
-        //$cid = $message->embed(Swift_Image::fromPath('pictures/descChart.png'));
-
         return '
 <table cellpadding="0" cellspacing="0">
     <tr>

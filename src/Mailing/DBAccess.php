@@ -6,25 +6,22 @@
  * Date: 28/11/15
  * Time: 15:55
  */
+
 /**
- * Singleton class
- *
- *
- */
-/**
- * Singleton class
- *
+ * Class DBAccessSingleton
+ * implemented as singleton
+ * to access all the data-objects with an single db-access
  */
 class DBAccessSingleton
 {
     //variable to hold db connection
     private $db;
 
-    // the userId
+    // the userId / with extractions
     public $userIdAll = array();
     public $userIdsWithExtractions = array();
 
-    // variable for all the funny stuff
+    // user data information
     public $username;
     public $firstname;
     public $familyname;
@@ -34,22 +31,23 @@ class DBAccessSingleton
     public $city;
     public $country;
 
-    public $extractionsUserReportedOn = array();
-    public $extractionsUserVolume = array();
-    public $extractionsUserFlowRate = array();
-    public $extractionsUserTemperature = array();
-
-
-    public $extractionUserCount;
-
-
+    // user
     public $energyUser = array();
+    public $volumeUser = array();
+    public $flowRateUser = array();
+    public $temperatureUser = array();
+    public $reportedOnUser = array();
+    public $extractionsCountUser;
+
+    // all user
     public $energyAllUser = array();
     public $flowRateAllUser = array();
     public $volumeAllUser = array();
 
+    // singleton instance
     static private $instance = null;
 
+    // instance creation and get instance
     static public function getInstance()
     {
         if (null === self::$instance)
@@ -59,39 +57,48 @@ class DBAccessSingleton
         return self::$instance;
     }
 
-     private function __construct()
-     {
-         $this->db = mysqli_connect('***REMOVED***:5190', '***REMOVED***', '***REMOVED***', '***REMOVED***');
-     }
-     private function __clone(){}
+    /**
+     * DBAccessSingleton constructor.
+     *
+     * init the db connection
+     */
+    private function __construct()
+    {
+        $this->db = mysqli_connect('***REMOVED***:5190', '***REMOVED***', '***REMOVED***', '***REMOVED***');
+    }
 
+    private function __clone(){}
+
+    /**
+     * Get all the data from the db and rum all functions one time to get everything we needed
+     *
+     * @param $id
+     * the user id
+     */
     public function RunAll($id)
     {
         $this->SetAllUserIds();
         $this->SetAllUserIdWithExtractions();
 
-        $this->SetAllUserEnergy();
-        $this->Update($id);
+        $this->SetAllUserShowerUsageInformation();
+        //$this->Update($id);
     }
 
+    /**
+     * Update only the relevant objects for the user
+     *
+     * @param $id
+     * the user id
+     */
     public function Update($id)
     {
         $this->SetUserDataInfo($id);
-        $this->SetUserEnergy($id);
+        $this->SetUserShowerUsageInformation($id);
     }
 
-    private function CalcDaysSinceLastReport($id)
-    {
-        $lastReport = mysqli_query($this->db, "SELECT * FROM bires_mcm_mailing WHERE id =" . $id . " ORDER BY lastMailingSent DESC;");
-        $dateLastReport = new DateTime($lastReport);
-
-        $today = new DateTime('now');
-
-        $diff = $datetime1->diff($today)->days;
-        return $diff;
-    }
-
-
+    /**
+     * set all userid in the userIdAll object
+     */
     private function SetAllUserIds()
     {
         $query = "SELECT id FROM b1user";
@@ -102,6 +109,9 @@ class DBAccessSingleton
         }
     }
 
+    /**
+     *  set all userid int the userIdsWithExtractions object who has extractions
+     */
     public function SetAllUserIdWithExtractions()
     {
         $queryUE = "SELECT DISTINCT b1user_id FROM b1users_b1extractions";
@@ -112,6 +122,11 @@ class DBAccessSingleton
         }
     }
 
+    /**
+     * set all user information
+     *
+     * @param $id int the user id
+     */
     private function SetUserDataInfo($id)
     {
         $res = mysqli_query($this->db, "SELECT * FROM b1user WHERE id =" . $id);
@@ -126,8 +141,177 @@ class DBAccessSingleton
         $this->familyname = $row['familyName'];
     }
 
+    /**
+     * set the calculated showerUsageInformation usage for each shower for the given user
+     * into the corresponding object
+     * @param $id int the user id
+     */
+    private function SetUserShowerUsageInformation($id)
+    {
+        $calc = new Calculations();
 
-    public function GetNumberOfExtractions(){
+        $userExtractionId = array();
+        // get all the extractionid for the user
+        $res = mysqli_query($this->db, "SELECT * FROM b1users_b1extractions WHERE b1user_id =" . $id );
+        while($row = mysqli_fetch_object($res))
+        {
+            array_push($userExtractionId , $row->b1extraction_id);
+        }
+
+        // building the query to get all shower data information
+        $query = "Select * From b1extraction WHERE id= " . $userExtractionId[0];
+        foreach($userExtractionId AS $extractionId)
+        {
+            $query = $query . " OR id = ". $extractionId;
+        }
+        $query = $query . " ORDER BY showerID;"; // order ascending
+
+        // get all the row information
+        $res = mysqli_query($this->db, $query);
+        while($row = mysqli_fetch_object($res))
+        {
+            // count all extractions
+            $this->extractionsCountUser = $this->extractionsCountUser + 1;
+
+            // check coldwatertemp
+            $cwT = 10;
+            if(!is_null($row->coldWaterTemperature) && $row->coldWaterTemperature > 10)
+            {
+                $cwT = $row->coldWaterTemperature;
+            }
+
+            // check heat efficiency
+            $he = 100;
+            if(!is_null($row->heatingEfficiency) && $row->heatingEfficiency < 100 && $row->heatingEfficiency > 80)
+            {
+                $he = $row->heatingEfficiency;
+            }
+            // Data Cleaning
+            if(!is_null($row->volume) && $row->volume >= 5 && $row->volume <= 150 &&  // detect outlier
+                !is_null($row->flowRate) && $row->flowRate > 0 &&
+                !is_null($row->temperature) && $row->temperature > 10
+            )
+            {
+                // push the value into the corresponding array
+                array_push($this->volumeUser, $row->volume);
+                array_push($this->flowRateUser, $row->flowRate);
+                array_push($this->temperatureUser, $row->temperature);
+                // calculate the energy usage
+                array_push($this->energyUser, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he/ 100));
+                // push all upload dates
+                if($this->GetDate('')!= $this->GetDate($row->reportedOn))
+                {
+                    array_push($this->reportedOnUser, $this->GetDate($row->reportedOn));
+                }
+            }
+        }
+    }
+
+    /**
+     * set the calculated showerUsageInformation for each shower for all user
+     * into the corresponding object
+     */
+    private function SetAllUserShowerUsageInformation()
+    {
+        $calc = new Calculations();
+
+        $allUserWithExtractions = array();
+        // get all user with extractionids
+        $queryUE = "SELECT DISTINCT b1user_id FROM b1users_b1extractions";
+        $res = mysqli_query($this->db, $queryUE);
+        while($row = mysqli_fetch_object($res))
+        {
+            array_push($allUserWithExtractions, $row->b1user_id);
+        }
+
+        // loop all user
+        foreach ($allUserWithExtractions as $uID)
+        {
+            // temp variables
+            $userExtractionIdsTemp = array();
+            $userEnergyTemp = array();
+            $userFlowRateTemp = array();
+            $userVolumeTemp = array();
+
+            // get all the extractionid for the user
+            $query = "SELECT b1extraction_id FROM b1users_b1extractions WHERE b1user_id = " . $uID;
+            $res = mysqli_query($this->db, $query);
+            while($row = mysqli_fetch_object($res))
+            {
+                array_push($userExtractionIdsTemp, $row->b1extraction_id);
+            }
+
+            // building the query to get all shower data information
+            $queryShowerData = "Select * From b1extraction WHERE id= " . $userExtractionIdsTemp[0];
+            foreach($userExtractionIdsTemp AS $extractionId)
+            {
+                $queryShowerData = $queryShowerData . " OR id = ". $extractionId;
+            }
+            $queryShowerData = $queryShowerData . " ORDER BY showerID;";
+
+            // get all the row information
+            $res = mysqli_query($this->db, $queryShowerData);
+            while($row = mysqli_fetch_object($res))
+            {
+                // check coldwatertemp
+                $cwT = 10;
+                if(!is_null($row->coldWaterTemperature) && $row->coldWaterTemperature > 10)
+                {
+                    $cwT = $row->coldWaterTemperature;
+                }
+
+                // check heat efficiency
+                $he = 100;
+                if(!is_null($row->heatingEfficiency) && $row->heatingEfficiency < 100 && $row->heatingEfficiency > 80)
+                {
+                    $he = $row->heatingEfficiency;
+                }
+
+                // same data cleaning
+                if(!is_null($row->volume) && $row->volume >= 5 && $row->volume <= 150 &&
+                    !is_null($row->flowRate) && $row->flowRate > 0 &&
+                    !is_null($row->temperature) && $row->temperature > 10)
+                {
+                    // push the value into the corresponding array
+                    array_push($userEnergyTemp, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he / 100));
+                    array_push($userFlowRateTemp, $row->flowRate);
+                    array_push($userVolumeTemp, $row->volume);
+                }
+            }
+
+            // after all shower data for one user is completed push the array into the array witch holds
+            // all data
+            array_push($this->volumeAllUser, $userVolumeTemp);
+            array_push($this->flowRateAllUser, $userFlowRateTemp);
+            array_push($this->energyAllUser, $userEnergyTemp);
+        } // end foreach user
+    }
+
+
+    /**
+     * TODO naming not calc describe function
+     *
+     *
+     * @param $id
+     * @return mixed
+     */
+    private function CalcDaysSinceLastReport($id)
+    {
+        $lastReport = mysqli_query($this->db, "SELECT * FROM bires_mcm_mailing WHERE id =" . $id . " ORDER BY lastMailingSent DESC;");
+        $dateLastReport = new DateTime($lastReport);
+
+        $today = new DateTime('now');
+
+        $diff = $datetime1->diff($today)->days;
+        return $diff;
+    }
+
+    /**
+     * Get the maximum number of extractions
+     * @return mixed the extraction count as int
+     */
+    public function GetNumberOfExtractions()
+    {
        // get all extractions
         $allExtractions = mysqli_query($this->db, "SELECT COUNT(id) as count FROM b1extraction");
         $row = mysqli_fetch_assoc($allExtractions);
@@ -135,6 +319,10 @@ class DBAccessSingleton
         return $row['count'];
     }
 
+    /**
+     * Get the maximum number of user
+     * @return mixed the user count as int
+     */
     public function GetNumberOfUsers(){
         // get all users
         $queryAllUsers = mysqli_query($this->db, "SELECT COUNT(id) as count FROM b1user");
@@ -143,136 +331,16 @@ class DBAccessSingleton
         return $row['count'];
     }
 
-    private function SetUserEnergy($id)
-    {
-        $calc = new Calculations();
-
-        $userExtractionId = array();
-        $res = mysqli_query($this->db, "SELECT * FROM b1users_b1extractions WHERE b1user_id =" . $id );
-        while($row = mysqli_fetch_object($res))
-        {
-            array_push($userExtractionId , $row->b1extraction_id);
-        }
-
-        $query = "Select * From b1extraction WHERE id= " . $userExtractionId[0];
-
-        foreach($userExtractionId AS $extractionId)
-        {
-            $query = $query . " OR id = ". $extractionId;
-        }
-        $query = $query . " ORDER BY showerID;";// Limit 10;";
-
-        $res = mysqli_query($this->db, $query);
-        while($row = mysqli_fetch_object($res))
-        {
-            $this->extractionUserCount = $this->extractionUserCount + 1;
-
-            $cwT = 10;
-            if(!is_null($row->coldWaterTemperature) && $row->coldWaterTemperature > 10)
-            {
-                $cwT = $row->coldWaterTemperature;
-            }
-            $he = 100;
-            if(!is_null($row->heatingEfficiency) && $row->heatingEfficiency < 100 && $row->heatingEfficiency > 80)
-            {
-                $he = $row->heatingEfficiency;
-            }
-            // Data Cleaning
-            if(!is_null($row->volume) && $row->volume >= 5 && $row->volume <= 150 &&
-                !is_null($row->flowRate) && $row->flowRate > 0 &&
-                !is_null($row->temperature) && $row->temperature > 10
-            )
-            {
-                array_push($this->extractionsUserVolume, $row->volume);
-                array_push($this->extractionsUserFlowRate, $row->flowRate);
-                array_push($this->extractionsUserTemperature, $row->temperature);
-
-                array_push($this->energyUser, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he/ 100));
-                if($this->GetDate('')!= $this->GetDate($row->reportedOn))
-                {
-                    array_push($this->extractionsUserReportedOn, $this->GetDate($row->reportedOn));
-                }
-            }
-        }
-    }
-
-
-    private function SetAllUserEnergy()
-    {
-        $calc = new Calculations();
-
-        $allUserWithExtractions = array();
-        $queryUE = "SELECT DISTINCT b1user_id FROM b1users_b1extractions";
-        $res = mysqli_query($this->db, $queryUE);
-        while($row = mysqli_fetch_object($res))
-        {
-            array_push($allUserWithExtractions, $row->b1user_id);
-        }
-
-        foreach ($allUserWithExtractions as $uID)
-        {
-
-            $userExtractionIds = array();
-            $userEnergyTemp = array();
-            $userFlowRateTemp = array();
-            $userVolumeTemp = array();
-            $query = "SELECT b1extraction_id FROM b1users_b1extractions WHERE b1user_id = " . $uID;
-            $res = mysqli_query($this->db, $query);
-            while($row = mysqli_fetch_object($res))
-            {
-                array_push($userExtractionIds, $row->b1extraction_id);
-            }
-
-            $queryE = "Select * From b1extraction WHERE id= " . $userExtractionIds[0];
-
-            foreach($userExtractionIds AS $extractionId)
-            {
-                $queryE = $queryE . " OR id = ". $extractionId;
-            }
-            $queryE = $queryE . " ORDER BY showerID;";// Limit 10;";
-
-            $res = mysqli_query($this->db, $queryE);
-            while($row = mysqli_fetch_object($res))
-            {
-                $cwT = 10;
-                if(!is_null($row->coldWaterTemperature) && $row->coldWaterTemperature > 10)
-                {
-                    $cwT = $row->coldWaterTemperature;
-                }
-                $he = 100;
-                if(!is_null($row->heatingEfficiency) && $row->heatingEfficiency < 100 && $row->heatingEfficiency > 80)
-                {
-                    $he = $row->heatingEfficiency;
-                }
-
-                // TODO: Data Cleaning missing
-                if(!is_null($row->volume) && $row->volume >= 5 && $row->volume <= 150 &&
-                    !is_null($row->flowRate) && $row->flowRate > 0 &&
-                    !is_null($row->temperature) && $row->temperature > 10)
-                {
-                    array_push($userEnergyTemp, $calc->CalcEnergy($row->volume,$row->temperature,$cwT,$he / 100));
-                    array_push($userFlowRateTemp, $row->flowRate);
-                    array_push($userVolumeTemp, $row->volume);
-
-                }
-
-
-            }
-
-            array_push($this->volumeAllUser, $userVolumeTemp);
-            array_push($this->flowRateAllUser, $userFlowRateTemp);
-            array_push($this->energyAllUser, $userEnergyTemp);
-        }
-    }
-
-
-
+    /**
+     * extract the date from the timestamp
+     *
+     * @param $reportTime timestamp
+     * @return bool|string the date
+     */
     private function GetDate($reportTime)
     {
         $date = $reportTime;
         $ts   = strtotime($date);
         return date('Y-m-d', $ts);
     }
-
-
 }

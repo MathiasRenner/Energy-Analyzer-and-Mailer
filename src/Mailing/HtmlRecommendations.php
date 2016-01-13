@@ -6,16 +6,16 @@
  * Date: 08/12/15
  * Time: 14:33
  */
+
+/**
+ * Class HtmlRecommendations
+ * creates the recommendation feature
+ */
 class HtmlRecommendations
 {
-
     public function GetHtmlRecommendations()
     {
         // fill an array with recommendations according to the user's behaviour
-
-        // Not used calculations
-        // $VolumeAvgUser = $calc->CalcVolumeAvgUser(TRUE);
-        // $VolumeAvgAllUser = $calc->CalcVolumeAllUser();
 
         $calc = new Calculations();
 
@@ -33,7 +33,7 @@ class HtmlRecommendations
 
         // calculate flow rate
         $avgflowRate = $calc->CalcFlowRateAllUser();
-        $UserflowRate = $calc->CalcUserFlowRate(TRUE);
+        $UserflowRate = $calc->CalcFlowRateUser(TRUE);
 
         if ($UserflowRate > $avgflowRate){
             $textReduceWater="<b>Turning on the tap only half way - for the sake for the environment! (+ special tip!)</b><br />Showering accounts for about 25% of total water consumption in a household. A lower flow rate saves reasonable a amount of water and takes you in control on conservating the most valuable resource for life of our planet. Special tip: Investing in a water efficient shower head makes this goal as easy as it gets!";
@@ -42,7 +42,7 @@ class HtmlRecommendations
 
         // calculate number of showers
         $AvgNumberOfShowers = $calc->CalcAvgNumberOfShowers();
-        $UserAvgNumberOfShowers = $calc->GetExtractionUserCount(TRUE);
+        $UserAvgNumberOfShowers = UtilHelper::GetExtractionUserCount(TRUE);
 
         if ($UserAvgNumberOfShowers > $AvgNumberOfShowers){
             $textReduceFrequency="<b>Don't take a shower too often. It can have negative impacts on your health!</b><br />Resource consumption in terms of heat energy generates large amounts of CO2 at the power plant generating this heat. If you do not exaggerate in taking showers, you can have strong impacts on conservating CO2 and reduce polluting the air, which you breath every other second.";

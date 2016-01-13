@@ -7,23 +7,24 @@
  * Time: 14:33
  */
 
+/**
+ * Class HtmlSummary
+ *
+ * creates the summary
+ */
 class HtmlSummary
 {
     public function GetHtmlSummary()
     {
-        //$message = SingletonMessage::Instance();
-        //$cid = $message->embed(Swift_Image::fromPath('assets/priming_eisbaer.png'));
-
-        // getting all the information we have
-        $db = DBAccessSingleton::getInstance();
-        $uploads = $db->extractionUserCount;
-
-        // calculate all the averages
+        // get all the averages for the summary
         $calc = new Calculations();
         $volume = $calc->CalcVolumeAvgUser(TRUE);
-        $flowRate = $calc->CalcUserFlowRate(TRUE);
+        $flowRate = $calc->CalcFlowRateUser(TRUE);
         $temperature = $calc->CalcUserTemperature(TRUE);
         $time = $calc->CalcUserTime(TRUE);
+
+        $db = DBAccessSingleton::getInstance();
+        $uploads = $db->extractionsCountUser;
 
         return
 '<table cellpadding="3" cellspacing="3" width="800" bgcolor="white">
@@ -36,24 +37,24 @@ class HtmlSummary
      <tr>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="assets/overview/pvolume.png">
+      <img width="40" src="'.UtilHelper::InlinePicture("assets/overview/pvolume.png").'">
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="assets/overview/ptime.png">
+      <img width="40" src="'.UtilHelper::InlinePicture("assets/overview/ptime.png").'">
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="assets/overview/pflow.png">
+      <img width="40" src="'.UtilHelper::InlinePicture("assets/overview/pflow.png").'">
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="50" src="assets/overview/ptemp.png">
+      <img width="40" src="'.UtilHelper::InlinePicture("assets/overview/ptemp.png").'">
       </td>
 
 <!--
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="assets/overview/pupload_2.png">
+      <img width="40" src="UtilHelper::InlinePicture("assets/overview/pupload_2.png")">
       </td>
 -->
 

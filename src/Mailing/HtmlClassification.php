@@ -9,31 +9,31 @@
 
 require "Calculations.php";
 
+/**
+ * Class HtmlClassification
+ * Creates the Classification-Feature
+ * the twitter feature
+ * the reward-feature
+ */
 class HtmlClassification
 {
     public function GetHtmlClassification()
     {
 
-        $message = SingletonMessage::Instance();
-        //$cid = $message->embed(Swift_Image::fromPath('assets/eklasse.png'));
-
-        // feature badge
+        // feature gamification badge
         $db = DBAccessSingleton::getInstance();
-        $aryReportedOn = $db->extractionsUserReportedOn;
+
+        // get the count off all uploads
+        $aryReportedOn = $db->reportedOnUser;
         $aryUniqueReportOn = array_unique($aryReportedOn);
         $reportCount = count($aryUniqueReportOn);
         $upload = 0;
 
-        if($db->extractionUserCount < 50)
-        {
-            $extractionUserCount = $db->extractionUserCount;
-        }
-        else
-        {
-            $extractionUserCount = 50;
-        }
+        $extractionUserCount = UtilHelper::GetExtractionUserCount();
 
         $rewardHeading = "Your reward!";
+        $badge = "";
+
         // select the right badge
         if($reportCount < 10)
         {
@@ -43,27 +43,28 @@ class HtmlClassification
         }
         elseif($reportCount >= 10 && $reportCount < 25)
         {
-            $badge = '<td><img width="140" height="82" src="assets/badges/g1.png"></td>';
+
+            $badge = '<td><img width="140" height="82" src="'.UtilHelper::InlinePicture("assets/badges/g1.png").'"></td>';
             $upload = 25;
         }
         elseif($reportCount >= 25 && $reportCount < 75)
         {
-            $badge = '<td><img width="140" height="82" src="assets/badges/g2.png"></td>';
+            $badge = '<td><img width="140" height="82" src="'.UtilHelper::InlinePicture("assets/badges/g2.png").'"></td>';
             $upload = 75;
         }
         elseif($reportCount >= 75 && $reportCount < 150)
         {
-            $badge = '<td><img width="140" height="82" src="assets/badges/g3.png"></td>';
+            $badge = '<td><img width="140" height="82" src="'.UtilHelper::InlinePicture("assets/badges/g3.png").'"></td>';
             $upload = 150;
         }
         elseif($reportCount >= 150 && $reportCount < 300)
         {
-            $badge = '<td><img width="140" height="82"  src="assets/badges/g4.png"></td>';
+            $badge = '<td><img width="140" height="82"  src="'.UtilHelper::InlinePicture("assets/badges/g4.png").'"></td>';
             $upload = 300;
         }
         elseif($reportCount >= 300)
         {
-            $badge = '<td><img width="140" height="82" src="assets/badges/g5.png"></td>';
+            $badge = '<td><img width="140" height="82" src="'.UtilHelper::InlinePicture("assets/badges/g5.png").'"></td>';
         }
 
         $rewardText = "";
@@ -84,47 +85,50 @@ class HtmlClassification
         }
 
 
-
-
-        // feature classification
+        // feature energy efficiency classification
         $calc = new Calculations();
-        $energy = $calc->CalcEnergyUsageUser();
-        $class =  $calc->GetEfficiencyClass($energy);
+        $energy = $calc->CalcEnergyUser();
+        $class =  UtilHelper::GetEfficiencyClass($energy);
 
-        $rowAA = '<td> <img width="auto" height="40px" src="assets/classifications/AA.png" > </td>';
-        $rowA = '<td> <img width="auto" height="40px" src="assets/classifications/A.png" > </td>';
-        $rowB = '<td> <img width="auto" height="40px" src="assets/classifications/B.png" > </td>';
-        $rowC = '<td> <img width="auto" height="40px" src="assets/classifications/C.png" > </td>';
-        $rowD = '<td> <img width="auto" height="40px" src="assets/classifications/D.png" > </td>';
-        $rowE = '<td> <img width="auto" height="40px" src="assets/classifications/E.png" > </td>';
-        $rowF = '<td> <img width="auto" height="40px" src="assets/classifications/F.png" > </td>';
-        $rowG = '<td> <img width="auto" height="40px" src="assets/classifications/G.png" > </td>';
+        // add the corresponding picture to the scale
+        $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
+        $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
+        $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
+        $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
+        $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
+        $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
+        $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
+        $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
 
+        // set the user row
         if ($class == 'A+') {
-            $rowAA = '<td> <img width="auto" height="40px" src="assets/classifications/AAY.png" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AAY.png").'" > </td>';
         }
         if ($class == 'A') {
-            $rowA = '<td> <img width="auto" height="40px" src="assets/classifications/AY.png" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AY.png").'" > </td>';
         }
         if ($class == 'B') {
-            $rowB = '<td> <img width="auto" height="40px" src="assets/classifications/BY.png" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/BY.png").'" > </td>';
         }
         if ($class == 'C') {
-            $rowC = '<td> <img width="auto" height="40px" src="assets/classifications/CY.png" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/CY.png").'" > </td>';
         }
         if ($class == 'D') {
-            $rowD = '<td> <img width="auto" height="40px" src="assets/classifications/DY.png" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/DY.png").'" > </td>';
         }
         if ($class == 'E') {
-            $rowE = '<td> <img width="auto" height="40px" src="assets/classifications/EY.png" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/EY.png").'" > </td>';
         }
         if ($class == 'F') {
-            $rowF = '<td> <img width="auto" height="40px" src="assets/classifications/FY.png" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/FY.png").'" > </td>';
         }
         if ($class == 'G') {
-            $rowG = '<td> <img width="auto" height="40px" src="assets/classifications/GY.png" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/GY.png").'" > </td>';
         }
 
+        // feature goal setting
+        // only for efficiency classes != "A+"
+        $goal = "";
         if($class != 'A+')
         {
             $savingVolume = $calc->CalcSavingVolumeForBetterEnergyClass($energy);
@@ -133,14 +137,26 @@ class HtmlClassification
                             or you shorten your showertime by <b>'. round($savingTime) .' seconds</b> for each shower you will reach the next better efficiency class!
                             You can also combine both and lower your warter consumption by <b>'. round($savingVolume / 2) .' liter</b>
                             and shorten your showertime by <b>'. round($savingTime / 2) .' seconds</b> for each shower';
-        }
 
+            $goal = '
+        <tr>
+            <td colspan="2" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            <!--<b>Your Goal for the next report!</b> -->
+            <b>You can reach the next better efficiency class!</b>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;
+            padding-left: 30px; padding-right: 30px;">
+            '. $savingText .'
+            </td>
+        </tr>';
+        }
 
         // feature twitter
         $ttext = 'Let\'s+save+the+planet!+My+efficiency+class+for+the+last+showers+were+' . $class . '+with+' . $energy . '+Wh+per+shower!';
         $twittertext = 'https://twitter.com/intent/tweet?url=http%3A%2F%2Famphiro.com&text='. $ttext .'&via=AmphiroAG';
-
-
 
         return
 '
@@ -217,7 +233,7 @@ class HtmlClassification
         <tr>
             <td align="center">
             <a href="' . $twittertext . '">
-                <img width="140px" height="80px"   src="assets/twitter/twitter_share_2.png">
+                <img width="140px" height="80px"   src="'.UtilHelper::InlinePicture("assets/twitter/twitter_share_2.png").'"/>
             </a>
             </td>
         </tr>
@@ -267,19 +283,7 @@ class HtmlClassification
         <td>&nbsp;<br/></td>
     </tr>
 
-    <tr>
-        <td colspan="2" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-        <!--<b>Your Goal for the next report!</b> -->
-        <b>You can reach the next better efficiency class!</b>
-        </td>
-    </tr>
-
-    <tr>
-        <td colspan="2" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;
-        padding-left: 30px; padding-right: 30px;">
-        '. $savingText .'
-        </td>
-    </tr>
+    '. $goal .'
 
 </table>
 

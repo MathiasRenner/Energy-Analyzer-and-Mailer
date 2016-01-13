@@ -6,6 +6,14 @@
  * Date: 28/11/15
  * Time: 15:34
  */
+
+/**
+ * Class SingletonMessage
+ *
+ * encapsulate the Swift_message instace
+ * needed to insert inline pictures
+ *
+ */
 final class SingletonMessage extends Swift_Message
 {
     /**
