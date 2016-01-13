@@ -26,8 +26,8 @@ class HtmlRecommendations
         $calcAllUserTime = $calc->CalcAllUserTime();
         $calcUserTime = $calc->CalcUserTime();
 
-        if ($calcUserTime > $calcAllUserTime){
-            $textReduceTime="<b>Invest less time in showering! You probably have more important things to do!</b><br />Your exposition to a constant stream of water is much higher compared to others. A shorter shower duration also means much water conservation.";
+        if ($calcUserTime > $calcAllUserTime) {
+            $textReduceTime = "<b>Invest less time in showering! You probably have more important things to do!</b><br />Your exposition to a constant stream of water is much higher compared to others. A shorter shower duration also means much water conservation.";
             array_push($array, $textReduceTime);
         }
 
@@ -35,36 +35,36 @@ class HtmlRecommendations
         $avgflowRate = $calc->CalcFlowRateAllUser();
         $UserflowRate = $calc->CalcFlowRateUser(TRUE);
 
-        if ($UserflowRate > $avgflowRate){
-            $textReduceWater="<b>Turning on the tap only half way - for the sake for the environment! (+ special tip!)</b><br />Showering accounts for about 25% of total water consumption in a household. A lower flow rate saves reasonable a amount of water and takes you in control on conservating the most valuable resource for life of our planet. Special tip: Investing in a water efficient shower head makes this goal as easy as it gets!";
+        if ($UserflowRate > $avgflowRate) {
+            $textReduceWater = "<b>Turning on the tap only half way - for the sake for the environment! (+ special tip!)</b><br />Showering accounts for about 25% of total water consumption in a household. A lower flow rate saves reasonable a amount of water and takes you in control on conservating the most valuable resource for life of our planet. Special tip: Investing in a water efficient shower head makes this goal as easy as it gets!";
             array_push($array, $textReduceWater);
         }
 
         // calculate number of showers
         $AvgNumberOfShowers = $calc->CalcAvgNumberOfShowers();
-        $UserAvgNumberOfShowers = UtilHelper::GetExtractionUserCount(TRUE);
+        $UserAvgNumberOfShowers = UtilSingleton::GetExtractionUserCount(TRUE);
 
-        if ($UserAvgNumberOfShowers > $AvgNumberOfShowers){
-            $textReduceFrequency="<b>Don't take a shower too often. It can have negative impacts on your health!</b><br />Resource consumption in terms of heat energy generates large amounts of CO2 at the power plant generating this heat. If you do not exaggerate in taking showers, you can have strong impacts on conservating CO2 and reduce polluting the air, which you breath every other second.";
+        if ($UserAvgNumberOfShowers > $AvgNumberOfShowers) {
+            $textReduceFrequency = "<b>Don't take a shower too often. It can have negative impacts on your health!</b><br />Resource consumption in terms of heat energy generates large amounts of CO2 at the power plant generating this heat. If you do not exaggerate in taking showers, you can have strong impacts on conservating CO2 and reduce polluting the air, which you breath every other second.";
             array_push($array, $textReduceFrequency);
         }
 
 
-        $textReduceShampooing='<b>Hold on! Do you need water during shampooing?</b><br />Stop the water when putting soap on your skin. Better take some seconds and give your body a little massage rather than letting the soap immediately rubbing down again.';
+        $textReduceShampooing = '<b>Hold on! Do you need water during shampooing?</b><br />Stop the water when putting soap on your skin. Better take some seconds and give your body a little massage rather than letting the soap immediately rubbing down again.';
         // analysing shower breaks is not yet available from the data, show randomly instead
-        if ( round(rand(0, 1)) ){
-          array_push($array, $textReduceShampooing);
-        }
-
-         //if data say that no recommendations are necessary, do not show recommendation section at all
-        if(count($array)-1 == 0){
+        if (round(rand(0, 1))) {
             array_push($array, $textReduceShampooing);
         }
 
-        $recommendations="";
+        //if data say that no recommendations are necessary, do not show recommendation section at all
+        if (count($array) - 1 == 0) {
+            array_push($array, $textReduceShampooing);
+        }
+
+        $recommendations = "";
         // get and show all user specific recommendations from the array
-        for ($i = 1; $i <= count($array)-1; $i++) {
-            $recommendations.='
+        for ($i = 1; $i <= count($array) - 1; $i++) {
+            $recommendations .= '
                 <tr>
                     <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; ">
                         <ul>
@@ -77,6 +77,11 @@ class HtmlRecommendations
             ';
         }
 
+        return $this->GetHtml($recommendations);
+    }
+
+    private function GetHtml($recommendations)
+    {
         return '
             <table cellpadding="0" cellspacing="0">
                 <tr>

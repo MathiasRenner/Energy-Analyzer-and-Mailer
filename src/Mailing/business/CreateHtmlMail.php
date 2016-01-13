@@ -7,14 +7,6 @@
  * Time: 17:56
  */
 
-include "HtmlPriming.php";
-include "HtmlClassification.php";
-include "HtmlDescInj.php";
-include "HtmlTimeComp.php";
-include "HtmlRecommendations.php";
-include "HtmlFooter.php";
-include "HtmlSummary.php";
-
 /**
  * Class CreateHtmlMail
  *

@@ -23,18 +23,20 @@ class HtmlSummary
         $temperature = $calc->CalcUserTemperature(TRUE);
         $time = $calc->CalcUserTime(TRUE);
 
-        $db = DBAccessSingleton::getInstance();
-        $uploads = $db->extractionsCountUser;
+        return $this->GetHtml($volume, $flowRate, $temperature, $time);
+    }
 
+    private function GetHtml($volume, $flowRate, $temperature, $time)
+    {
         return
-'<table cellpadding="3" cellspacing="3" width="800" bgcolor="white">
+            '<table cellpadding="3" cellspacing="3" width="800" bgcolor="white">
        <tr>
             <td colspan="4" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
             In a nutshell
             </td>
         </tr>
 
-     <tr>
+    <tr>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
       <img width="40" src="'.UtilSingleton::getInstance()->InlinePicture("assets/overview/pvolume.png").'">
@@ -51,12 +53,6 @@ class HtmlSummary
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
       <img width="40" src="'.UtilSingleton::getInstance()->InlinePicture("assets/overview/ptemp.png").'">
       </td>
-
-<!--
-      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <img width="40" src="UtilSingleton::getInstance()->InlinePicture("assets/overview/pupload_2.png")">
-      </td>
--->
 
     </tr>
 
@@ -78,16 +74,9 @@ class HtmlSummary
       &empty; '. $temperature .' C&deg;
       </td>
 
-<!--
-      <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      '. $uploads .' uploads
-      </td>
--->
-
     </tr>
 </table>
 ';
-
     }
 }
 

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: Max
@@ -7,10 +6,6 @@
  * Time: 17:44
  */
 
-/* pChart library inclusions */
-include_once("libs/charts/pChart2_1_4/class/pData.class.php");
-include_once("libs/charts/pChart2_1_4/class/pDraw.class.php");
-include_once("libs/charts/pChart2_1_4/class/pImage.class.php");
 
 /**
  * Class CreateCharts

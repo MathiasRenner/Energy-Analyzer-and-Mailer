@@ -7,8 +7,6 @@
  * Time: 14:33
  */
 
-require "Calculations.php";
-
 /**
  * Class HtmlClassification
  * Creates the Classification-Feature
@@ -19,7 +17,6 @@ class HtmlClassification
 {
     public function GetHtmlClassification()
     {
-
         // feature gamification badge
         $db = DBAccessSingleton::getInstance();
 
@@ -29,7 +26,7 @@ class HtmlClassification
         $reportCount = count($aryUniqueReportOn);
         $upload = 0;
 
-        $extractionUserCount = UtilHelper::GetExtractionUserCount();
+        $extractionUserCount = UtilSingleton::GetExtractionUserCount();
 
         $rewardHeading = "Your reward!";
         $badge = "";
@@ -88,7 +85,16 @@ class HtmlClassification
         // feature energy efficiency classification
         $calc = new Calculations();
         $energy = $calc->CalcEnergyUser();
-        $class =  UtilHelper::GetEfficiencyClass($energy);
+        $class =  UtilSingleton::GetEfficiencyClass($energy);
+
+        $rowAA = "";
+        $rowA  = "";
+        $rowB  = "";
+        $rowC  = "";
+        $rowD  = "";
+        $rowE  = "";
+        $rowF  = "";
+        $rowG  = "";
 
         // set the user row
         if ($class == 'A+') {
@@ -102,7 +108,7 @@ class HtmlClassification
             $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
 
         }
-        if ($class == 'A') {
+        elseif ($class == 'A') {
             $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AY.png").'" > </td>';
             $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
             $rowB = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/B.png").'" > </td>';
@@ -113,7 +119,7 @@ class HtmlClassification
             $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
 
         }
-        if ($class == 'B') {
+        elseif ($class == 'B') {
             $rowB = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/BY.png").'" > </td>';
             $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
             $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
@@ -124,7 +130,7 @@ class HtmlClassification
             $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
 
         }
-        if ($class == 'C') {
+        elseif ($class == 'C') {
             $rowC = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/CY.png").'" > </td>';
             $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
             $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
@@ -135,7 +141,7 @@ class HtmlClassification
             $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
 
         }
-        if ($class == 'D') {
+        elseif ($class == 'D') {
             $rowD = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/DY.png").'" > </td>';
             $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
             $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
@@ -145,7 +151,7 @@ class HtmlClassification
             $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/F.png").'" > </td>';
             $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
         }
-        if ($class == 'E') {
+        elseif ($class == 'E') {
             $rowE = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/EY.png").'" > </td>';
             $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
             $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
@@ -155,7 +161,7 @@ class HtmlClassification
             $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/F.png").'" > </td>';
             $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
         }
-        if ($class == 'F') {
+        elseif ($class == 'F') {
             $rowF = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/FY.png").'" > </td>';
             $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
             $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
@@ -166,7 +172,7 @@ class HtmlClassification
             $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/G.png").'" > </td>';
 
         }
-        if ($class == 'G') {
+        elseif ($class == 'G') {
             $rowG = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/GY.png").'" > </td>';
             $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AA.png").'" > </td>';
             $rowA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/A.png").'" > </td>';
@@ -209,8 +215,15 @@ class HtmlClassification
         $ttext = 'Let\'s+save+the+planet!+My+efficiency+class+for+the+last+showers+were+' . $class . '+with+' . $energy . '+Wh+per+shower!';
         $twittertext = 'https://twitter.com/intent/tweet?url=http%3A%2F%2Famphiro.com&text='. $ttext .'&via=AmphiroAG';
 
+        return $this->GetHtml($extractionUserCount,$energy,$class,$rowAA,$rowA,$rowB,$rowC,$rowD,$rowE,$rowF,$rowG,
+            $twittertext,$rewardHeading,$badge,$rewardText,$goal);
+    }
+
+    private function GetHtml($extractionUserCount,$energy,$class,$rowAA,$rowA,$rowB,$rowC,$rowD,$rowE,$rowF,$rowG,
+                             $twittertext,$rewardHeading,$badge,$rewardText,$goal)
+    {
         return
-'
+            '
 <table cellpadding="0" cellspacing="0" width="800px">
     <tr>
         <td colspan="2" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
@@ -341,6 +354,7 @@ class HtmlClassification
 <br/>
 ';
     }
+
 }
 
 

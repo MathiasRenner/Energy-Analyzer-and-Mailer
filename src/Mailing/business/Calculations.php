@@ -50,7 +50,7 @@ class Calculations
     {
         $db = DBAccessSingleton::getInstance();
 
-        $extractionUserCount = UtilHelper::GetExtractionUserCount($ignoreLimit);
+        $extractionUserCount = UtilSingleton::GetExtractionUserCount($ignoreLimit);
 
         $avgEnergyUser = array_sum(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount))
             / count(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount));
@@ -113,7 +113,7 @@ class Calculations
     {
         $db = DBAccessSingleton::getInstance();
 
-        $extractionUserCount = UtilHelper::GetExtractionUserCount($ignoreLimit);
+        $extractionUserCount = UtilSingleton::GetExtractionUserCount($ignoreLimit);
 
         $avgUserVolume = array_sum(array_slice($db->volumeUser,$extractionUserCount*(-1),$extractionUserCount))
             / count(array_slice($db->volumeUser,$extractionUserCount*(-1),$extractionUserCount));
@@ -152,7 +152,7 @@ class Calculations
     public function CalcFlowRateUser($ignoreLimit = FALSE)
     {
         $db = DBAccessSingleton::getInstance();
-        $extractionUserCount = UtilHelper::GetExtractionUserCount($ignoreLimit);
+        $extractionUserCount = UtilSingleton::GetExtractionUserCount($ignoreLimit);
 
         $avgUserFlowRate = array_sum(array_slice($db->flowRateUser,$extractionUserCount*(-1),$extractionUserCount))
             / count(array_slice($db->flowRateUser,$extractionUserCount*(-1),$extractionUserCount));
@@ -190,7 +190,7 @@ class Calculations
     public function CalcUserTemperature($ignoreLimit = FALSE)
     {
         $db = DBAccessSingleton::getInstance();
-        $extractionUserCount = UtilHelper::GetExtractionUserCount($ignoreLimit);
+        $extractionUserCount = UtilSingleton::GetExtractionUserCount($ignoreLimit);
 
         $avgUserTemperature = array_sum(array_slice($db->temperatureUser,$extractionUserCount*(-1),$extractionUserCount))
             / count(array_slice($db->temperatureUser,$extractionUserCount*(-1),$extractionUserCount));
@@ -251,7 +251,7 @@ class Calculations
      */
     public function CalcSavingTimeForBetterEnergyClass($actualConsumption)
     {
-        $betterConsumption = UtilHelper::GetConsumptionForBetterEfficiencyClass($actualConsumption);
+        $betterConsumption = UtilSingleton::GetConsumptionForBetterEfficiencyClass($actualConsumption);
 
         $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
 
@@ -275,7 +275,7 @@ class Calculations
      */
     public function CalcSavingVolumeForBetterEnergyClass($actualConsumption)
     {
-        $betterConsumption = UtilHelper::GetConsumptionForBetterEfficiencyClass($actualConsumption);
+        $betterConsumption = UtilSingleton::GetConsumptionForBetterEfficiencyClass($actualConsumption);
 
         $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
 

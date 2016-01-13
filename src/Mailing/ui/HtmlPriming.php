@@ -63,8 +63,12 @@ class HtmlPriming
             $name = $db->firstname;
         }
 
-        return
+        return $this->GetHtml($name,$textConsumption,$textConsEqual);
+    }
 
+    private function GetHtml($name,$textConsumption,$textConsEqual)
+    {
+        return
 '<table cellpadding="0" cellspacing="0" width="800">
     <tr>
         <td  width="800" align="center">
@@ -110,16 +114,6 @@ class HtmlPriming
                 </lu>
                 </td>
                 </tr>
-
-           <!--     <td width="300" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 10px">
-                Our greatest customer<br/>
-                '. $db->firstname . '  '. $db->familyname .' <br/>
-                '. $db->email .' <br/>
-                '. $db->address.' <br/>
-                '. $db->city .' <br/>
-                <br/>
-                <br/>
-                </td> -->
             </table>
         </td>
     </tr>
@@ -132,7 +126,6 @@ class HtmlPriming
 </table>
 
 <br/>';
-
     }
 }
 

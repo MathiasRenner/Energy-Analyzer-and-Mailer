@@ -49,7 +49,11 @@ class HtmlDescInj
             $descText = "Your average energy consumption for your last shower was below the average.";
         }
 
+        return $this->GetHtml($descText,$inj,$injtext);
+    }
 
+    private function GetHtml($descText,$inj,$injtext)
+    {
         return '
 <table cellpadding="0" cellspacing="0">
     <tr>
@@ -122,7 +126,6 @@ class HtmlDescInj
 
 <br/>
 ';
-
     }
 }
 
