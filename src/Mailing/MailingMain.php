@@ -52,14 +52,9 @@ $db->Update($id);
 
 // the transport object
 // TODO: auf mail.uni.bamberg umstellen
-//$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 587, 'tls');
-//$transport->setUsername('eesys.mcm.mailer@gmail.com');
-//$transport->setPassword('eesys.mcm.mailer1516');
-//$transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de');
-
-    $transport = Swift_SmtpTransport::newInstance('smtp-mail.outlook.com', 587, 'tls');
-    $transport->setUsername('raab.maximilian@live.com');
-    $transport->setPassword('6Jv4LmEjzRxXPjr;');
+$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 587, 'tls');
+$transport->setUsername('eesys.mcm.mailer@gmail.com');
+$transport->setPassword('eesys.mcm.mailer1516');
 //$transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de');
 
 
