@@ -30,6 +30,4 @@ final class SingletonMessage extends Swift_Message
         }
         return $inst;
     }
-
-
 }

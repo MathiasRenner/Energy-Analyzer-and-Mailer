@@ -91,39 +91,100 @@ class HtmlClassification
         $class =  UtilHelper::GetEfficiencyClass($energy);
 
         // add the corresponding picture to the scale
-        $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
-        $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
-        $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
-        $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
-        $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
-        $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
-        $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
-        $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+        //$rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
+        //$rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
+        //$rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
+        //$rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
+        //$rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
+        //$rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
+        //$rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
+        //$rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
 
         // set the user row
         if ($class == 'A+') {
             $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AAY.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+
         }
         if ($class == 'A') {
             $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+
         }
         if ($class == 'B') {
             $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/BY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+
         }
         if ($class == 'C') {
             $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/CY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+
         }
         if ($class == 'D') {
             $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/DY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
         }
         if ($class == 'E') {
             $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/EY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
         }
         if ($class == 'F') {
             $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/FY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/G.png").'" > </td>';
+
         }
         if ($class == 'G') {
             $rowG = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/GY.png").'" > </td>';
+            $rowAA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/AA.png").'" > </td>';
+            $rowA = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/A.png").'" > </td>';
+            $rowB = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/B.png").'" > </td>';
+            $rowC = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/C.png").'" > </td>';
+            $rowD = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/D.png").'" > </td>';
+            $rowE = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/E.png").'" > </td>';
+            $rowF = '<td> <img width="auto" height="40px" src="'.UtilHelper::InlinePicture("assets/classifications/F.png").'" > </td>';
         }
 
         // feature goal setting

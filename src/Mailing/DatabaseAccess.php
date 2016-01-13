@@ -18,8 +18,8 @@ class DBAccessSingleton
     private $db;
 
     // the userId / with extractions
-    public $userIdAll = array();
-    public $userIdsWithExtractions = array();
+    public $userIdAll;
+    public $userIdsWithExtractions;
 
     // user data information
     public $username;
@@ -32,17 +32,17 @@ class DBAccessSingleton
     public $country;
 
     // user
-    public $energyUser = array();
-    public $volumeUser = array();
-    public $flowRateUser = array();
-    public $temperatureUser = array();
-    public $reportedOnUser = array();
+    public $energyUser;
+    public $volumeUser;
+    public $flowRateUser;
+    public $temperatureUser;
+    public $reportedOnUser;
     public $extractionsCountUser;
 
     // all user
-    public $energyAllUser = array();
-    public $flowRateAllUser = array();
-    public $volumeAllUser = array();
+    public $energyAllUser;
+    public $flowRateAllUser;
+    public $volumeAllUser;
 
     // singleton instance
     static private $instance = null;
@@ -72,16 +72,14 @@ class DBAccessSingleton
     /**
      * Get all the data from the db and rum all functions one time to get everything we needed
      *
-     * @param $id
      * the user id
      */
-    public function RunAll($id)
+    public function Init()
     {
         $this->SetAllUserIds();
         $this->SetAllUserIdWithExtractions();
 
         $this->SetAllUserShowerUsageInformation();
-        //$this->Update($id);
     }
 
     /**
@@ -101,6 +99,8 @@ class DBAccessSingleton
      */
     private function SetAllUserIds()
     {
+        $this->userIdAll = array();
+
         $query = "SELECT id FROM b1user";
         $res = mysqli_query($this->db, $query);
         while($row = mysqli_fetch_object($res))
@@ -114,6 +114,8 @@ class DBAccessSingleton
      */
     public function SetAllUserIdWithExtractions()
     {
+        $this->userIdsWithExtractions = array();
+
         $queryUE = "SELECT DISTINCT b1user_id FROM b1users_b1extractions";
         $res = mysqli_query($this->db, $queryUE);
         while($row = mysqli_fetch_object($res))
@@ -149,6 +151,13 @@ class DBAccessSingleton
     private function SetUserShowerUsageInformation($id)
     {
         $calc = new Calculations();
+
+        $this->energyUser = array();
+        $this->volumeUser = array();
+        $this->flowRateUser = array();
+        $this->temperatureUser = array();
+        $this->reportedOnUser = array();
+        $this->extractionsCountUser = 0;
 
         $userExtractionId = array();
         // get all the extractionid for the user
@@ -216,6 +225,10 @@ class DBAccessSingleton
         $calc = new Calculations();
 
         $allUserWithExtractions = array();
+        $this->energyAllUser = array();
+        $this->flowRateAllUser = array();
+        $this->volumeAllUser = array();
+
         // get all user with extractionids
         $queryUE = "SELECT DISTINCT b1user_id FROM b1users_b1extractions";
         $res = mysqli_query($this->db, $queryUE);

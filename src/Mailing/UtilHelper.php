@@ -22,7 +22,6 @@ class UtilHelper
     public static function InlinePicture($pathToPicture)
     {
         // uncommend the line when you send a mail
-
         //$message = SingletonMessage::Instance();
         //return $cid = $message->embed(Swift_Image::fromPath($pathToPicture));
 
