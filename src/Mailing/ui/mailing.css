@@ -84,10 +84,19 @@ a.ms { background-color: #000!important; }
     width:100%;
 }
 
-#headline {
-    margin-bottom: 10px;
+.headline {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    text-align: center;
 }
 
+table#timecomp {
+    margin: auto;
+}
+
+table#recommendations {
+    padding: 20px;
+}
 /* -------------------------------------
 		HEADER
 ------------------------------------- */

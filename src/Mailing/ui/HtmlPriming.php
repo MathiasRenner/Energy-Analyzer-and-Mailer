@@ -91,7 +91,7 @@ class HtmlPriming
                 </tr>
 
                 <tr>
-                <td  width="800" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px; padding-bottom: 20px; ">
+                <td  class="headline" width="800" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px; padding-bottom: 20px; ">
                 Your personal Amphiro report
                 <br>
                 </td>

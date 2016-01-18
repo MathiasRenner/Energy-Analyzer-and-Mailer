@@ -226,7 +226,7 @@ class HtmlClassification
             '
 <table class=section cellpadding="0" cellspacing="0">
     <tr>
-        <td colspan="2" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
+        <td class="headline" colspan="2" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
         Your position on the efficiency scale
         </td>
     </tr>
