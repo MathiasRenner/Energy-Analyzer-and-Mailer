@@ -128,31 +128,22 @@ class CreateCharts
     public function CreateTimeCompChart()
     {
         $db = DBAccessSingleton::getInstance();
-        $user = $db->username;
-        $energyUser = $db->energyUser;
+        $usern = $db->username;
+        $userExtractions = $db-> energyUser;
 
-        // select max 30 elements or lower if not enough data is available
-        if(count($energyUser) >= 30)
-            $countEnergyUser = 30;
-        else
-            $countEnergyUser = count($energyUser);
-
-        // select the font
         $font2 = "libs/charts/pChart2_1_4/fonts/verdana.ttf";
 
         /* Create and populate the pData object */
         $MyData = new pData();
-        $MyData->addPoints(array_slice($energyUser,-1*$countEnergyUser,$countEnergyUser),$user);
+        $MyData->addPoints(array_slice($userExtractions,-30,30),$usern);
 
-        // select the color
         $serieSettings = array("R"=>66,"G"=>106,"B"=>131);
-        $MyData->setPalette($user,$serieSettings);
+        $MyData->setPalette($usern,$serieSettings);
 
-        // set the series weight
-        $MyData->setSerieWeight($user, 1);
+        $MyData->setSerieWeight($usern, 1);
 
-        //set value to "Wh"
-        $MyData->setAxisUnit(0," Wh");
+        //Einheit "Wh" anzeigen
+        $MyData->setAxisUnit(0,"Wh");
 
         $MyData->setAxisName(0,"");
         //TODO: x-Achsenbezeichnung an Daten anpassen
@@ -161,45 +152,54 @@ class CreateCharts
         //$MyData->setAbscissa("Labels");
 
         /* Create the pChart object */
-        $myPicture = new pImage(700,230,$MyData);
+        $myTimeCompChart = new pImage(700,230,$MyData);
 
         /* Turn of Antialiasing */
-        $myPicture->Antialias = FALSE;
+        $myTimeCompChart->Antialias = FALSE;
 
 
         /* Set the default font */
-        $myPicture->setFontProperties(array("FontName"=>$font2,"FontSize"=>9,"R"=>0,"G"=>0,"B"=>0));
+        $myTimeCompChart->setFontProperties(array("FontName"=>$font2,"FontSize"=>9,"R"=>0,"G"=>0,"B"=>0));
 
         /* Define the chart area */
         //$myPicture->setGraphArea(60,40,650,200);
-        $myPicture->setGraphArea(60,30,680,200);
+        $myTimeCompChart->setGraphArea(60,30,680,200);
 
         //$myPicture->drawText(40,20,"Wh");
 
         /* Draw the scale */
         $scaleSettings = array("XMargin"=>10,"YMargin"=>10,"Floating"=>TRUE,"GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
         //$myPicture->drawScale($scaleSettings);
-        $AxisBoundaries = array(0=>array("Min"=>0,"Max"=>max(array_slice($energyUser,-30,30))));
-        $myPicture->drawScale(array("InnerTickWidth"=>-1,"OuterTickWidth"=>5,"TickR"=>255,"TickG"=>255,"TickB"=>255,"Mode"=>SCALE_MODE_MANUAL,"ManualScale"=>$AxisBoundaries,"LabelRotation"=>45,"DrawXLines"=>FALSE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridTicks"=>0,"GridAlpha"=>30,"AxisAlpha"=>0));
+        $AxisBoundaries = array(0=>array("Min"=>0,"Max"=>max(array_slice($userExtractions,-30,30))));
+        $myTimeCompChart->drawScale(array("InnerTickWidth"=>-1,"OuterTickWidth"=>5,"TickR"=>255,"TickG"=>255,"TickB"=>255,"Mode"=>SCALE_MODE_MANUAL,"ManualScale"=>$AxisBoundaries,"LabelRotation"=>45,"DrawXLines"=>FALSE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridTicks"=>0,"GridAlpha"=>30,"AxisAlpha"=>0));
 
         /* Enable shadow computing */
-        $myPicture->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+        $myTimeCompChart->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
 
         /* Draw the line chart
         $myPicture->drawLineChart(array("DisplayColor"=>DISPLAY_MANUAL));
         $myPicture->drawPlotChart(array("DisplayValues"=>TRUE,"PlotBorder"=>TRUE,"BorderSize"=>2,"Surrounding"=>-60,"BorderAlpha"=>80));
         */
 
-        $myPicture->drawBarChart();
+        $myTimeCompChart->drawBarChart();
         /* Write the chart legend */
         // legend is just the email of the user, which is already  shown in the header of the mailing
         //$myPicture->drawLegend(590,9,array("Style"=>LEGEND_NOBORDER,"Mode"=>LEGEND_HORIZONTAL,"FontR"=>255,"FontG"=>255,"FontB"=>255));
 
         $RectangleSettings = array("R"=>255,"G"=>255,"B"=>255);
-        $myPicture->drawFilledRectangle(61,201,720,230,$RectangleSettings);
+        $myTimeCompChart->drawFilledRectangle(61,201,720,230,$RectangleSettings);
+
+
+        $GradientAreaSettings = array("StartR"=>255,"StartG"=>255,"StartB"=>255,"Alpha"=>100,
+            "EndR"=>11, "EndG"=>71, "EndB"=>101);
+        $myTimeCompChart->drawGradientArea(140,205,676,218, DIRECTION_HORIZONTAL, $GradientAreaSettings);
+
+        $myTimeCompChart->drawText(631,215,"latest showers",array("R"=>255, "G"=>255, "B"=>255,"FontSize"=>8,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+
         /* Render the picture (choose the best way) */
-        $myPicture->render("pictures/timeCompChart.png");
+        $myTimeCompChart->render("pictures/timeCompChart.png");
 
 
     }
+
 }

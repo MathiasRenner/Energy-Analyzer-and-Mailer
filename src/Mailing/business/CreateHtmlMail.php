@@ -52,7 +52,10 @@ class CreateHtmlMail
             .$recommendations_html
             .$summary_html
             .$footer_html
-            .'</body></html>';
+            .'
+            </div>
+            </body>
+            </html>';
     }
 
     /**
@@ -69,6 +72,7 @@ class CreateHtmlMail
                     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                     <title>Amphiro Report 0.5</title>
                 </head>
-                <body>';
+                <body>
+                <div id="page-wrap">';
     }
 }
