@@ -69,7 +69,7 @@ class HtmlPriming
     private function GetHtml($name,$textConsumption,$textConsEqual)
     {
         return
-'<table cellpadding="0" cellspacing="0" width="800">
+'<table class=section cellpadding="0" cellspacing="0">
     <tr>
         <td  width="800" align="center">
             <table cellpadding="0" cellspacing="0">
@@ -91,21 +91,25 @@ class HtmlPriming
                 </tr>
 
                 <tr>
-                <td  width="800" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
+                <td  width="800" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px; padding-bottom: 20px; ">
                 Your personal Amphiro report
+                <br>
                 </td>
                 </tr>
 
                 <tr>
-                <td  width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 30px; padding-right: 30px;">
-                Hallo <b>' . $name . '</b>! <br/>
+                <td   width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 30px; padding-right: 30px;">
+                Hello <b>' . $name . '</b>, <br/>
+                <br>
                 We are pleased to provide you your <b>personal</b> report. We want to help you to reduce your energy.
                 With this report we provide you:
+
+
                 </td>
                 </tr>
 
                 <tr>
-                <td  width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 2px; padding-left: 50px; padding-right: 50px;">
+                <td  width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 50px; padding-right: 50px;">
 
                 <lu>
                    <li><strong>your energy consumption compared to our customers</strong></li>

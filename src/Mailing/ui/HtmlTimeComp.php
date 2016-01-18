@@ -18,7 +18,7 @@ class HtmlTimeComp
     public function GetHtmlTimeComp()
     {
         return '
-<table cellpadding="0" cellspacing="0">
+<table class=section cellpadding="0" cellspacing="0">
     <tr>
         <td class="pattern" width="800" align="center">
             <table cellpadding="0" cellspacing="0">
@@ -35,7 +35,7 @@ class HtmlTimeComp
                             </tr>
                             <tr>
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                Genauere Beschreibung
+                                With 100 Wh you can work on your notebook for 5 hours.
                                 </td>
                             </tr>
                         </table>

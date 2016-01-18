@@ -19,16 +19,23 @@ body {
     -webkit-text-size-adjust:none;
     width: 100%!important;
     height: 100%;
+    background-color: #CDDBE2;
 }
 
 #page-wrap {
-    width: 800px;
+    width: 820px;
     margin: 0 auto;
+    padding : 15px;
+    padding-top: 0px;
+    background-color: #CDDBE2;
 }
+
+
 
 /* -------------------------------------
 		ELEMENTS
 ------------------------------------- */
+
 a { color: #2BA6CB;}
 
 .btn {
@@ -77,6 +84,10 @@ a.ms { background-color: #000!important; }
     width:100%;
 }
 
+#headline {
+    margin-bottom: 10px;
+}
+
 /* -------------------------------------
 		HEADER
 ------------------------------------- */
@@ -91,6 +102,16 @@ table.head-wrap { width: 100%;}
 ------------------------------------- */
 table.body-wrap { width: 100%;}
 
+table.section {
+    background-color: white;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+table#descInj {
+    padding-left: 20px;
+}
+
 
 /* -------------------------------------
 		FOOTER
@@ -102,6 +123,10 @@ table.footer-wrap { width: 100%;	clear:both!important;
     font-size:10px;
     font-weight: bold;
 
+}
+
+table#footer {
+    margin-top: 20px;
 }
 
 

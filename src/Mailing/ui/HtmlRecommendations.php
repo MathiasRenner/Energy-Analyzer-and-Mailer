@@ -83,7 +83,7 @@ class HtmlRecommendations
     private function GetHtml($recommendations)
     {
         return '
-            <table cellpadding="0" cellspacing="0">
+            <table class=section cellpadding="0" cellspacing="0">
                 <tr>
                     <td class="pattern" width="800" align="center">
                         <table cellpadding="0" cellspacing="0">

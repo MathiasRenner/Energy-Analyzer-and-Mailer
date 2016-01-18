@@ -16,7 +16,7 @@ class HtmlFooter
     public function GetHtmlFooter()
     {
         return
-'<table cellpadding="3" cellspacing="3" bgcolor="white">
+'<table class=section id="footer" cellpadding="3" cellspacing="3" bgcolor="white">
     <tr>
       <td class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;" width="800" align="center">
       Follow us on:

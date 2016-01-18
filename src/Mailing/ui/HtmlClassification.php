@@ -224,7 +224,7 @@ class HtmlClassification
     {
         return
             '
-<table cellpadding="0" cellspacing="0" width="800px">
+<table class=section cellpadding="0" cellspacing="0">
     <tr>
         <td colspan="2" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
         Your position on the efficiency scale
@@ -244,7 +244,7 @@ class HtmlClassification
     <tr>
         <td>
 
-        <table cellpadding="0" cellspacing="0" width="500" style="padding-left: 20px;">
+        <table cellpadding="0" cellspacing="0" width="480" style="padding-left: 20px;">
 
         <tr>
         <td>&nbsp;</td>

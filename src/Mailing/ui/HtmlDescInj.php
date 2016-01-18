@@ -55,7 +55,7 @@ class HtmlDescInj
     private function GetHtml($descText,$inj,$injtext)
     {
         return '
-<table cellpadding="0" cellspacing="0">
+<table class=section cellpadding="0" cellspacing="0">
     <tr>
         <td width="800" valign="top">
         <table cellpadding="0" cellspacing="0">
@@ -67,7 +67,7 @@ class HtmlDescInj
 
         <tr>
         <td>
-        <table cellpadding="0" cellspacing="0">
+        <table id="descInj" cellpadding="0" cellspacing="0">
            <tr>
            <td width="500" valign="top">
                <table>
