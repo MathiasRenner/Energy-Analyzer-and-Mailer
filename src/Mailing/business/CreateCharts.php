@@ -26,7 +26,91 @@ class CreateCharts
     {
         $this->CreateDescChart();
         $this->CreateTimeCompChart();
+        $this->CreateGoalChart();
     }
+
+    /**
+     *  Wrapper for the creation of the pie charts for the goal feature
+     */
+    public function CreateGoalChart()
+    {
+        $calculations = new Calculations();
+        $actualConsEnergy = $calculations->CalcEnergyUser(TRUE);
+
+        $actualConsVolume = $calculations->CalcVolumeAvgUser(TRUE);
+        $actualConsTime = $calculations->CalcUserTime(TRUE);
+
+
+
+        $savingConsVolume = $calculations->CalcSavingVolumeForBetterEnergyClass($actualConsEnergy);
+        $savingConsTime = $calculations->CalcSavingTimeForBetterEnergyClass($actualConsEnergy);
+
+        /**
+        echo "<br/> Act Vol:    ". $actualConsVolume ;
+        echo "<br/> Better Vol: ". $savingConsVolume ;
+        echo "<br/> Diff:       ". $savingConsVolume / $actualConsVolume;
+
+        echo "<br/> Act Tim:    ". $actualConsTime * 60;
+        echo "<br/> Better Tim: ". $savingConsTime;
+        echo "<br/> Diff:       ". $savingConsTime / ($actualConsTime * 60);
+        */
+
+        $this->CreateGoalChartPicture(1-($savingConsVolume / $actualConsVolume), $savingConsVolume / $actualConsVolume,0, "volumeSavingChart.png");
+
+        $this->CreateGoalChartPicture(1-(($savingConsTime / ($actualConsTime * 60)) / 2 + ($savingConsVolume / $actualConsVolume)/2),
+            ($savingConsTime / ($actualConsTime * 60)) / 2, ($savingConsVolume / $actualConsVolume) / 2, "combinedSavingChart.png");
+
+
+    }
+
+    /**
+     * Create the pie charts for the goal feature
+     *
+     * @param $actual | int actual value first section
+     * @param $saving | int saving value second section
+     * @param int $saving2 | int optional third section
+     * @param $name | string the name of the chart
+     */
+    private function CreateGoalChartPicture($actual, $saving, $saving2 = 0, $name)
+    {
+        /* Create and populate the pData object */
+        $MyData = new pData();
+
+        // define the color
+        $col_dark = array("R"=>79,"G"=>122,"B"=>149,"Alpha"=>100);
+        $col_mid = array("R"=>138,"G"=>171,"B"=>188,"Alpha"=>100);
+        $col_light = array("R"=>205,"G"=>219,"B"=>226,"Alpha"=>100);
+
+        $palette = array("0"=>$col_light, "1"=>$col_mid, "2"=>$col_dark);
+
+        $font2 = "libs/charts/pChart2_1_4/fonts/verdana.ttf";
+
+        $MyData->addPoints(array($actual,$saving, $saving2),"ScoreA");
+
+        $MyData->setSerieDescription("ScoreA","Application A");
+        /* Define the absissa serie */
+        $MyData->addPoints(array("A0","B1", "C2"),"Labels");
+        $MyData->setAbscissa("Labels");
+        /* Create the pChart object */
+        $myPicture = new pImage(300,260,$MyData);
+        /* Write the picture title */
+        $myPicture->setFontProperties(array("FontName"=>$font2,"FontSize"=>6));
+        /* Create the pPie object */
+        $PieChart = new pPie($myPicture,$MyData);
+
+        $PieChart->setSliceColor(0, $col_dark);
+        $PieChart->setSliceColor(1, $col_mid);
+        $PieChart->setSliceColor(2, $col_light);
+
+        /* Draw an AA pie chart */
+        $PieChart->draw2DRing(160,140,array("DrawLabels"=>FALSE,"LabelStacked"=>FALSE,"Border"=>TRUE));
+        /* Write the legend box */
+        $myPicture->setShadow(FALSE);
+        /* Render the picture (choose the best way) */
+        $myPicture->render("pictures/".$name);
+    }
+
+
 
     /**
      * Creates the chart for the descriptive feature
@@ -123,40 +207,42 @@ class CreateCharts
 
     /**
      * creates the time comparison chart
-     * TODO: update comments
      */
     public function CreateTimeCompChart()
     {
         $db = DBAccessSingleton::getInstance();
-        $usern = $db->username;
-        $userExtractions = $db-> energyUser;
+        $username = $db->username;
+        $userEnergy= $db-> energyUser;
 
+        // select max 30 elements or lower if not enough data is available
+        if(count($userEnergy) >= 30)
+            $countEnergyUser = 30;
+        else
+            $countEnergyUser = count($userEnergy);
+
+        // select the font
         $font2 = "libs/charts/pChart2_1_4/fonts/verdana.ttf";
 
         /* Create and populate the pData object */
         $MyData = new pData();
-        $MyData->addPoints(array_slice($userExtractions,-30,30),$usern);
+        $MyData->addPoints(array_slice($userEnergy,(-1)*$countEnergyUser,$countEnergyUser),$username);
 
+        // setting the series color
         $serieSettings = array("R"=>66,"G"=>106,"B"=>131);
-        $MyData->setPalette($usern,$serieSettings);
+        $MyData->setPalette($username,$serieSettings);
 
-        $MyData->setSerieWeight($usern, 1);
+        $MyData->setSerieWeight($username, 1);
 
-        //Einheit "Wh" anzeigen
-        $MyData->setAxisUnit(0,"Wh");
+        //show values in " Wh"
+        $MyData->setAxisUnit(0," Wh");
 
         $MyData->setAxisName(0,"");
-        //TODO: x-Achsenbezeichnung an Daten anpassen
-        //$MyData->addPoints(range(-30,-1),"Labels");
-        //$MyData->setSerieDescription("Labels","Months");
-        //$MyData->setAbscissa("Labels");
 
         /* Create the pChart object */
         $myTimeCompChart = new pImage(700,230,$MyData);
 
         /* Turn of Antialiasing */
         $myTimeCompChart->Antialias = FALSE;
-
 
         /* Set the default font */
         $myTimeCompChart->setFontProperties(array("FontName"=>$font2,"FontSize"=>9,"R"=>0,"G"=>0,"B"=>0));
@@ -165,21 +251,16 @@ class CreateCharts
         //$myPicture->setGraphArea(60,40,650,200);
         $myTimeCompChart->setGraphArea(60,30,680,200);
 
-        //$myPicture->drawText(40,20,"Wh");
-
         /* Draw the scale */
-        $scaleSettings = array("XMargin"=>10,"YMargin"=>10,"Floating"=>TRUE,"GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
+        //$scaleSettings = array("XMargin"=>10,"YMargin"=>10,"Floating"=>TRUE,"GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
         //$myPicture->drawScale($scaleSettings);
-        $AxisBoundaries = array(0=>array("Min"=>0,"Max"=>max(array_slice($userExtractions,-30,30))));
+
+        /* set bar boundaries */
+        $AxisBoundaries = array(0=>array("Min"=>0,"Max"=>max(array_slice($userEnergy,(-1)*$countEnergyUser,$countEnergyUser))));
         $myTimeCompChart->drawScale(array("InnerTickWidth"=>-1,"OuterTickWidth"=>5,"TickR"=>255,"TickG"=>255,"TickB"=>255,"Mode"=>SCALE_MODE_MANUAL,"ManualScale"=>$AxisBoundaries,"LabelRotation"=>45,"DrawXLines"=>FALSE,"GridR"=>0,"GridG"=>0,"GridB"=>0,"GridTicks"=>0,"GridAlpha"=>30,"AxisAlpha"=>0));
 
         /* Enable shadow computing */
         $myTimeCompChart->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
-
-        /* Draw the line chart
-        $myPicture->drawLineChart(array("DisplayColor"=>DISPLAY_MANUAL));
-        $myPicture->drawPlotChart(array("DisplayValues"=>TRUE,"PlotBorder"=>TRUE,"BorderSize"=>2,"Surrounding"=>-60,"BorderAlpha"=>80));
-        */
 
         $myTimeCompChart->drawBarChart();
         /* Write the chart legend */
@@ -189,7 +270,7 @@ class CreateCharts
         $RectangleSettings = array("R"=>255,"G"=>255,"B"=>255);
         $myTimeCompChart->drawFilledRectangle(61,201,720,230,$RectangleSettings);
 
-
+        /* draw the gradient under the chart*/
         $GradientAreaSettings = array("StartR"=>255,"StartG"=>255,"StartB"=>255,"Alpha"=>100,
             "EndR"=>11, "EndG"=>71, "EndB"=>101);
         $myTimeCompChart->drawGradientArea(140,205,676,218, DIRECTION_HORIZONTAL, $GradientAreaSettings);

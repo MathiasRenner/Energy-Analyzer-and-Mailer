@@ -17,6 +17,7 @@ include "libs/swiftmailer/lib/swift_required.php";
 include("libs/charts/pChart2_1_4/class/pData.class.php");
 include("libs/charts/pChart2_1_4/class/pDraw.class.php");
 include("libs/charts/pChart2_1_4/class/pImage.class.php");
+include("libs/charts/pChart2_1_4/class/pPie.class.php");
 
 /* include all needed files */
 include "business/CreateCharts.php";
@@ -44,7 +45,7 @@ $db = DBAccessSingleton::getInstance();
 // Init DB and get all relevant db entries
 $db->Init();  // init database
 
-$allUser = array(3,8); // array(3,6);
+$allUser = array(3); // array(3,6);
 //$allUser = $db->userIdsWithExtractions;
 
 foreach($allUser as $id)

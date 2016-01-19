@@ -246,8 +246,8 @@ class Calculations
     /**
      * Cals the saving time to reache the next better energy class
      *
-     * @param $actualConsumption
-     * @return float time so save
+     * @param $actualConsumption | int use the energyconsumption
+     * @return float time too save
      */
     public function CalcSavingTimeForBetterEnergyClass($actualConsumption)
     {
@@ -270,7 +270,7 @@ class Calculations
     /**
      * Cals the volume to save to reache the next better energy class
      *
-     * @param $actualConsumption
+     * @param $actualConsumption| int use the energyconsumption
      * @return float volume to save
      */
     public function CalcSavingVolumeForBetterEnergyClass($actualConsumption)

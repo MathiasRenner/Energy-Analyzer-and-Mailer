@@ -186,29 +186,48 @@ class HtmlClassification
         // feature goal setting
         // only for efficiency classes != "A+"
         $goal = "";
-        if($class != 'A+')
+
+        if($class != "A+")
         {
             $savingVolume = $calc->CalcSavingVolumeForBetterEnergyClass($energy);
             $savingTime = $calc->CalcSavingTimeForBetterEnergyClass($energy);
-            $savingText =  'If you lower your average water consumption by <b>'. round($savingVolume)  .' liter</b>
-                            or you shorten your showertime by <b>'. round($savingTime) .' seconds</b> for each shower you will reach the next better efficiency class!
-                            You can also combine both and lower your warter consumption by <b>'. round($savingVolume / 2) .' liter</b>
-                            and shorten your showertime by <b>'. round($savingTime / 2) .' seconds</b> for each shower';
+            $savingText1 = '...if you lower your average water consumption by <b>'. round($savingVolume)  .' liter</b>
+                            <br/>
+                            <b>or</b> you shorten your showertime by <b>'. round($savingTime) .' seconds.</b>';
+            $savingText2 = '...if you lower your average water consumption by <b>'. round($savingVolume / 2) .' liter</b>
+                            <br/>
+                            <b>and</b> shorten your showertime by <b>'. round($savingTime / 2) .' seconds</b>';
 
             $goal = '
-        <tr>
-            <td colspan="2" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+              <tr>
+            <td colspan="4" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
             <!--<b>Your Goal for the next report!</b> -->
-            <b>You can reach the next better efficiency class!</b>
+            <b>You can reach the next better efficiency class...</b>
             </td>
         </tr>
 
         <tr>
-            <td colspan="2" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;
-            padding-left: 30px; padding-right: 30px;">
-            '. $savingText .'
+            <td colspan="4">
+
+            <table width="100%">
+            <tr>
+            <td width="20%"><img align="left" src="'.UtilSingleton::getInstance()->InlinePicture("pictures/volumeSavingChart.png").'" > </td>
+            <td width="30%" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;
+            padding-left: 3px; padding-right: 3px;">
+            '. $savingText1 .'
             </td>
-        </tr>';
+            <td width="30%" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;
+            padding-left: 3px; padding-right: 3px;">
+            '. $savingText2 .'
+            </td>
+            <td width="20%"> <img align="left" src="'.UtilSingleton::getInstance()->InlinePicture("pictures/combinedSavingChart.png").'" > </td>
+            </tr>
+            </table>
+
+            </td>
+        </tr>
+            ';
+
         }
 
         // feature twitter
@@ -347,6 +366,11 @@ class HtmlClassification
         <td>&nbsp;<br/></td>
     </tr>
 
+</table>
+
+<br/>
+
+<table class=section cellpadding="0" cellspacing="0">
     '. $goal .'
 
 </table>
