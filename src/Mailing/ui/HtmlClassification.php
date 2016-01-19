@@ -1,17 +1,12 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Max
- * Date: 08/12/15
- * Time: 14:33
- */
-
-/**
  * Class HtmlClassification
- * Creates the Classification-Feature
- * the twitter feature
- * the reward-feature
+ *
+ * Creates
+ *  - the Classification-Feature
+ *  - the twitter feature
+ *  - the reward-feature
  */
 class HtmlClassification
 {

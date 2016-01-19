@@ -1,13 +1,6 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Max
- * Date: 08/12/15
- * Time: 14:33
- */
-
-/**
  * Class HtmlTimeComp
  *
  * creates the comparison over time feature

@@ -1,17 +1,11 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Max
- * Date: 08/12/15
- * Time: 14:33
- */
-
-/**
  * Class HtmlPriming
+ *
  * crates the Priming feature
  * with say something big at the beginning and
- * personal speeach
+ * personal speech
  */
 class HtmlPriming
 {

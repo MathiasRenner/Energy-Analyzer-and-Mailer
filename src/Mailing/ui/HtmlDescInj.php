@@ -1,14 +1,8 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Max
- * Date: 08/12/15
- * Time: 14:33
- */
-
-/**
  * Class HtmlDescInj
+ *
  * Creates the Descriptive and Injunctive feature
  */
 class HtmlDescInj
