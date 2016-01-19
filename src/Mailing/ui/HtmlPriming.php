@@ -63,7 +63,8 @@ class HtmlPriming
     private function GetHtml($name,$textConsumption,$textConsEqual)
     {
         return
-'<table class=section cellpadding="0" cellspacing="0">
+'<br/>
+<table class=section cellpadding="0" cellspacing="0">
     <tr>
         <td  width="800" align="center">
             <table cellpadding="0" cellspacing="0">

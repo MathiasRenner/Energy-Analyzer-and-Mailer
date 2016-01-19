@@ -22,7 +22,8 @@ class HtmlSummary
     private function GetHtml($volume, $flowRate, $temperature, $time)
     {
         return
-            '<table class=section cellpadding="3" cellspacing="3" width="820" bgcolor="white">
+            '
+<table class=section cellpadding="3" cellspacing="3" width="820" bgcolor="white">
        <tr>
             <td colspan="4" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
             In a nutshell
@@ -69,6 +70,8 @@ class HtmlSummary
 
     </tr>
 </table>
+
+<br/>
 ';
     }
 }

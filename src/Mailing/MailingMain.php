@@ -34,6 +34,7 @@ include "ui/HtmlTimeComp.php";
 include "ui/HtmlRecommendations.php";
 include "ui/HtmlFooter.php";
 include "ui/HtmlSummary.php";
+include "ui/HtmlTwitterBadge.php";
 
 // Parameter
 //$id = $_GET['user'];
@@ -45,7 +46,7 @@ $db = DBAccessSingleton::getInstance();
 // Init DB and get all relevant db entries
 $db->Init();  // init database
 
-$allUser = array(3); // array(3,6);
+$allUser = array(5); // array(3,6);
 //$allUser = $db->userIdsWithExtractions;
 
 foreach($allUser as $id)

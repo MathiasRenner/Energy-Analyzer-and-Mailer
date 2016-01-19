@@ -29,6 +29,7 @@ class CreateHtmlMail
         $recommendations = new HtmlRecommendations();
         $footer = new HtmlFooter();
         $summary = new HtmlSummary();
+        $twitterGoal = new HtmlTwitterBadge();
 
         // gets the html header information
         $htmlheadmeta = $this->GetHtmlHeadMeta();
@@ -41,16 +42,18 @@ class CreateHtmlMail
         $recommendations_html = $recommendations->GetHtmlRecommendations();
         $footer_html = $footer->GetHtmlFooter();
         $summary_html = $summary->GetHtmlSummary();
+        $twitter_goal_html = $twitterGoal->GetTwitterBadge();
 
         // build and return the full html mail
         return
             $htmlheadmeta
             .$priming_html
+            .$summary_html
             .$descinj_html
             .$classification_html
             .$timecomp_html
             .$recommendations_html
-            .$summary_html
+            .$twitter_goal_html
             .$footer_html
             .'
             </div>

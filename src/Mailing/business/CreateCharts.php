@@ -80,6 +80,7 @@ class CreateCharts
         $col_dark = array("R"=>79,"G"=>122,"B"=>149,"Alpha"=>100);
         $col_mid = array("R"=>138,"G"=>171,"B"=>188,"Alpha"=>100);
         $col_light = array("R"=>205,"G"=>219,"B"=>226,"Alpha"=>100);
+        $col_orange = array("R"=>239,"G"=>162, "B"=>112);
 
         $palette = array("0"=>$col_light, "1"=>$col_mid, "2"=>$col_dark);
 
@@ -89,7 +90,7 @@ class CreateCharts
 
         $MyData->setSerieDescription("ScoreA","Application A");
         /* Define the absissa serie */
-        $MyData->addPoints(array("A0","B1", "C2"),"Labels");
+        $MyData->addPoints(array("Volume","Saving", "C2"),"Labels");
         $MyData->setAbscissa("Labels");
         /* Create the pChart object */
         $myPicture = new pImage(300,260,$MyData);
@@ -98,8 +99,9 @@ class CreateCharts
         /* Create the pPie object */
         $PieChart = new pPie($myPicture,$MyData);
 
-        $PieChart->setSliceColor(0, $col_dark);
-        $PieChart->setSliceColor(1, $col_mid);
+        $PieChart->setSliceColor(0, $col_mid);
+        $PieChart->setSliceColor(1, $col_orange);
+        //$PieChart->setSliceColor(1, array("R"=>255,"G"=>255,"B"=>255,"Alpha"=>100));
         $PieChart->setSliceColor(2, $col_light);
 
         /* Draw an AA pie chart */
@@ -185,14 +187,14 @@ class CreateCharts
             // start from zero
             "Mode" => SCALE_MODE_START0));
 
-        // funtion for a custom y axis format
+        // function for a custom y axis format
         if (!function_exists('YAxisFormat')) {
             function YAxisFormat($Value) { return(" ".  $Value ." Wh"); }
             // ... proceed to declare your function
         }
 
-        // draws an headin text
-        $myDescChart->drawText(450,28,"consumption in wH",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+        // draws an heading text
+        $myDescChart->drawText(450,28,"consumption in Wh",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 
         // create the chart
         $myDescChart->drawBarChart(array("DisplayValues"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$palette));
@@ -223,10 +225,12 @@ class CreateCharts
         // select the font
         $font2 = "libs/charts/pChart2_1_4/fonts/verdana.ttf";
 
+        $calc = new Calculations();
+        $avgCons = $calc->CalcEnergyUser(FALSE);
+
         /* Create and populate the pData object */
         $MyData = new pData();
         $MyData->addPoints(array_slice($userEnergy,(-1)*$countEnergyUser,$countEnergyUser),$username);
-
         // setting the series color
         $serieSettings = array("R"=>66,"G"=>106,"B"=>131);
         $MyData->setPalette($username,$serieSettings);
@@ -254,6 +258,9 @@ class CreateCharts
         /* Draw the scale */
         //$scaleSettings = array("XMargin"=>10,"YMargin"=>10,"Floating"=>TRUE,"GridR"=>200,"GridG"=>200,"GridB"=>200,"DrawSubTicks"=>TRUE,"CycleBackground"=>TRUE);
         //$myPicture->drawScale($scaleSettings);
+        /* Draw the scale */
+        //$myTimeCompChart->drawScale(array("DrawSubTicks"=>TRUE));
+        /* Draw two thresholds */
 
         /* set bar boundaries */
         $AxisBoundaries = array(0=>array("Min"=>0,"Max"=>max(array_slice($userEnergy,(-1)*$countEnergyUser,$countEnergyUser))));
@@ -276,6 +283,8 @@ class CreateCharts
         $myTimeCompChart->drawGradientArea(140,205,676,218, DIRECTION_HORIZONTAL, $GradientAreaSettings);
 
         $myTimeCompChart->drawText(631,215,"latest showers",array("R"=>255, "G"=>255, "B"=>255,"FontSize"=>8,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+
+       // $myTimeCompChart->drawThreshold($avgCons,array("Alpha"=>100,"R"=>0,"G"=>0,"B"=>255, "WriteCaption"=>TRUE,"Caption"=>"Your Average"));
 
         /* Render the picture (choose the best way) */
         $myTimeCompChart->render("pictures/timeCompChart.png");

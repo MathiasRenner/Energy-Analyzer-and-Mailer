@@ -167,13 +167,13 @@ class UtilSingleton
         {
             return $db->extractionsCountUser;
         }
-        if($db->extractionsCountUser < 50)
+        if($db->extractionsCountUser < 30)
         {
             $extractionUserCount = $db->extractionsCountUser;
         }
         else
         {
-            $extractionUserCount = 50;
+            $extractionUserCount = 30;
         }
         return $extractionUserCount;
     }
