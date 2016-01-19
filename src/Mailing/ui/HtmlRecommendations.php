@@ -92,13 +92,13 @@ class HtmlRecommendations
         return '
             <table class=section cellpadding="0" cellspacing="0">
                 <tr>
-                    <td class="pattern" width="800" align="center">
+                    <td class="pattern" width="800">
                         <table id="recommendations" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td class="col" width="800" valign="top">
                                     <table cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <td colspan="2" class="headline" text-align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
+                                            <td class="headline" width="800" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
                                                 Personal tips how you can improve
                                             </td>
                                         </tr>
