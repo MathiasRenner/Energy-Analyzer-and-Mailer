@@ -102,7 +102,7 @@ class HtmlRecommendations
                                             </td>
                                         </tr>
                                             <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                                When we had a look at your data, we figured out that you can save most if you follow these recommendations: <br />
+                                                When we had a look at your data, we figured out that you can save most if you follow these recommendations: <br /><br />
                                             </td>
                                         </tr>
                                         ' . $recommendations . '

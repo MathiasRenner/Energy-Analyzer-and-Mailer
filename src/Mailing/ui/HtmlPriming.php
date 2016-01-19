@@ -22,7 +22,7 @@ class HtmlPriming
         else
         {
             $energyConsumption = (array_sum($db->energyUser) / count($db->energyUser)) * 200 / 1000;
-            $textConsumption = "You have uploaded ". $db->extractionsCountUser ." showers. When you have showered <b>200</b> times you will have consumed <b>" . round($energyConsumption,1) ."</b> kWh energy. ";
+            $textConsumption = "In total, you have uploaded ". $db->extractionsCountUser ." showers. When you'll have showered <b>200</b> times you'll have consumed <b>" . round($energyConsumption,1) ."</b> kWh energy. ";
         }
 
         $textConsEqual = 'This energy usage corresponds to the annual energy consumption of ';
@@ -106,7 +106,7 @@ class HtmlPriming
                 <td  width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 50px; padding-right: 50px;">
 
                 <lu>
-                   <li><strong>your energy consumption compared to our customers</strong></li>
+                   <li><strong>your energy consumption compared to other customers</strong></li>
                    <li><strong>personal energy saving tips</strong></li>
                    <li><strong>your energy saving progress</strong></li>
                 </lu>

@@ -248,9 +248,9 @@ class HtmlClassification
     <tr>
         <td colspan="2" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;
         padding-left: 30px; padding-right: 30px;">
-        for the average energy consumption off the last <b>'. $extractionUserCount .'</b> showers.
+        ... for the average energy consumption of the last <b>'. $extractionUserCount .'</b> showers: <br />
 
-        Your average energy consumption was <b>'. $energy .' </b>  Wh per shower.
+        In average, you consumed <b>'. $energy .' </b>  Wh per shower.
         With this energy usage your energy efficiency class is <b>'. $class .'</b>. <br/> &nbsp;
         </td>
     </tr>
