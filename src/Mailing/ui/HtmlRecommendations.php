@@ -24,7 +24,7 @@ class HtmlRecommendations
 
         // compare shower time
         if ($calcUserTime > $calcAllUserTime) {
-            $textReduceTime = "<b>Invest less time in showering! You probably have more important things to do!</b><br />Your exposition to a constant stream of water is much higher compared to others. A shorter shower duration also means much water conservation.";
+            $textReduceTime = "<b>Invest less time in showering!</b><br />Your showertime is high compared to others.";
             array_push($array, $textReduceTime);
         }
 
@@ -35,7 +35,7 @@ class HtmlRecommendations
 
         // compare flow rate
         if ($UserflowRate > $avgflowRate) {
-            $textReduceWater = "<b>Turning on the tap only half way - for the sake for the environment! (+ special tip!)</b><br />Showering accounts for about 25% of total water consumption in a household. A lower flow rate saves reasonable a amount of water and takes you in control on conservating the most valuable resource for life of our planet. Special tip: Investing in a water efficient shower head makes this goal as easy as it gets!";
+            $textReduceWater = "<b>Turn on the tap only half way!</b><br />Compared to others, you have a high flow rate.";
             array_push($array, $textReduceWater);
         }
 
@@ -46,12 +46,13 @@ class HtmlRecommendations
 
         // compare number of showers
         if ($UserAvgNumberOfShowers > $AvgNumberOfShowers) {
-            $textReduceFrequency = "<b>Don't take a shower too often. It can have negative impacts on your health!</b><br />Resource consumption in terms of heat energy generates large amounts of CO2 at the power plant generating this heat. If you do not exaggerate in taking showers, you can have strong impacts on conservating CO2 and reduce polluting the air, which you breath every other second.";
+            $textReduceFrequency = "<b>Don't take a shower too often!</b><br />You take showers more ofthen than others.";
             array_push($array, $textReduceFrequency);
         }
 
+
         // instanciate global variable for beeing accessible
-        $textReduceShampooing = '<b>Hold on! Do you need water during shampooing?</b><br />Stop the water when putting soap on your skin. Better take some seconds and give your body a little massage rather than letting the soap immediately rubbing down again.';
+        $textReduceShampooing = '<b>Stop water during shampooing!</b><br />Take a short break rather than letting the soap immediately rubbing down again.';
         // analysing shower breaks is not yet available from the data, show randomly instead
         if (round(rand(0, 1))) {
             array_push($array, $textReduceShampooing);
@@ -97,12 +98,11 @@ class HtmlRecommendations
                                 <td class="col" width="800" valign="top">
                                     <table cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
+                                            <td colspan="2" class="headline" text-align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
                                                 Personal tips how you can improve
                                             </td>
                                         </tr>
                                             <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                                When we had a look at your data, we figured out that you can save most if you follow these recommendations: <br /><br />
                                             </td>
                                         </tr>
                                         ' . $recommendations . '
