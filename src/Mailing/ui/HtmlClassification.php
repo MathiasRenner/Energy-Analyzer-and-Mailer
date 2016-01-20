@@ -117,15 +117,13 @@ class HtmlClassification
 
         // feature goal setting
         // only for efficiency classes != "A+"
-        $goal = "";
-
         if($class != "A+")
         {
             $savingVolume = $calc->CalcSavingVolumeForBetterEnergyClass($energy);
             $savingTime = $calc->CalcSavingTimeForBetterEnergyClass($energy);
             $savingText1 = 'if you lower your average water consumption by <b style="color:rgb(239,162,112)">'. round($savingVolume)  .' liter</b>';
             $savingText2 = 'if you shorten your showertime by <b style="color:rgb(239,162,112)">'. round($savingTime) .' seconds</b>';
-            $savingText3 = 'if you lower your average water consumption by <b style="color:rgb(239,162,112)">'. round($savingVolume / 2) .' liter</b>
+            $savingText3 = 'if you lower your average water consumption by <b style="color:rgb(239,162,112)">'. round($savingVolume)/2 .' liter</b>
                             <br/><b>&nbsp;   &nbsp;  and</b> shorten your showertime by <b  style="color:rgb(239,162,112)">'. round($savingTime / 2) .' seconds</b>';
 
             $goal = '
@@ -153,7 +151,6 @@ class HtmlClassification
         </tr>
 
             ';
-
         }
         else
         {
@@ -175,7 +172,7 @@ class HtmlClassification
             '
 <table class=section cellpadding="0" cellspacing="0">
     <tr>
-        <td class="headline" colspan="2" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
+        <td class="headline" colspan="2" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 10px;">
         Your position on the efficiency scale
         </td>
     </tr>
@@ -183,10 +180,10 @@ class HtmlClassification
     <tr>
         <td colspan="2" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;
         padding-left: 30px; padding-right: 30px;">
-        ... for the average energy consumption of the last <b>'. $extractionUserCount .'</b> showers: <br />
+        for the average energy consumption of the last <b>'. $extractionUserCount .'</b> showers<br/>
 
-        In average, you consumed <b>'. $energy .' </b>  Wh per shower.
-        With this energy usage your energy efficiency class is <b>'. $class .'</b>. <br/> &nbsp;
+        In average, you consumed <b>'. $energy .' Wh</b> per shower.
+        With this energy consumption your energy efficiency class is <b>'. $class .'</b>. <br/> &nbsp;
         </td>
     </tr>
 

@@ -69,12 +69,12 @@ class HtmlTwitterBadge
         if($reportCount < 10)
         {
             $rewardText = 'You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
-            If you upload your shower data <b>'. $upload .'</b> times you will get your first reward!<br/>';
+            Upload your shower data <b>'. $upload .'</b> times and you will get your first reward!<br/>';
         }
         elseif($reportCount < 300)
         {
             $rewardText = 'You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
-            If you upload your shower data <b>'. $upload .'</b> times the living place of your icebear will increase!<br/>';
+            Upload your shower data <b>'. $upload .'</b> times and the living place increases!<br/>';
         }
         elseif($reportCount >= 300)
         {
@@ -87,7 +87,8 @@ class HtmlTwitterBadge
 <table class=section cellpadding="0" cellspacing="0">
 
    <tr>
-        <td width="30%" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">Share</td>
+        <td width="30%" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+        Share it!</td>
         <td width="70%" colspan="3" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
         '.$rewardHeading.'</td>
         <td></td>

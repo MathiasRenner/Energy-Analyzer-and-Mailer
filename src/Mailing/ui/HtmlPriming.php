@@ -11,41 +11,36 @@ class HtmlPriming
 {
     public function GetHtmlPriming()
     {
-        $db = DBAccessSingleton::getInstance();
-
         // feature say something big
-        if($db->extractionsCountUser >= 200)
+        $db = DBAccessSingleton::getInstance();
+        $extractionUserCount = $db->extractionsCountUser;
+
+        if($extractionUserCount >= 200)
         {
-            $energyConsumption = round(array_sum($db->energyUser) / 1000,1);
-            $textConsumption = 'With your last <b>200</b> showers you have consumed <b>' . $energyConsumption .'</b> kWh energy. ';
+            $energyConsumption = round(array_sum(array_slice($db->energyUser,200*(-1),200))) / 1000;
+            $diff = "is";
         }
         else
         {
-            $energyConsumption = (array_sum($db->energyUser) / count($db->energyUser)) * 200 / 1000;
-            $textConsumption = "In total, you have uploaded ". $db->extractionsCountUser ." showers. When you'll have showered <b>200</b> times you'll have consumed <b>" . round($energyConsumption,1) ."</b> kWh energy. ";
+            $energyConsumption = round(array_sum(array_slice($db->energyUser,$extractionUserCount *(-1),$extractionUserCount))
+            / count(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount))) * (200 / 1000);
+            $diff = "will be";
         }
 
-        $textConsEqual = 'This energy usage corresponds to the annual energy consumption of ';
-        if($energyConsumption > 0 && $energyConsumption < 165)
-        {
-            $textConsEqual = $textConsEqual . '<b>2 laptops</b>.';
-        }
-        elseif($energyConsumption >= 165 && $energyConsumption < 240)
-        {
-            $textConsEqual = $textConsEqual . '<b>1 washing machine</b>.';
-        }
-        elseif($energyConsumption >= 240 && $energyConsumption < 330)
-        {
-            $textConsEqual = $textConsEqual . '<b>1 fridge</b>.';
-        }
-        elseif($energyConsumption >= 330 && $energyConsumption < 460)
-        {
-            $textConsEqual = $textConsEqual . '<b>3 laptops</b>.';
-        }
-        elseif($energyConsumption >= 460)
-        {
-            $textConsEqual = $textConsEqual . '<b>'. round($energyConsumption/350,1) . ' times your energy usage for lighting</b>.';
-        }
+        $consHomeOffice = round($energyConsumption / 150,1);
+        $consWashingMaschine = round($energyConsumption / 250,1);;
+        $consLightning = round($energyConsumption / 500,1);
+
+        $textConsumption = '<b>'.$energyConsumption. ' kWh!</b> This '. $diff .' your energy consumption after <b>200</b> showers!
+        <br/>This energy consumption corresponds to the <b>annual</b> energy consumption of';
+        $textConsumptionComp = '
+            <lu>
+            <li><b>'.$consHomeOffice.'</b> laptops</li>
+            <li><b>'.$consWashingMaschine.'</b> wasching machines</li>
+            <li><b>'.$consLightning.'</b> times lightning a household</li>
+            </lu>
+        ';
+
 
         // if the user has not given a name take the mail address
         if(strlen($db->firstname) == 0)
@@ -57,10 +52,10 @@ class HtmlPriming
             $name = $db->firstname;
         }
 
-        return $this->GetHtml($name,$textConsumption,$textConsEqual);
+        return $this->GetHtml($name,$textConsumption, $textConsumptionComp);
     }
 
-    private function GetHtml($name,$textConsumption,$textConsEqual)
+    private function GetHtml($name,$textConsumption, $textConsumptionComp)
     {
         return
 '<br/>
@@ -74,12 +69,12 @@ class HtmlPriming
                     <tr>
                     <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="'. UtilSingleton::getInstance()->InlinePicture("assets/badges/logo.png") .'" width="200" alt="" style="display: block; border: 0;" /> </a>
                     </td>
-                    <td>
+                 <!--   <td>
                         <img src="'. UtilSingleton::getInstance()->InlinePicture("assets/badges/_baer.png") .'" height="40" width="auto" alt="" style="display: block; border: 0;" />
                     </td>
                     <td align="left" style="font-family: arial,sans-serif; font-size: 13px; line-height: 17px !important; color: #7f7f7f; padding-top: 5px;">
                        Together we can <br/><b>save</b> his world!
-                    </td>
+                    </td> -->
                     </tr>
                     </table>
                 </td>
@@ -87,7 +82,7 @@ class HtmlPriming
 
                 <tr>
                 <td  class="headline" width="800" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px; padding-bottom: 20px; ">
-                Your personal Amphiro report
+                Your personal amphiro report
                 <br>
                 </td>
                 </tr>
@@ -96,9 +91,9 @@ class HtmlPriming
                 <td   width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 30px; padding-right: 30px;">
                 Hello <b>' . $name . '</b>, <br/>
                 <br>
-                We are pleased to provide you your <b>personal</b> report. We want to help you to reduce your energy.
-                With this report we provide you:
-
+                We are pleased to provide you your <b>personal</b> amphiro report.
+                <br/>
+                We provide you information about...
 
                 </td>
                 </tr>
@@ -107,20 +102,35 @@ class HtmlPriming
                 <td  width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 50px; padding-right: 50px;">
 
                 <lu>
-                   <li><strong>your energy consumption compared to other customers</strong></li>
+                   <li><strong>your energy consumption compared to our other customers</strong></li>
+                   <li><strong>your energy saving performance</strong></li>
                    <li><strong>personal energy saving tips</strong></li>
-                   <li><strong>your energy saving progress</strong></li>
                 </lu>
+                </td>
+                </tr>
+
+                <tr>
+                <td  width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 30px; padding-right: 30px;">
+                ...so you can even save more energy!
                 </td>
                 </tr>
             </table>
         </td>
     </tr>
+</table>
 
+<br/>
+
+<table class=section cellpadding="0" cellspacing="0">
     <tr>
-        <td width="800" align="left" style="font-family: arial,sans-serif; font-size: 17px; line-height: 20px !important; color: #7f7f7f; padding-top: 20px; padding-left: 30px; padding-right: 30px;" >
-            '. $textConsumption . $textConsEqual .'
+        <td width="800" align="left" style="font-family: arial,sans-serif; font-size: 15px; line-height: 20px !important; color: #7f7f7f; padding-top: 20px; padding-left: 30px; padding-right: 30px;" >
+            '. $textConsumption .'
         </td>
+    </tr>
+    <tr>
+     <td width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 20px; padding-left: 50px; padding-right: 50px;">
+        '. $textConsumptionComp .'
+    </td>
     </tr>
 </table>
 

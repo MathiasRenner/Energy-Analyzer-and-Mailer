@@ -57,9 +57,9 @@ class CreateCharts
 
         $this->CreateGoalChartPicture(1-($savingConsVolume / $actualConsVolume), $savingConsVolume / $actualConsVolume,0, "volumeSavingChart.png");
 
-        $this->CreateGoalChartPicture(1-(($savingConsTime / ($actualConsTime * 60)) / 2 + ($savingConsVolume / $actualConsVolume)/2),
+      /*  $this->CreateGoalChartPicture(1-(($savingConsTime / ($actualConsTime * 60)) / 2 + ($savingConsVolume / $actualConsVolume)/2),
             ($savingConsTime / ($actualConsTime * 60)) / 2, ($savingConsVolume / $actualConsVolume) / 2, "combinedSavingChart.png");
-
+*/
 
     }
 
@@ -76,13 +76,13 @@ class CreateCharts
         /* Create and populate the pData object */
         $MyData = new pData();
 
+        // TODO : TITLE with Your can reduce your consumption!
+
         // define the color
         $col_dark = array("R"=>79,"G"=>122,"B"=>149,"Alpha"=>100);
         $col_mid = array("R"=>138,"G"=>171,"B"=>188,"Alpha"=>100);
         $col_light = array("R"=>205,"G"=>219,"B"=>226,"Alpha"=>100);
         $col_orange = array("R"=>239,"G"=>162, "B"=>112);
-
-        $palette = array("0"=>$col_light, "1"=>$col_mid, "2"=>$col_dark);
 
         $font2 = "libs/charts/pChart2_1_4/fonts/verdana.ttf";
 
@@ -131,6 +131,7 @@ class CreateCharts
         $col_dark = array("R"=>79,"G"=>122,"B"=>149,"Alpha"=>100);
         $col_mid = array("R"=>138,"G"=>171,"B"=>188,"Alpha"=>100);
         $col_light = array("R"=>205,"G"=>219,"B"=>226,"Alpha"=>100);
+        $col_orange = array("R"=>239,"G"=>162, "B"=>112);
 
         $palette = array("0"=>$col_light, "1"=>$col_mid, "2"=>$col_dark);
 

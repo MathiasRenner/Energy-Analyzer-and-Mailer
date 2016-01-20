@@ -19,35 +19,20 @@ class HtmlDescInj
         // descriptive text for lowest / average / highest consumption
         if($avgUser <= $avgTop20)
         {
-            $inj = '<td align="center" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj1.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
-            $injtext = "Nice work! You are great, but do not stop being an environment saver!";
-            if($avgUser <= $avgTop20)
-            {
-                $descText = "You are one of the Top 20% user. That's great!";
-            }
-            else
-            {
-                $descText = "Your average energy consumption for your last shower was near the Top 20% user. That's great!";
-            }
+            $inj = '<td align="left" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj1.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
+            $descText = "You are one of the Top 20% user. That's great!<br/>Do not stop being an energy saver";
         }
         elseif($avgUser <= $avgAll)
         {
-            $inj = '<td align="center" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj2.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
-            $injtext = "Nice work! You are good, but do not stop being an water saver!";
-            $descText = "Your average energy consumption for your last shower was above the average. That's good!";
+            $inj = '<td align="left" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj2.png").'" width="45%" alt="" style="display: block; border: 0;" /></td>';
+            $descText = "Your average energy consumption for your last showers was above the average.<br/>Well done!";
         }
         else
         {
-            $inj = '<td align="center" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj3.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
-            $injtext = "You are good, but we know you can do better!";
-            $descText = "Your average energy consumption for your last shower was below the average.";
+            $inj = '<td align="left" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj3.png").'" width="52%" alt="" style="display: block; border: 0;" /></td>';
+            $descText = "Your average energy consumption for your last showers was below the average.<br/>You are good, but we know you can do better!";
         }
 
-        return $this->GetHtml($descText,$inj,$injtext);
-    }
-
-    private function GetHtml($descText,$inj,$injtext)
-    {
         return '
 <table class=section cellpadding="0" cellspacing="0">
     <tr>
@@ -55,7 +40,7 @@ class HtmlDescInj
         <table cellpadding="0" cellspacing="0">
         <tr>
                <td class="headline" colspan="2" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-               How are you doing compared to all Amphiro users?
+               How are you doing compared to all amphiro users?
                </td>
         </tr>
 
@@ -63,7 +48,7 @@ class HtmlDescInj
         <td>
         <table id="descInj" cellpadding="0" cellspacing="0">
            <tr>
-           <td width="500" valign="top">
+           <td width="600" valign="top">
                <table>
                <tr>
                <td>
@@ -76,7 +61,7 @@ class HtmlDescInj
 
                <tr>
                    <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                   We compared you with all Amphio users. '. $descText .'
+                   '. $descText .'
                    </td>
                </tr>
                </table>
@@ -85,7 +70,7 @@ class HtmlDescInj
            <td class="spacer" width="20" style="font-size: 1px;">&nbsp;
            </td>
 
-           <td width="253" valign="top" align="center">
+           <td width="200" valign="top" align="center">
 
                <table cellpadding="0" cellspacing="0">
                <tr>
@@ -95,16 +80,6 @@ class HtmlDescInj
                </tr>
                <tr>
                '. $inj .'
-               </tr>
-               <tr>
-               <td>
-                 &nbsp;
-               </td>
-               </tr>
-               <tr>
-                   <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                   '. $injtext .'
-                   </td>
                </tr>
                </table>
            </td>
