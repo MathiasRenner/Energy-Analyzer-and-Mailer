@@ -165,11 +165,11 @@ class UtilSingleton
         $db = DBAccessSingleton::getInstance();
         if($ignoreLimit)
         {
-            return $db->extractionsCountUser;
+            return $db->getExtractionsCountUser();
         }
-        if($db->extractionsCountUser < 30)
+        if($db->getExtractionsCountUser() < 30)
         {
-            $extractionUserCount = $db->extractionsCountUser;
+            $extractionUserCount = $db->getExtractionsCountUser();
         }
         else
         {

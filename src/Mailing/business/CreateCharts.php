@@ -214,8 +214,8 @@ class CreateCharts
     public function CreateTimeCompChart()
     {
         $db = DBAccessSingleton::getInstance();
-        $username = $db->username;
-        $userEnergy= $db-> energyUser;
+        $username = $db->getUsername();
+        $userEnergy= $db->getEnergyUser();
 
         // select max 30 elements or lower if not enough data is available
         if(count($userEnergy) >= 30)

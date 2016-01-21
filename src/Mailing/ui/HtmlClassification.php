@@ -121,9 +121,9 @@ class HtmlClassification
         {
             $savingVolume = $calc->CalcSavingVolumeForBetterEnergyClass($energy);
             $savingTime = $calc->CalcSavingTimeForBetterEnergyClass($energy);
-            $savingText1 = 'if you lower your average water consumption by <b style="color:rgb(239,162,112)">'. round($savingVolume)  .' liter</b>';
-            $savingText2 = 'if you shorten your showertime by <b style="color:rgb(239,162,112)">'. round($savingTime) .' seconds</b>';
-            $savingText3 = 'if you lower your average water consumption by <b style="color:rgb(239,162,112)">'. round($savingVolume)/2 .' liter</b>
+            $savingText1 = 'lower your average water consumption by <b style="color:rgb(239,162,112)">'. round($savingVolume)  .' liter</b>';
+            $savingText2 = 'shorten your showertime by <b style="color:rgb(239,162,112)">'. round($savingTime) .' seconds</b>';
+            $savingText3 = 'lower your average water consumption by <b style="color:rgb(239,162,112)">'. round($savingVolume)/2 .' liter</b>
                             <br/><b>&nbsp;   &nbsp;  and</b> shorten your showertime by <b  style="color:rgb(239,162,112)">'. round($savingTime / 2) .' seconds</b>';
 
             $goal = '
@@ -135,8 +135,8 @@ class HtmlClassification
         </tr>
 
         <tr>
-            <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 15px;">
-            <b>You can reach the next better efficiency class...</b>
+            <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 1px;">
+            <b>You can reach the next better efficiency class if you...</b>
             </td>
         </tr>
         <tr>

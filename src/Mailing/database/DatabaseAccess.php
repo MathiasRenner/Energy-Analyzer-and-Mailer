@@ -18,31 +18,122 @@ class DBAccessSingleton
     private $db;
 
     // the userId / with extractions
-    public $userIdAll;
-    public $userIdsWithExtractions;
+    private $userIdAll;
+    public function getUserIdAll()
+    {
+        return $this->userIdAll;
+    }
+
+    private $userIdsWithExtractions;
+    public function getUserIdsWithExtractions()
+    {
+        return $this->userIdsWithExtractions;
+    }
 
     // user data information
-    public $username;
-    public $firstname;
-    public $familyname;
-    public $address;
-    public $email;
-    public $postal;
-    public $city;
-    public $country;
+    private $username;
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    private $firstname;
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    private $familyname;
+    public function getFamilyname()
+    {
+        return $this->familyname;
+    }
+
+    private $address;
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    private $email;
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    private $postal;
+    public function getPostal()
+    {
+        return $this->postal;
+    }
+
+    private $city;
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    private $country;
+    public function getCountry()
+    {
+        return $this->country;
+    }
 
     // user
-    public $energyUser;
-    public $volumeUser;
-    public $flowRateUser;
-    public $temperatureUser;
-    public $reportedOnUser;
-    public $extractionsCountUser;
+    private $energyUser;
+    public function getEnergyUser()
+    {
+        return $this->energyUser;
+    }
+
+    private $volumeUser;
+    public function getVolumeUser()
+    {
+        return $this->volumeUser;
+    }
+
+    private $flowRateUser;
+    public function getFlowRateUser()
+    {
+        return $this->flowRateUser;
+    }
+
+    private $temperatureUser;
+    public function getTemperatureUser()
+    {
+        return $this->temperatureUser;
+    }
+
+    private $reportedOnUser;
+    public function getReportedOnUser()
+    {
+        return $this->reportedOnUser;
+    }
+
+    private $extractionsCountUser;
+    public function getExtractionsCountUser()
+    {
+        return $this->extractionsCountUser;
+    }
 
     // all user
-    public $energyAllUser;
-    public $flowRateAllUser;
-    public $volumeAllUser;
+    private $energyAllUser;
+    public function getEnergyAllUser()
+    {
+        return $this->energyAllUser;
+    }
+
+    private $flowRateAllUser;
+    public function getFlowRateAllUser()
+    {
+        return $this->flowRateAllUser;
+    }
+
+    private $volumeAllUser;
+    public function getVolumeAllUser()
+    {
+        return $this->volumeAllUser;
+    }
 
     // singleton instance
     static private $instance = null;

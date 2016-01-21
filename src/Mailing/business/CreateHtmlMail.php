@@ -73,7 +73,7 @@ class CreateHtmlMail
                 <head>
                 <!-- importend charset=utf-8 and http-equiv="Content-Type" for the inline css -->
                     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                    <title>Amphiro Report 0.5</title>
+                    <title>Your personal amphiro Report</title>
                 </head>
                 <body>
                 <div id="page-wrap">';

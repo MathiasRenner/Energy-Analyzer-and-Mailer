@@ -47,7 +47,7 @@ $db = DBAccessSingleton::getInstance();
 $db->Init();  // init database
 
 $allUser = array(5); // 3 = B // 5 = F // array(3,6);
-//$allUser = $db->userIdsWithExtractions;
+//$allUser = $db->getUserIdsWithExtractions();
 
 foreach($allUser as $id)
 {

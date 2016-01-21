@@ -13,17 +13,17 @@ class HtmlPriming
     {
         // feature say something big
         $db = DBAccessSingleton::getInstance();
-        $extractionUserCount = $db->extractionsCountUser;
+        $extractionUserCount = $db->getExtractionsCountUser();
 
         if($extractionUserCount >= 200)
         {
-            $energyConsumption = round(array_sum(array_slice($db->energyUser,200*(-1),200))) / 1000;
+            $energyConsumption = round(array_sum(array_slice($db->getEnergyUser(),200*(-1),200))) / 1000;
             $diff = "is";
         }
         else
         {
-            $energyConsumption = round(array_sum(array_slice($db->energyUser,$extractionUserCount *(-1),$extractionUserCount))
-            / count(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount))) * (200 / 1000);
+            $energyConsumption = round(array_sum(array_slice($db->getEnergyUser(),$extractionUserCount *(-1),$extractionUserCount))
+            / count(array_slice($db->getEnergyUser(),$extractionUserCount*(-1),$extractionUserCount))) * (200 / 1000);
             $diff = "will be";
         }
 
@@ -31,7 +31,7 @@ class HtmlPriming
         $consWashingMaschine = round($energyConsumption / 250,1);;
         $consLightning = round($energyConsumption / 500,1);
 
-        $textConsumption = '<b>'.$energyConsumption. ' kWh!</b> This '. $diff .' your energy consumption after <b>200</b> showers!
+        $textConsumption = '<b>'.$energyConsumption. ' kWh!</b> This '. $diff .' your energy consumption with <b>200</b> showers!
         <br/>This energy consumption corresponds to the <b>annual</b> energy consumption of';
         $textConsumptionComp = '
             <lu>
@@ -43,13 +43,13 @@ class HtmlPriming
 
 
         // if the user has not given a name take the mail address
-        if(strlen($db->firstname) == 0)
+        if(strlen($db->getFirstname()) == 0)
         {
-            $name = $db->email;
+            $name = $db->getEmail();
         }
         else
         {
-            $name = $db->firstname;
+            $name = $db->getFirstname();
         }
 
         return $this->GetHtml($name,$textConsumption, $textConsumptionComp);

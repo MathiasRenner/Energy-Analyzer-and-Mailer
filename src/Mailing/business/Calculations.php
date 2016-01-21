@@ -52,8 +52,8 @@ class Calculations
 
         $extractionUserCount = UtilSingleton::GetExtractionUserCount($ignoreLimit);
 
-        $avgEnergyUser = array_sum(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount))
-            / count(array_slice($db->energyUser,$extractionUserCount*(-1),$extractionUserCount));
+        $avgEnergyUser = array_sum(array_slice($db->getEnergyUser(),$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->getEnergyUser(),$extractionUserCount*(-1),$extractionUserCount));
 
         return round($avgEnergyUser);
     }
@@ -69,7 +69,7 @@ class Calculations
         $db = DBAccessSingleton::getInstance();
         $temp = array();
 
-        foreach ($db->energyAllUser as $item)
+        foreach ($db->getEnergyAllUser() as $item)
         {
             $avgEnergyUser = array_sum($item) / count($item);
             array_push($temp, $avgEnergyUser);
@@ -92,7 +92,7 @@ class Calculations
         $db = DBAccessSingleton::getInstance();
         $temp = array();
 
-        foreach ($db->energyAllUser as $item)
+        foreach ($db->getEnergyAllUser() as $item)
         {
             $avgEnergyUser = array_sum($item) / count($item);
             array_push($temp, $avgEnergyUser);
@@ -115,8 +115,8 @@ class Calculations
 
         $extractionUserCount = UtilSingleton::GetExtractionUserCount($ignoreLimit);
 
-        $avgUserVolume = array_sum(array_slice($db->volumeUser,$extractionUserCount*(-1),$extractionUserCount))
-            / count(array_slice($db->volumeUser,$extractionUserCount*(-1),$extractionUserCount));
+        $avgUserVolume = array_sum(array_slice($db->getVolumeUser(),$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->getVolumeUser(),$extractionUserCount*(-1),$extractionUserCount));
 
         return round($avgUserVolume,1);
     }
@@ -131,7 +131,7 @@ class Calculations
         $db = DBAccessSingleton::getInstance();
 
         $temp = array();
-        foreach ($db->volumeAllUser as $item)
+        foreach ($db->getVolumeAllUser() as $item)
         {
             $avgVolume = array_sum($item) / count($item);
             array_push($temp, $avgVolume);
@@ -154,8 +154,8 @@ class Calculations
         $db = DBAccessSingleton::getInstance();
         $extractionUserCount = UtilSingleton::GetExtractionUserCount($ignoreLimit);
 
-        $avgUserFlowRate = array_sum(array_slice($db->flowRateUser,$extractionUserCount*(-1),$extractionUserCount))
-            / count(array_slice($db->flowRateUser,$extractionUserCount*(-1),$extractionUserCount));
+        $avgUserFlowRate = array_sum(array_slice($db->getFlowRateUser(),$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->getFlowRateUser(),$extractionUserCount*(-1),$extractionUserCount));
 
         return round($avgUserFlowRate,1);
     }
@@ -170,7 +170,7 @@ class Calculations
         $db = DBAccessSingleton::getInstance();
         $temp = array();
 
-        foreach ($db->flowRateAllUser as $item)
+        foreach ($db->getFlowRateAllUser() as $item)
         {
             $avgFlowRateUser = array_sum($item) / count($item);
             array_push($temp, $avgFlowRateUser);
@@ -192,8 +192,8 @@ class Calculations
         $db = DBAccessSingleton::getInstance();
         $extractionUserCount = UtilSingleton::GetExtractionUserCount($ignoreLimit);
 
-        $avgUserTemperature = array_sum(array_slice($db->temperatureUser,$extractionUserCount*(-1),$extractionUserCount))
-            / count(array_slice($db->temperatureUser,$extractionUserCount*(-1),$extractionUserCount));
+        $avgUserTemperature = array_sum(array_slice($db->getTemperatureUser(),$extractionUserCount*(-1),$extractionUserCount))
+            / count(array_slice($db->getTemperatureUser(),$extractionUserCount*(-1),$extractionUserCount));
 
         return round($avgUserTemperature,1);
     }

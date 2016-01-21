@@ -90,6 +90,10 @@ a.ms { background-color: #000!important; }
     text-align: center;
 }
 
+table{
+    border-radius:6px;
+}
+
 table#timecomp {
     margin: auto;
 }

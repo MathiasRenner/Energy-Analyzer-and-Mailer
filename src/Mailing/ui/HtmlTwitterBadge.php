@@ -24,7 +24,7 @@ class HtmlTwitterBadge
         $db = DBAccessSingleton::getInstance();
 
         // get the count off all uploads
-        $aryReportedOn = $db->reportedOnUser;
+        $aryReportedOn = $db->getReportedOnUser();
         $aryUniqueReportOn = array_unique($aryReportedOn);
         $reportCount = count($aryUniqueReportOn);
         $upload = 0;
