@@ -216,6 +216,21 @@ class DBAccessSingleton
     }
 
     /**
+     * for one user, write timestamp of last sent Mail into database
+     *
+     * @param $id int the user id
+     */
+    public function WriteTimestampOfMailing($id)
+    {
+        //$this->userIdsWithExtractions = array();
+        $date = date( 'Y-m-d' );
+
+        $queryUE = "insert into bires_mcm_mailing (b1user_ID,lastMailingSent) values ($id,'$date')";
+        $res = mysqli_query($this->db, $queryUE);
+    }
+
+
+    /**
      * set all user information
      *
      * @param $id int the user id

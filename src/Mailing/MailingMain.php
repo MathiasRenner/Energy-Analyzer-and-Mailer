@@ -101,7 +101,13 @@ foreach($allUser as $id)
     print $message->getBody();
 
     // for sending your email
-    //if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!'; } else { echo "There was an error:\n"; print_r($failures);}
+      //if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!
+
+         // write timestamp to database
+         $db->WriteTimestampOfMailing($id);
+
+      // } else { echo "There was an error:\n"; print_r($failures);}
+
 
 }
 
