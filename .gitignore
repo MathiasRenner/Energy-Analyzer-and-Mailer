@@ -1,3 +1,3 @@
 .idea
-src/Mailing/pictures/timeCompChart.png
-src/Mailing/pictures/descChart.png
+**/test.php
+src/Mailing/pictures/*.png
