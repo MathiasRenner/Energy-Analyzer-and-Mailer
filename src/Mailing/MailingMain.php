@@ -46,7 +46,7 @@ $db = DBAccessSingleton::getInstance();
 // Init DB and get all relevant db entries
 $db->Init();  // init database
 
-$allUser = array(5); // 3 = B // 5 = F // array(3,6);
+$allUser = array(11); // 3 = B // 5 = F // array(3,6);
 //$allUser = $db->getUserIdsWithExtractions();
 
 foreach($allUser as $id)
@@ -54,6 +54,20 @@ foreach($allUser as $id)
 
     // set the user db information
     $db->Update($id);
+
+// if last mailing has been sent within a specific interval, do not send a report
+if( $DaysSinceLastMailing = $db->DaysSinceLastMailing($id) < 14 ){
+
+    // do nothing for this user
+    // echo $DaysSinceLastMailing
+    echo 'No report has been generated because the last report has been sent ' . $DaysSinceLastMailing . ' day(s) ago.';
+
+// TODO: If there is not enough data
+} else if (TRUE) {
+
+    // build a message with message: "not enough data for the report - upload more data!"
+    
+} else {
 
     // Create the message object
     $message = new Swift_Message("This is your Amphiro report. Together we can save the planet!");
@@ -80,8 +94,7 @@ foreach($allUser as $id)
 
     //TODO: Absender anpassen
     $from = array('a@b.com' => 'Your Amphiro Team');
-    $to = array(
-        //, $db->email => $db->firstname . ' ' . $db->familyname
+    $to = array(//, $db->email => $db->firstname . ' ' . $db->familyname
     );
 
     // object for sending the finished mail
@@ -101,13 +114,13 @@ foreach($allUser as $id)
     print $message->getBody();
 
     // for sending your email
-      //if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!
+    //if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!
 
-         // write timestamp to database
-         $db->WriteTimestampOfMailing($id);
+      // write timestamp to database
+      //$db->WriteTimestampOfMailing($id);
 
-      // } else { echo "There was an error:\n"; print_r($failures);}
+    // } else { echo "There was an error:\n"; print_r($failures);}
 
-
+    }
 }
 

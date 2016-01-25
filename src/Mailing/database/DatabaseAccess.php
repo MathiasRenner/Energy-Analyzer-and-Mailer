@@ -222,11 +222,35 @@ class DBAccessSingleton
      */
     public function WriteTimestampOfMailing($id)
     {
-        //$this->userIdsWithExtractions = array();
         $date = date( 'Y-m-d' );
 
-        $queryUE = "insert into bires_mcm_mailing (b1user_ID,lastMailingSent) values ($id,'$date')";
+        $queryUE = "insert into bires_mcm_mailing (b1user_ID,MailingSentOn) values ($id,'$date')";
         $res = mysqli_query($this->db, $queryUE);
+    }
+
+    /**
+     * for one user, calculate the number of days since the last mailing has been sent
+     *
+     * @param $id int the user id
+     */
+    public function DaysSinceLastMailing($id)
+    {
+        // Query timestamp of last Mailing from Database
+        $queryUE = "select MailingSentOn from ***REMOVED***.bires_mcm_mailing where b1user_ID = $id ORDER BY MailingSentOn DESC  limit 1";
+        $res = mysqli_query($this->db, $queryUE);
+        $dateLastMailingArray = mysqli_fetch_assoc($res);
+        $dateLastMailing = $dateLastMailingArray['MailingSentOn'];
+
+        // Create "Today"
+        $now = new DateTime();
+
+        // Calculate difference between "Today" and Last Mailing timestamp
+        $val = $now->diff(new DateTime($dateLastMailing));
+
+        // Output the interval only in full days
+        $interval = (int)$val->format("%a"); // output with sign: $interval = (int)$val->format("%r%a");
+
+        return $interval;
     }
 
 
