@@ -39,7 +39,7 @@ class HtmlDescInj
         <td width="800" valign="top">
         <table cellpadding="0" cellspacing="0">
         <tr>
-               <td class="headline" colspan="2" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
+               <td class="headline" colspan="2" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #7f7f7f;  padding-top: 10px;">
                How are you doing compared to all amphiro users?
                </td>
         </tr>

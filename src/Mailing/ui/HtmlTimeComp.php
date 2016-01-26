@@ -19,7 +19,7 @@ class HtmlTimeComp
                     <td class="col" width="800" valign="top">
                         <table id="timecomp" cellpadding="0" cellspacing="0" >
                             <tr>
-                                <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
+                                <td class="headline" align="left" style="font-family: arial,sans-serif; font-size: 22px; color: #7f7f7f; padding-top: 10px;">
                                     See the consumption of your last 30 showers
                                 </td>
                             </tr>
@@ -28,7 +28,7 @@ class HtmlTimeComp
                             </tr>
                             <tr>
                                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-                                With 100 Wh you can work on your notebook for 5 hours.
+                                With 200 Wh you can work on your notebook for 10 hours.
                                 </td>
                             </tr>
                         </table>

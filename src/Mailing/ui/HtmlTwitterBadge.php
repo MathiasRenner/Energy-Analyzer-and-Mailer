@@ -29,7 +29,7 @@ class HtmlTwitterBadge
         $reportCount = count($aryUniqueReportOn);
         $upload = 0;
 
-        $rewardHeading = "Your reward!";
+        $rewardHeading = '&nbsp; &nbsp; Your reward!';
         $badge = "";
 
         // select the right badge
@@ -68,35 +68,38 @@ class HtmlTwitterBadge
         $rewardText = "";
         if($reportCount < 10)
         {
-            $rewardText = 'You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
-            Upload your shower data <b>'. $upload .'</b> times and you will get your first reward!<br/>';
+            $rewardText = '<td width="40%" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+             You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
+            Upload your shower data <b>'. $upload .'</b> times <br/> and you will get your first reward!
+            </td>';
         }
         elseif($reportCount < 300)
         {
-            $rewardText = 'You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
-            Upload your shower data <b>'. $upload .'</b> times and the living place increases!<br/>';
+            $rewardText = '<td width="40%" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
+            Upload your shower data <b>'. $upload .'</b> times and the living place increases!
+            </td>';
         }
         elseif($reportCount >= 300)
         {
-            $rewardText = 'You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
-            We thank you very much for being such an awesome customer!<br/>';
+            $rewardText = '<td width="40%" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
+            We thank you very much for being such an awesome customer!
+            </td>';
         }
 
 
         return '
-<table class=section cellpadding="0" cellspacing="0">
+<table width="820" class=section cellpadding="0" cellspacing="0">
 
-   <tr>
+   <tr >
         <td width="30%" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-        Share it!</td>
+        </td>
         <td width="70%" colspan="3" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
         '.$rewardHeading.'</td>
         <td></td>
    </tr>
 
-   <tr>
-        <td>&nbsp;</td>
-   </tr>
 
    <tr>
             <td width="30%" align="center">
@@ -107,9 +110,7 @@ class HtmlTwitterBadge
 
             '. $badge .'
 
-            <td width="40%" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
             '. $rewardText .'
-            </td>
 
     </tr>
 </table>

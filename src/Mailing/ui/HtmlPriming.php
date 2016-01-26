@@ -28,16 +28,18 @@ class HtmlPriming
         }
 
         $consHomeOffice = round($energyConsumption / 150,1);
-        $consWashingMaschine = round($energyConsumption / 250,1);;
+        $consWashingMachine = round($energyConsumption / 250,1);;
         $consLightning = round($energyConsumption / 500,1);
+        $consHouseHold = round($energyConsumption / 3500,2) * 100;
 
         $textConsumption = '<b>'.$energyConsumption. ' kWh!</b> This '. $diff .' your energy consumption with <b>200</b> showers!
         <br/>This energy consumption corresponds to the <b>annual</b> energy consumption of';
         $textConsumptionComp = '
             <lu>
             <li><b>'.$consHomeOffice.'</b> laptops</li>
-            <li><b>'.$consWashingMaschine.'</b> wasching machines</li>
+            <li><b>'.$consWashingMachine.'</b> wasching machines</li>
             <li><b>'.$consLightning.'</b> times lightning a household</li>
+           <!-- <li><b>.$consHouseHold. %</b> of your overall consumption</li> -->
             </lu>
         ';
 
@@ -67,10 +69,10 @@ class HtmlPriming
                 <td width="800" align="center" valign="top">
                     <table cellpadding="0" cellspacing="0">
                     <tr>
-                    <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="'. UtilSingleton::getInstance()->InlinePicture("assets/badges/logo.png") .'" width="200" alt="" style="display: block; border: 0;" /> </a>
+                    <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="'. UtilSingleton::getInstance()->InlinePicture("assets/badges/amphirologo.png") .'" width="200" alt="" style="display: block; border: 0;" /> </a>
                     </td>
                  <!--   <td>
-                        <img src="'. UtilSingleton::getInstance()->InlinePicture("assets/badges/_baer.png") .'" height="40" width="auto" alt="" style="display: block; border: 0;" />
+                        <img src=" UtilSingleton::getInstance()->InlinePicture("assets/badges/_baer.png") " height="40" width="auto" alt="" style="display: block; border: 0;" />
                     </td>
                     <td align="left" style="font-family: arial,sans-serif; font-size: 13px; line-height: 17px !important; color: #7f7f7f; padding-top: 5px;">
                        Together we can <br/><b>save</b> his world!
@@ -81,7 +83,7 @@ class HtmlPriming
                 </tr>
 
                 <tr>
-                <td  class="headline" width="800" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px; padding-bottom: 20px; ">
+                <td  class="headline" width="800" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #7f7f7f; padding-top: 15px; padding-bottom: 20px; ">
                 Your personal amphiro report
                 <br>
                 </td>

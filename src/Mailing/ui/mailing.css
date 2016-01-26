@@ -158,6 +158,10 @@ h4 { font-weight:500; font-size: 23px;}
 h5 { font-weight:900; font-size: 17px;}
 h6 { font-weight:900; font-size: 14px; text-transform: uppercase; color:#444;}
 
+@font-face { font-family: 'amphiro';
+    src: url('/src/Mailing/assets/fonts/OfficinaSansStd-BookItalic.otf') format('truetype'); }
+
+
 .collapse { margin:0!important;}
 
 p, ul {

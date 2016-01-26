@@ -25,8 +25,8 @@ class HtmlSummary
             '
 <table class=section cellpadding="3" cellspacing="3" width="820" bgcolor="white">
        <tr>
-            <td colspan="4" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px;">
-            In a nutshell
+            <td colspan="4" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #7f7f7f; padding-top: 10px;">
+            Your average shower
             </td>
         </tr>
 
@@ -53,19 +53,19 @@ class HtmlSummary
     <tr>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      &empty; '. $volume .' liter
+       <b> '. $volume .' liter </b>
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      &empty; '. $time .' min
+       <b> '. $time .' min </b>
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      &empty; '. $flowRate .' liter/min
+      <b>  '. $flowRate .' liter/min </b>
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      &empty; '. $temperature .' C&deg;
+      <b>  '. $temperature .' C&deg; </b>
       </td>
 
     </tr>
