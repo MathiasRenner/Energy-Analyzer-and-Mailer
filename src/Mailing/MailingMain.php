@@ -56,70 +56,71 @@ foreach($allUser as $id)
     $db->Update($id);
 
 // if last mailing has been sent within a specific interval, do not send a report
-if( $DaysSinceLastMailing = $db->DaysSinceLastMailing($id) < 14 ){
+    if( FALSE ) {
+//if( $DaysSinceLastMailing = $db->DaysSinceLastMailing($id) < 14 ){
 
-    // do nothing for this user
-    // echo $DaysSinceLastMailing
-    echo 'No report has been generated because the last report has been sent ' . $DaysSinceLastMailing . ' day(s) ago.';
+        // do nothing for this user
+        // echo $DaysSinceLastMailing
+        echo 'No report has been generated because the last report has been sent ' . $DaysSinceLastMailing . ' day(s) ago.';
 
 // TODO: If there is not enough data
-} else if (TRUE) {
+    } else if (FALSE) {
 
-    // build a message with message: "not enough data for the report - upload more data!"
-    
-} else {
+        // build a message with message: "not enough data for the report - upload more data!"
 
-    // Create the message object
-    $message = new Swift_Message("This is your Amphiro report. Together we can save the planet!");
-    UtilSingleton::getInstance()->SetSwiftMailerInstance($message);
+    } else {
 
-    // create all charts
-    $createChart->CreateAllCharts();
+        // Create the message object
+        $message = new Swift_Message("This is your Amphiro report. Together we can save the planet!");
+        UtilSingleton::getInstance()->SetSwiftMailerInstance($message);
 
-    // Create the html mail including all pictures + html + style
-    $htmlMailing = new CreateHtmlMail();
-    $html = $htmlMailing->CreateHTMLMailing();
+        // create all charts
+        $createChart->CreateAllCharts();
 
-    // inline css
-    $cssToInlineStyles = new CssToInlineStyles();
-    $css = file_get_contents(__DIR__ . '/ui/mailing.css');
-    $cssToInlineStyles->setHTML($html);
-    $cssToInlineStyles->setCSS($css);
-    // output
-    $html = $cssToInlineStyles->convert();
+        // Create the html mail including all pictures + html + style
+        $htmlMailing = new CreateHtmlMail();
+        $html = $htmlMailing->CreateHTMLMailing();
 
-    // the transport object
-    $transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de', 587, 'tls');
-    $transport->setLocalDomain('[127.0.0.1]');
+        // inline css
+        $cssToInlineStyles = new CssToInlineStyles();
+        $css = file_get_contents(__DIR__ . '/ui/mailing.css');
+        $cssToInlineStyles->setHTML($html);
+        $cssToInlineStyles->setCSS($css);
+        // output
+        $html = $cssToInlineStyles->convert();
 
-    //TODO: Absender anpassen
-    $from = array('a@b.com' => 'Your Amphiro Team');
-    $to = array(//, $db->email => $db->firstname . ' ' . $db->familyname
-    );
+        // the transport object
+        $transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de', 587, 'tls');
+        $transport->setLocalDomain('[127.0.0.1]');
 
-    // object for sending the finished mail
-    $mailer = Swift_Mailer::newInstance($transport);
+        //TODO: Absender anpassen
+        $from = array('a@b.com' => 'Your Amphiro Team');
+        $to = array(//, $db->email => $db->firstname . ' ' . $db->familyname
+        );
 
-    // build your mail
-    $message->setFrom($from);
-    $message->setBody($html, 'text/html');
+        // object for sending the finished mail
+        $mailer = Swift_Mailer::newInstance($transport);
 
-    // further infos
-    //$text = "This is your Amphiro report. Together we can save the planet!";
+        // build your mail
+        $message->setFrom($from);
+        $message->setBody($html, 'text/html');
 
-    $message->setTo($to);
-    //$message->addPart($text, 'text/plain');
+        // further infos
+        //$text = "This is your Amphiro report. Together we can save the planet!";
 
-    // display for debug
-    print $message->getBody();
+        $message->setTo($to);
+        //$message->addPart($text, 'text/plain');
 
-    // for sending your email
-    //if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!
+        // display for debug
+        print $message->getBody();
 
-      // write timestamp to database
-      //$db->WriteTimestampOfMailing($id);
+        // for sending your email
+        //if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!
 
-    // } else { echo "There was an error:\n"; print_r($failures);}
+        // write timestamp to database
+        //$db->WriteTimestampOfMailing($id);
+
+        // } else { echo "There was an error:\n"; print_r($failures);}
 
     }
 }
