@@ -27,21 +27,14 @@ class HtmlPriming
             $diff = "will be";
         }
 
-        $consHomeOffice = round($energyConsumption / 150,1);
+        $consHomeOffice = round($energyConsumption / 80,1); // 150 = Homeoffice | 80 = notebook
         $consWashingMachine = round($energyConsumption / 250,1);;
         $consLightning = round($energyConsumption / 500,1);
         $consHouseHold = round($energyConsumption / 3500,2) * 100;
 
-        $textConsumption = '<b>'.$energyConsumption. ' kWh!</b> This '. $diff .' your energy consumption with <b>200</b> showers!
-        <br/>This energy consumption corresponds to the <b>annual</b> energy consumption of';
-        $textConsumptionComp = '
-            <lu>
-            <li><b>'.$consHomeOffice.'</b> laptops</li>
-            <li><b>'.$consWashingMachine.'</b> wasching machines</li>
-            <li><b>'.$consLightning.'</b> times lightning a household</li>
-           <!-- <li><b>.$consHouseHold. %</b> of your overall consumption</li> -->
-            </lu>
-        ';
+        $textConsumption = 'This '. $diff .' your energy consumption with <b>200</b> showers';
+        $textConsumptionVar = 'This energy consumption corresponds to the <b>annual</b> energy consumption of <br/> &nbsp;';
+
 
 
         // if the user has not given a name take the mail address
@@ -54,11 +47,6 @@ class HtmlPriming
             $name = $db->getFirstname();
         }
 
-        return $this->GetHtml($name,$textConsumption, $textConsumptionComp);
-    }
-
-    private function GetHtml($name,$textConsumption, $textConsumptionComp)
-    {
         return
 '<br/>
 <table class=section cellpadding="0" cellspacing="0">
@@ -69,10 +57,10 @@ class HtmlPriming
                 <td width="800" align="center" valign="top">
                     <table cellpadding="0" cellspacing="0">
                     <tr>
-                    <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="'. UtilSingleton::getInstance()->InlinePicture("assets/badges/amphirologo.png") .'" width="200" alt="" style="display: block; border: 0;" /> </a>
+                    <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="'. UtilSingleton::getInstance()->InlinePicture("assets/priming/amphirologo.png") .'" width="200" alt="" style="display: block; border: 0; padding-top: 15px;" /> </a>
                     </td>
                  <!--   <td>
-                        <img src=" UtilSingleton::getInstance()->InlinePicture("assets/badges/_baer.png") " height="40" width="auto" alt="" style="display: block; border: 0;" />
+                        <img src=" UtilSingleton::getInstance()->InlinePicture("assets/badges/baer.png") " height="40" width="auto" alt="" style="display: block; border: 0;" />
                     </td>
                     <td align="left" style="font-family: arial,sans-serif; font-size: 13px; line-height: 17px !important; color: #7f7f7f; padding-top: 5px;">
                        Together we can <br/><b>save</b> his world!
@@ -90,8 +78,10 @@ class HtmlPriming
                 </tr>
 
                 <tr>
-                <td   width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 30px; padding-right: 30px;">
-                Hello <b>' . $name . '</b>, <br/>
+                <td   width="800" align="left" valign="top" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 30px; padding-right: 30px;">
+                <img src="'. UtilSingleton::getInstance()->InlinePicture("assets/priming/baer.png") .'" width="50" alt=""/>
+                Hello <b>' . $name . '</b>,
+                <br/>
                 <br>
                 We are pleased to provide you your <b>personal</b> amphiro report.
                 <br/>
@@ -120,22 +110,6 @@ class HtmlPriming
         </td>
     </tr>
 </table>
-
-<br/>
-
-<table class=section cellpadding="0" cellspacing="0">
-    <tr>
-        <td width="800" align="left" style="font-family: arial,sans-serif; font-size: 15px; line-height: 20px !important; color: #7f7f7f; padding-top: 20px; padding-left: 30px; padding-right: 30px;" >
-            '. $textConsumption .'
-        </td>
-    </tr>
-    <tr>
-     <td width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 20px; padding-left: 50px; padding-right: 50px;">
-        '. $textConsumptionComp .'
-    </td>
-    </tr>
-</table>
-
 <br/>';
     }
 }

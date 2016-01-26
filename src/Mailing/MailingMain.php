@@ -35,6 +35,7 @@ include "ui/HtmlRecommendations.php";
 include "ui/HtmlFooter.php";
 include "ui/HtmlSummary.php";
 include "ui/HtmlTwitterBadge.php";
+include "ui/HtmlThinkBig.php";
 
 // Parameter
 //$id = $_GET['user'];

@@ -30,6 +30,7 @@ class CreateHtmlMail
         $footer = new HtmlFooter();
         $summary = new HtmlSummary();
         $twitterGoal = new HtmlTwitterBadge();
+        $thinBig = new HtmlThinkBig();
 
         // gets the html header information
         $htmlheadmeta = $this->GetHtmlHeadMeta();
@@ -43,11 +44,13 @@ class CreateHtmlMail
         $footer_html = $footer->GetHtmlFooter();
         $summary_html = $summary->GetHtmlSummary();
         $twitter_goal_html = $twitterGoal->GetTwitterBadge();
+        $thinkBig_html = $thinBig->GetHtmlThinkBig();
 
         // build and return the full html mail
         return
             $htmlheadmeta
             .$priming_html
+            .$thinkBig_html
             .$summary_html
             .$descinj_html
             .$classification_html
