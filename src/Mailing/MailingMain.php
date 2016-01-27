@@ -22,6 +22,7 @@ include("libs/charts/pChart2_1_4/class/pPie.class.php");
 /* include all needed files */
 include "business/CreateCharts.php";
 include "business/CreateHtmlMail.php";
+include "business/CreateHtmlMailReminder.php";
 include "business/Calculations.php";
 include "business/UtilHelper.php";
 
@@ -35,6 +36,7 @@ include "ui/HtmlRecommendations.php";
 include "ui/HtmlFooter.php";
 include "ui/HtmlSummary.php";
 include "ui/HtmlTwitterBadge.php";
+include "ui/HtmlReminder.php";
 
 // Parameter
 //$id = $_GET['user'];
@@ -46,40 +48,53 @@ $db = DBAccessSingleton::getInstance();
 // Init DB and get all relevant db entries
 $db->Init();  // init database
 
-$allUser = array(11); // 3 = B // 5 = F // array(3,6);
+// To show  users in different efficiency classes, use 1 = A | 7 = B | 5 = F | array(1,5,7);
+// Test if user did not recently upload data: 11
+// Test if just received a report: 4
+$allUser = array(11);
+
+
 //$allUser = $db->getUserIdsWithExtractions();
 
-foreach($allUser as $id)
-{
+foreach($allUser as $id) {
 
     // set the user db information
     $db->Update($id);
 
-// if last mailing has been sent within a specific interval, do not send a report
-    if( FALSE ) {
-//if( $DaysSinceLastMailing = $db->DaysSinceLastMailing($id) < 14 ){
+    $array = $db->getReportedOnUser();
 
-        // do nothing for this user
-        // echo $DaysSinceLastMailing
-        echo 'No report has been generated because the last report has been sent ' . $DaysSinceLastMailing . ' day(s) ago.';
 
-// TODO: If there is not enough data
-    } else if (FALSE) {
+    // create the message object
+    $message = new Swift_Message("This is your Amphiro report. Together we can save the planet!");
+    UtilSingleton::getInstance()->SetSwiftMailerInstance($message);
 
-        // build a message with message: "not enough data for the report - upload more data!"
+    // create all charts
+    $createChart->CreateAllCharts();
+
+    // if last mailing has been sent within the last X days, do not send a report again
+    global $sendMail;
+    $sendMail = true;
+    if ($db->DaysSinceLastMailing($id) < 21 && $db->DaysSinceLastMailing($id) != 0 ) {
+
+        $sendMail = false;
+        echo 'No report has been generated because the last report has been sent ' . $db->DaysSinceLastMailing($id) . ' day(s) ago.';
+        break;
+
+        // if user did not upload data in the last X days, send him a reminder to upload data
+    } else if ($db->CalcDaysSinceLastUpload() > 21) {
+
+        // create the html mail including all pictures + html + style
+        $htmlMailing = new CreateHtmlMailReminder();
+        $html = $htmlMailing->CreateHTMLMailing();
 
     } else {
-
-        // Create the message object
-        $message = new Swift_Message("This is your Amphiro report. Together we can save the planet!");
-        UtilSingleton::getInstance()->SetSwiftMailerInstance($message);
-
-        // create all charts
-        $createChart->CreateAllCharts();
-
-        // Create the html mail including all pictures + html + style
+        // create the html mail including all pictures + html + style
         $htmlMailing = new CreateHtmlMail();
         $html = $htmlMailing->CreateHTMLMailing();
+    }
+
+    // only send Mail when variable has not been set to false before
+    if ($sendMail == true){
 
         // inline css
         $cssToInlineStyles = new CssToInlineStyles();
@@ -113,15 +128,14 @@ foreach($allUser as $id)
 
         // display for debug
         print $message->getBody();
-
-        // for sending your email
-        //if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!
-
-        // write timestamp to database
-        //$db->WriteTimestampOfMailing($id);
-
-        // } else { echo "There was an error:\n"; print_r($failures);}
-
     }
+    // for sending your email
+    // if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!';
+
+    // write timestamp to database
+    //$db->WriteTimestampOfMailing($id);
+
+    // } else { echo "There was an error:\n"; print_r($failures);}
+
 }
 

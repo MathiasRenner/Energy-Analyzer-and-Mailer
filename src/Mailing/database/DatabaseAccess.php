@@ -110,6 +110,7 @@ class DBAccessSingleton
         return $this->reportedOnUser;
     }
 
+
     private $extractionsCountUser;
     public function getExtractionsCountUser()
     {
@@ -247,9 +248,8 @@ class DBAccessSingleton
         // Calculate difference between "Today" and Last Mailing timestamp
         $val = $now->diff(new DateTime($dateLastMailing));
 
-        // Output the interval only in full days
+        // Output and return the interval only in full days
         $interval = (int)$val->format("%a"); // output with sign: $interval = (int)$val->format("%r%a");
-
         return $interval;
     }
 
@@ -410,7 +410,7 @@ class DBAccessSingleton
                     $he = $row->heatingEfficiency;
                 }
 
-                // same data cleaning
+                // some data cleaning
                 if(!is_null($row->volume) && $row->volume >= 5 && $row->volume <= 150 &&
                     !is_null($row->flowRate) && $row->flowRate > 0 &&
                     !is_null($row->temperature) && $row->temperature > 10)
@@ -430,24 +430,22 @@ class DBAccessSingleton
         } // end foreach user
     }
 
-
-    /**
-     * TODO naming not calc describe function
-     *
-     *
-     * @param $id
-     * @return mixed
-     */
-    private function CalcDaysSinceLastReport($id)
+    public function CalcDaysSinceLastUpload()
     {
-        $lastReport = mysqli_query($this->db, "SELECT * FROM bires_mcm_mailing WHERE id =" . $id . " ORDER BY lastMailingSent DESC;");
-        $dateLastReport = new DateTime($lastReport);
+        // Query timestamp of last Upload from Database
+        $dateLastUploadString = $this->getReportedOnUser()[(count($this->getReportedOnUser()))-1];
+        $dateLastUpload = new DateTime($dateLastUploadString);
 
+        // Create "Today"
         $today = new DateTime('now');
 
-        $diff = $datetime1->diff($today)->days;
+        // Calculate difference between "Today" and Last Upload timestamp
+        $diff = $dateLastUpload->diff($today)->days;
+
+        // Return the interval only in full days
         return $diff;
     }
+
 
     /**
      * Get the maximum number of extractions
