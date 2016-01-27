@@ -52,7 +52,7 @@ $db->Init();  // init database
 // To show  users in different efficiency classes, use 1 = A | 7 = B | 5 = F | array(1,5,7);
 // Test if user did not recently upload data: 11
 // Test if just received a report: 4
-$allUser = array(11);
+$allUser = array(1);
 
 
 //$allUser = $db->getUserIdsWithExtractions();
