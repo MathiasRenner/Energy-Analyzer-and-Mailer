@@ -42,14 +42,8 @@ class HtmlReminder
                 <td width="800" align="center" valign="top">
                     <table cellpadding="0" cellspacing="0">
                     <tr>
-                    <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="'. UtilSingleton::getInstance()->InlinePicture("assets/badges/logo.png") .'" width="200" alt="" style="display: block; border: 0;" /> </a>
+                    <td> <a class="hero_image"><a href="http://amphiro.com/"><img src="'. UtilSingleton::getInstance()->InlinePicture("assets/priming/amphirologo.png") .'" width="200" alt="" style="display: block; border: 0;" /> </a>
                     </td>
-                 <!--   <td>
-                        <img src="'. UtilSingleton::getInstance()->InlinePicture("assets/badges/_baer.png") .'" height="40" width="auto" alt="" style="display: block; border: 0;" />
-                    </td>
-                    <td align="left" style="font-family: arial,sans-serif; font-size: 13px; line-height: 17px !important; color: #7f7f7f; padding-top: 5px;">
-                       Together we can <br/><b>save</b> his world!
-                    </td> -->
                     </tr>
                     </table>
                 </td>
@@ -64,8 +58,14 @@ class HtmlReminder
 
                 <tr>
                 <td   width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 30px; padding-right: 30px;">
-                Hello <b>' . $name . '</b>, <br/>
-                <br>
+                <table>
+                <tr>
+                <td>  <img src="'. UtilSingleton::getInstance()->InlinePicture("assets/priming/baer.png") .'" width="50" alt=""/>
+                </td>
+                <td>&nbsp; Hello <b>' . $name . '</b>,</td>
+                </tr>
+                </table>
+
                 We would be pleased to provide you your <b>personal</b> amphiro report. To do so, we need some recent data from you (the last time you uploaded your shower data was  '.  $DaysSinceLastUpload .'   days ago).
                  <br/><br/>
                 The report will then provide you information about...

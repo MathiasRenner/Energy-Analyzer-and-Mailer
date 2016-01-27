@@ -79,10 +79,14 @@ class HtmlPriming
 
                 <tr>
                 <td   width="800" align="left" valign="top" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 30px; padding-right: 30px;">
-                <img src="'. UtilSingleton::getInstance()->InlinePicture("assets/priming/baer.png") .'" width="50" alt=""/>
-                Hello <b>' . $name . '</b>,
-                <br/>
-                <br>
+
+                <table>
+                <tr>
+                <td>  <img src="'. UtilSingleton::getInstance()->InlinePicture("assets/priming/baer.png") .'" width="50" alt=""/>
+                </td>
+                <td>&nbsp; Hello <b>' . $name . '</b>,</td>
+                </tr>
+                </table>
                 We are pleased to provide you your <b>personal</b> amphiro report.
                 <br/>
                 We provide you information about...
