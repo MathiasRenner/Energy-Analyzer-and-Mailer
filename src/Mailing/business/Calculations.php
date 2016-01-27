@@ -244,7 +244,22 @@ class Calculations
 
 
     /**
-     * Cals the saving time to reache the next better energy class
+     *
+     * Cals the saving in percent to reach the next better energy class
+     * @param $actualConsumption | int use the energyconsumption
+     * @return float percent to save
+     */
+    public function CalcPercentageSavings($actualConsumption)
+    {
+        $betterConsumption = UtilSingleton::GetConsumptionForBetterEfficiencyClass($actualConsumption);
+
+        $percent = ($actualConsumption - $betterConsumption)/$actualConsumption;
+
+        return $percent;
+    }
+
+    /**
+     * Cals the saving time to reach the next better energy class
      *
      * @param $actualConsumption | int use the energyconsumption
      * @return float time too save
@@ -265,6 +280,7 @@ class Calculations
 
         return round($time,1);
     }
+
 
 
     /**

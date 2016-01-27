@@ -37,6 +37,7 @@ include "ui/HtmlFooter.php";
 include "ui/HtmlSummary.php";
 include "ui/HtmlTwitterBadge.php";
 include "ui/HtmlReminder.php";
+include "ui/HtmlThinkBig.php";
 
 // Parameter
 //$id = $_GET['user'];
@@ -138,4 +139,3 @@ foreach($allUser as $id) {
     // } else { echo "There was an error:\n"; print_r($failures);}
 
 }
-

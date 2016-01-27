@@ -38,12 +38,8 @@ class CreateCharts
         $actualConsEnergy = $calculations->CalcEnergyUser(TRUE);
 
         $actualConsVolume = $calculations->CalcVolumeAvgUser(TRUE);
-        $actualConsTime = $calculations->CalcUserTime(TRUE);
-
-
 
         $savingConsVolume = $calculations->CalcSavingVolumeForBetterEnergyClass($actualConsEnergy);
-        $savingConsTime = $calculations->CalcSavingTimeForBetterEnergyClass($actualConsEnergy);
 
         /**
         echo "<br/> Act Vol:    ". $actualConsVolume ;
@@ -76,10 +72,10 @@ class CreateCharts
         /* Create and populate the pData object */
         $MyData = new pData();
 
-        // TODO : TITLE with Your can reduce your consumption!
+        $calc = new Calculations();
+        $percent = round($calc->CalcPercentageSavings($calc->CalcEnergyUser()) * 100);
 
         // define the color
-        $col_dark = array("R"=>79,"G"=>122,"B"=>149,"Alpha"=>100);
         $col_mid = array("R"=>138,"G"=>171,"B"=>188,"Alpha"=>100);
         $col_light = array("R"=>205,"G"=>219,"B"=>226,"Alpha"=>100);
         $col_orange = array("R"=>239,"G"=>162, "B"=>112);
@@ -104,9 +100,12 @@ class CreateCharts
         //$PieChart->setSliceColor(1, array("R"=>255,"G"=>255,"B"=>255,"Alpha"=>100));
         $PieChart->setSliceColor(2, $col_light);
 
+
         /* Draw an AA pie chart */
         $PieChart->draw2DRing(160,140,array("DrawLabels"=>FALSE,"LabelStacked"=>FALSE,"Border"=>TRUE));
-        /* Write the legend box */
+
+        $myPicture->drawText(160,146,100-$percent . "%",array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE, "R"=>79,"G"=>122,"B"=>149));
+
         $myPicture->setShadow(FALSE);
         /* Render the picture (choose the best way) */
         $myPicture->render("pictures/".$name);
@@ -133,7 +132,7 @@ class CreateCharts
         $col_light = array("R"=>205,"G"=>219,"B"=>226,"Alpha"=>100);
         $col_orange = array("R"=>239,"G"=>162, "B"=>112);
 
-        $palette = array("0"=>$col_light, "1"=>$col_mid, "2"=>$col_dark);
+        $palette = array("0"=>$col_light, "1"=>$col_orange, "2"=>$col_dark);
 
         // the chart data object
         $myDescData = new pData();
@@ -190,12 +189,12 @@ class CreateCharts
 
         // function for a custom y axis format
         if (!function_exists('YAxisFormat')) {
-            function YAxisFormat($Value) { return(" ".  $Value ." Wh"); }
+            function YAxisFormat($Value) { return(" ".  $Value .""); }
             // ... proceed to declare your function
         }
 
         // draws an heading text
-        $myDescChart->drawText(450,28,"consumption in Wh",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+        $myDescChart->drawText(270,28,"consumption in Wh",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 
         // create the chart
         $myDescChart->drawBarChart(array("DisplayValues"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$palette));
