@@ -42,9 +42,13 @@ include "ui/HtmlThinkBig.php";
 // Parameter
 //$id = $_GET['user'];
 
+// DEBUG MODE:
+$debug = true;
+
 // create the chart object
 $createChart = new CreateCharts();
 $db = DBAccessSingleton::getInstance();
+UtilSingleton::getInstance()->SetDebugMode($debug);
 
 // Init DB and get all relevant db entries
 $db->Init();  // init database
@@ -109,9 +113,10 @@ foreach($allUser as $id) {
         $transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de', 587, 'tls');
         $transport->setLocalDomain('[127.0.0.1]');
 
-        //TODO: Absender anpassen
-        $from = array('a@b.com' => 'Your Amphiro Team');
-        $to = array(//, $db->email => $db->firstname . ' ' . $db->familyname
+        $from = array('mailing@amphiro.com' => 'Your Amphiro Team');
+        $to = array(
+            $db->getEmail() => $db->getFirstname(). ' ' . $db->getFamilyname()
+
         );
 
         // object for sending the finished mail
@@ -129,13 +134,18 @@ foreach($allUser as $id) {
 
         // display for debug
         print $message->getBody();
+
+        if($debug == false)
+        {
+            // for sending your email
+            if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!';
+
+            // write timestamp to database
+            //$db->WriteTimestampOfMailing($id);
+
+            } else { echo "There was an error:\n"; print_r($failures);}
+        }
     }
-    // for sending your email
-    // if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!';
 
-    // write timestamp to database
-    //$db->WriteTimestampOfMailing($id);
-
-    // } else { echo "There was an error:\n"; print_r($failures);}
 
 }

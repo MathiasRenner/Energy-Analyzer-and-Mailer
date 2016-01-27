@@ -143,6 +143,7 @@ class CreateCharts
             $descValuesArray = array($energy_user, $energy_top20, $energy_all );
             $myDescData-> addPoints($descValuesArray, "Compare yourself!");
             $myDescData->addPoints(array("You ", "Top 20% ", "Average "),"Labels");
+            $palette =  array("0"=>$col_orange, "1"=>$col_mid, "2"=>$col_dark);
 
         }
         elseif($energy_user > $energy_top20 & $energy_user <= $energy_all)
@@ -150,6 +151,7 @@ class CreateCharts
             $descValuesArray = array($energy_top20,$energy_user, $energy_all );
             $myDescData-> addPoints($descValuesArray, "Compare yourself!");
             $myDescData->addPoints(array("Top 20% ","You ", "Average "),"Labels");
+            $palette =  array("0"=>$col_light, "1"=>$col_orange, "2"=>$col_dark);
 
         }
         elseif($energy_user > $energy_all)
@@ -157,6 +159,7 @@ class CreateCharts
             $descValuesArray = array($energy_top20, $energy_all, $energy_user);
             $myDescData-> addPoints($descValuesArray, "Compare yourself!");
             $myDescData->addPoints(array("Top 20% ", "Average ","You " ),"Labels");
+            $palette =  array("0"=>$col_light, "1"=>$col_mid, "2"=>$col_orange);
         }
 
         $myDescData->setAbscissa("Labels");

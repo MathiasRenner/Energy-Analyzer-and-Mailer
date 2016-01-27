@@ -15,6 +15,7 @@ class UtilSingleton
 {
     // the one and only message object
     private $message;
+    private $debug;
 
     /**
      * instance
@@ -53,6 +54,11 @@ class UtilSingleton
         $this->message = $m;
     }
 
+    public function SetDebugMode($mode)
+    {
+        $this->debug = $mode;
+    }
+
     /**
      * Helper to encode pictures to base64
      *
@@ -61,11 +67,12 @@ class UtilSingleton
      */
     public function InlinePicture($pathToPicture)
     {
-        // uncommend the line when you send a mail
-        //$picture = Swift_Image::fromPath($pathToPicture);
-        //$picture->setDisposition('inline');
-        //return $cid = $this->message->embed($picture);
-
+        if($this->debug == false)
+        {
+            $picture = Swift_Image::fromPath($pathToPicture);
+            $picture->setDisposition('inline');
+            return $cid = $this->message->embed($picture);
+        }
         // for debug to see the pictures in the browser
         return $pathToPicture;
     }

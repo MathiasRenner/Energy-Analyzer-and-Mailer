@@ -20,7 +20,7 @@ class HtmlDescInj
         if($avgUser <= $avgTop20)
         {
             $inj = '<td align="left" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj1.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
-            $descText = "You are one of the Top 20% user. That's great!<br/>Do not stop being an energy saver";
+            $descText = "You are one of the Top 20% user. That's great!<br/>Do not stop being an energy saver!";
         }
         elseif($avgUser <= $avgAll)
         {
