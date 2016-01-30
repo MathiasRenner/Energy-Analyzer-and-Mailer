@@ -15,7 +15,7 @@ class HtmlRecommendations
         $calc = new Calculations();
 
         // initiate array
-        $array = array("");
+        $array = array();
 
 
         // calculate shower time
@@ -66,45 +66,55 @@ class HtmlRecommendations
 
 
         // instanciate global variable for beeing accessible
-        $recommendations = "";
+        $recommendation = "";
+
+        // create array that contains all recommendations
+        $recommendationArray = array();
 
         // build HTML for all user specific recommendations from the array
-        for ($i = 1; $i <= count($array) - 1; $i++) {
-            $recommendations .= '
-                <tr>
-                    <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; ">
+        foreach ($array as $item){
+
+        //for ($i = 1; $i <= count($array) - 1; $i++) {
+            $recommendation = '
+
+
                         <ul>
                             <li>
-                                ' . $array[$i] . '
+                                '.  $item . '
                             </li>
                         </ul>
-                    </td>
-                </tr>
+
+
             ';
+
+            array_push($recommendationArray, $recommendation);
+
         }
 
-        return $this->GetHtml($recommendations);
+        return $this->GetHtml($recommendationArray);
     }
 
     // creates all HTML output for all recommendations
-    private function GetHtml($recommendations)
+    private function GetHtml($recommendationArray)
     {
         return '
-            <table class=section cellpadding="0" cellspacing="0">
+            <table class=section cellpadding="0" cellspacing="0" >
                 <tr>
-                    <td class="headline" width="800" style="font-family: arial,sans-serif; font-size: 22px; color: #7f7f7f; padding-top: 10px;">
+                    <td class="headline" width="800" colspan="2" style="font-family: arial,sans-serif; font-size: 22px; color: #7f7f7f; padding-top: 10px;">
                     Personal tips how you can improve
                     </td>
                 </tr>
-                </tr>
-                <td> </td>
-                <td> </td>
-                ' . $recommendations . '
-                </tr>
+
                 <tr>
-                <td> </td>
-                <td> </td>
+                    <td width="400" height="50" valign="top" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $recommendationArray[1] . '  </td>
+                     <td class="body_copy" align="left" valign="top" height="50" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $recommendationArray[2] . ' </td>
                 </tr>
+
+                <tr>
+                      <td width="50" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $recommendationArray[3] . ' </td>
+                      <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $recommendationArray[4] . '</td>
+                </tr>
+
             </table>
             <br/>
         ';
