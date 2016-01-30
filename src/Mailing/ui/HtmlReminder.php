@@ -50,8 +50,9 @@ class HtmlReminder
                 </tr>
 
                 <tr>
-                <td  class="headline" width="800" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #333; padding-top: 15px; padding-bottom: 20px; ">
-                Your personal amphiro report can not be created.
+                <td class="headline" width="800" style="font-family: arial,sans-serif; font-size: 22px; color: #7f7f7f; padding-top: 10px;">
+                We are sorry, <br />
+                we would like to send you an updated amphiro report but we couldn’t!
                 <br>
                 </td>
                 </tr>
@@ -62,11 +63,11 @@ class HtmlReminder
                 <tr>
                 <td>  <img src="'. UtilSingleton::getInstance()->InlinePicture("assets/priming/baer.png") .'" width="50" alt=""/>
                 </td>
-                <td>&nbsp; Hello <b>' . $name . '</b>,</td>
+                <td>&nbsp; Hello <b>' . $name . ' </b> ,</td>
                 </tr>
                 </table>
 
-                We would be pleased to provide you your <b>personal</b> amphiro report. To do so, we need some recent data from you (the last time you uploaded your shower data was  '.  $DaysSinceLastUpload .'   days ago).
+                <b>we need some recent data from you such that we can provide you your <b>personal</b> amphiro report </b> (the last time you uploaded your shower data was  '.  $DaysSinceLastUpload .'   days ago).
                  <br/><br/>
                 The report will then provide you information about...
 
