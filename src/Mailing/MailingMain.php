@@ -90,7 +90,7 @@ foreach($allUser as $id) {
 
         // create the html mail including all pictures + html + style
         $htmlMailing = new CreateHtmlMailReminder();
-        $html = $htmlMailing->CreateHTMLMailing();
+        $html = $htmlMailing->CreateHTMLReminderMailing();
 
     } else {
         // create the html mail including all pictures + html + style

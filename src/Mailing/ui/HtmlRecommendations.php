@@ -64,39 +64,44 @@ class HtmlRecommendations
             array_push($array, $textReduceShampooing);
         }
 
-
-        // instanciate global variable for beeing accessible
-        $recommendation = "";
-
         // create array that contains all recommendations
         $recommendationArray = array();
 
         // build HTML for all user specific recommendations from the array
-        foreach ($array as $item){
+        foreach ($array as $item)
+        {
 
         //for ($i = 1; $i <= count($array) - 1; $i++) {
             $recommendation = '
-
-
                         <ul>
                             <li>
                                 '.  $item . '
                             </li>
                         </ul>
-
-
             ';
-
             array_push($recommendationArray, $recommendation);
-
         }
 
-        return $this->GetHtml($recommendationArray);
-    }
+        // define recommendation variable and assign only if the recommendation exists to avoid warnings
+        $rec1 = "";$rec2 = "";$rec3 = "";$rec4 = "";
+        if(count($recommendationArray) > 0)
+        {
+            $rec1 = $recommendationArray[0];
+        }
+        if(count($recommendationArray) > 1)
+        {
+            $rec2 = $recommendationArray[1];
+        }
+        if(count($recommendationArray) > 2)
+        {
+            $rec3 = $recommendationArray[2];
+        }
+        if(count($recommendationArray) > 3)
+        {
+            $rec4 = $recommendationArray[3];
+        }
 
-    // creates all HTML output for all recommendations
-    private function GetHtml($recommendationArray)
-    {
+
         return '
             <table class=section cellpadding="0" cellspacing="0" >
                 <tr>
@@ -106,13 +111,13 @@ class HtmlRecommendations
                 </tr>
 
                 <tr>
-                    <td width="400" height="50" valign="top" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $recommendationArray[1] . '  </td>
-                     <td class="body_copy" align="left" valign="top" height="50" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $recommendationArray[2] . ' </td>
+                    <td width="400" height="50" valign="top" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' .  $rec1 . '  </td>
+                     <td class="body_copy" align="left" valign="top" height="50" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $rec2 . ' </td>
                 </tr>
 
                 <tr>
-                      <td width="50" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $recommendationArray[3] . ' </td>
-                      <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $recommendationArray[4] . '</td>
+                      <td width="50" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $rec3 . ' </td>
+                      <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $rec4. '</td>
                 </tr>
 
             </table>

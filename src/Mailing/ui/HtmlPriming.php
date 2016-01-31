@@ -13,29 +13,6 @@ class HtmlPriming
     {
         // feature say something big
         $db = DBAccessSingleton::getInstance();
-        $extractionUserCount = $db->getExtractionsCountUser();
-
-        if($extractionUserCount >= 200)
-        {
-            $energyConsumption = round(array_sum(array_slice($db->getEnergyUser(),200*(-1),200))) / 1000;
-            $diff = "is";
-        }
-        else
-        {
-            $energyConsumption = round(array_sum(array_slice($db->getEnergyUser(),$extractionUserCount *(-1),$extractionUserCount))
-            / count(array_slice($db->getEnergyUser(),$extractionUserCount*(-1),$extractionUserCount))) * (200 / 1000);
-            $diff = "will be";
-        }
-
-        $consHomeOffice = round($energyConsumption / 80,1); // 150 = Homeoffice | 80 = notebook
-        $consWashingMachine = round($energyConsumption / 250,1);;
-        $consLightning = round($energyConsumption / 500,1);
-        $consHouseHold = round($energyConsumption / 3500,2) * 100;
-
-        $textConsumption = 'This '. $diff .' your energy consumption with <b>200</b> showers';
-        $textConsumptionVar = 'This energy consumption corresponds to the <b>annual</b> energy consumption of <br/> &nbsp;';
-
-
 
         // if the user has not given a name take the mail address
         if(strlen($db->getFirstname()) == 0)

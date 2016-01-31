@@ -12,8 +12,9 @@ class CreateHtmlMailReminder
      *
      * @return string the complete html mail
      */
-    public function CreateHTMLMailing()
+    public function CreateHTMLReminderMailing()
     {
+        // init html section classes
         // init html section classes
         $priming = new HtmlReminder();
         $footer = new HtmlFooter();

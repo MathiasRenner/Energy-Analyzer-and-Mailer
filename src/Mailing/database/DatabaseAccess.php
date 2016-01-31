@@ -233,6 +233,7 @@ class DBAccessSingleton
      * for one user, calculate the number of days since the last mailing has been sent
      *
      * @param $id int the user id
+     * @return int
      */
     public function DaysSinceLastMailing($id)
     {
