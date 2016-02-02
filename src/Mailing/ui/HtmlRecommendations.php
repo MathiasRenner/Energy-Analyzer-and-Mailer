@@ -111,13 +111,13 @@ class HtmlRecommendations
                 </tr>
 
                 <tr>
-                    <td width="400" height="50" valign="top" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' .  $rec1 . '  </td>
-                     <td class="body_copy" align="left" valign="top" height="50" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $rec2 . ' </td>
+                    <td width="400" height="50" valign="top" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-left: 20px;"> ' .  $rec1 . '  </td>
+                     <td class="body_copy" align="left" valign="top" height="50" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-left: 20px;"> ' . $rec2 . ' </td>
                 </tr>
 
                 <tr>
-                      <td width="50" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $rec3 . ' </td>
-                      <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; "> ' . $rec4. '</td>
+                      <td width="50" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-left: 20px;"> ' . $rec3 . ' </td>
+                      <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-left: 20px;"> ' . $rec4. '</td>
                 </tr>
 
             </table>

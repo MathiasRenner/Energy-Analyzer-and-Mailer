@@ -24,8 +24,9 @@ class HtmlFooter
         </td>
     </tr>
     <tr>
-      <td class="body_copy" width="800" align="center" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;" >
-        You can unsubscribe from this report <a href="http://www.example.com">here</a>.
+      <td class="body_copy" width="800" align="center" style="font-family: arial,sans-serif; font-size: 10px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;" >
+        We send you this report,because you subscribed through our portal. If you don\'t longer wish to receive this report, you can unsubscribe from your personal report <a href="http://www.example.com">here</a>.
+        <br/>Made with &hearts; by amphiro!
         </td>
     </tr>
 </table>
