@@ -36,7 +36,27 @@ body {
 		ELEMENTS
 ------------------------------------- */
 
-a { color: #2BA6CB;}
+a { color: grey;}
+
+/* unvisited link */
+a:link {
+    color: grey;
+}
+
+/* visited link */
+a:visited {
+    color: grey;
+}
+
+/* mouse over link */
+a:hover {
+    color: grey;
+}
+
+/* selected link */
+a:active {
+    color: grey;
+}
 
 .btn {
     text-decoration:none;
