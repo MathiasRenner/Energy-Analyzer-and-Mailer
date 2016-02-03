@@ -163,7 +163,7 @@ class UtilSingleton
     /**
      * Gets the number of extractions for this user
      *
-     * @param bool|FALSE $ignoreLimit FALSE for getting only 50 extractions
+     * @param bool|FALSE $ignoreLimit FALSE for getting only 30 extractions
      *                     TRUE for getting all extraction counts
      * @return int count of extractions
      */

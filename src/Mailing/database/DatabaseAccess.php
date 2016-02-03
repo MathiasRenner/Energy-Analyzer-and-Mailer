@@ -180,7 +180,7 @@ class DBAccessSingleton
      * @param $id
      * the user id
      */
-    public function Update($id)
+    public function UpdateCurrentUserData($id)
     {
         $this->SetUserDataInfo($id);
         $this->SetUserShowerUsageInformation($id);
@@ -431,6 +431,10 @@ class DBAccessSingleton
         } // end foreach user
     }
 
+    /**
+     * Calculates the days since the last upload
+     * @return mixed
+     */
     public function CalcDaysSinceLastUpload()
     {
         // Query timestamp of last Upload from Database

@@ -41,16 +41,17 @@ include "ui/HtmlThinkBig.php";
 
 // Parameter
 //$id = $_GET['user'];
+//$debug = $_GET['debug'];
 
 // DEBUG MODE:
 $debug = true;
+UtilSingleton::getInstance()->SetDebugMode($debug);
 
 // create the chart object
 $createChart = new CreateCharts();
-$db = DBAccessSingleton::getInstance();
-UtilSingleton::getInstance()->SetDebugMode($debug);
 
 // Init DB and get all relevant db entries
+$db = DBAccessSingleton::getInstance();
 $db->Init();  // init database
 
 // To show  users in different efficiency classes, use 1 = A | 7 = B | 5 = F | array(1,5,7);
@@ -58,18 +59,16 @@ $db->Init();  // init database
 // Test if just received a report: 4
 $allUser = array(1);
 
-
+// if you wanna send all users with extractions or all registered users
 //$allUser = $db->getUserIdsWithExtractions();
+//$allUser = $db->getUserIdAll();
 
-foreach($allUser as $id) {
-
+foreach($allUser as $id)
+{
     // set the user db information
-    $db->Update($id);
+    $db->UpdateCurrentUserData($id);
 
-    $array = $db->getReportedOnUser();
-
-
-    // create the message object
+     // create the message object
     $message = new Swift_Message("This is your Amphiro report. Together we can save the planet!");
     UtilSingleton::getInstance()->SetSwiftMailerInstance($message);
 
@@ -86,7 +85,7 @@ foreach($allUser as $id) {
         break;
 
         // if user did not upload data in the last X days, send him a reminder to upload data
-    } else if ($db->CalcDaysSinceLastUpload() > 21) {
+    } else if ($db->CalcDaysSinceLastUpload() >= 21) {
 
         // create the html mail including all pictures + html + style
         $htmlMailing = new CreateHtmlMailReminder();
@@ -99,8 +98,8 @@ foreach($allUser as $id) {
     }
 
     // only send Mail when variable has not been set to false before
-    if ($sendMail == true){
-
+    if ($sendMail == true)
+    {
         // inline css
         $cssToInlineStyles = new CssToInlineStyles();
         $css = file_get_contents(__DIR__ . '/ui/mailing.css');
@@ -146,6 +145,4 @@ foreach($allUser as $id) {
             } else { echo "There was an error:\n"; print_r($failures);}
         }
     }
-
-
 }

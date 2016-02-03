@@ -41,21 +41,7 @@ class CreateCharts
 
         $savingConsVolume = $calculations->CalcSavingVolumeForBetterEnergyClass($actualConsEnergy);
 
-        /**
-        echo "<br/> Act Vol:    ". $actualConsVolume ;
-        echo "<br/> Better Vol: ". $savingConsVolume ;
-        echo "<br/> Diff:       ". $savingConsVolume / $actualConsVolume;
-
-        echo "<br/> Act Tim:    ". $actualConsTime * 60;
-        echo "<br/> Better Tim: ". $savingConsTime;
-        echo "<br/> Diff:       ". $savingConsTime / ($actualConsTime * 60);
-        */
-
-        $this->CreateGoalChartPicture(1-($savingConsVolume / $actualConsVolume), $savingConsVolume / $actualConsVolume,0, "volumeSavingChart.png");
-
-      /*  $this->CreateGoalChartPicture(1-(($savingConsTime / ($actualConsTime * 60)) / 2 + ($savingConsVolume / $actualConsVolume)/2),
-            ($savingConsTime / ($actualConsTime * 60)) / 2, ($savingConsVolume / $actualConsVolume) / 2, "combinedSavingChart.png");
-*/
+        $this->CreateGoalChartPicture(1-($savingConsVolume / $actualConsVolume), $savingConsVolume / $actualConsVolume, "volumeSavingChart.png");
 
     }
 
@@ -64,10 +50,10 @@ class CreateCharts
      *
      * @param $actual | int actual value first section
      * @param $saving | int saving value second section
-     * @param int $saving2 | int optional third section
      * @param $name | string the name of the chart
+     * @internal param int $saving2 | int optional third section
      */
-    private function CreateGoalChartPicture($actual, $saving, $saving2 = 0, $name)
+    private function CreateGoalChartPicture($actual, $saving, $name)
     {
         /* Create and populate the pData object */
         $MyData = new pData();
@@ -82,7 +68,7 @@ class CreateCharts
 
         $font2 = "libs/charts/pChart2_1_4/fonts/verdana.ttf";
 
-        $MyData->addPoints(array($actual,$saving, $saving2),"ScoreA");
+        $MyData->addPoints(array($actual,$saving),"ScoreA");
 
         $MyData->setSerieDescription("ScoreA","Application A");
         /* Define the absissa serie */
@@ -227,9 +213,6 @@ class CreateCharts
 
         // select the font
         $font2 = "libs/charts/pChart2_1_4/fonts/verdana.ttf";
-
-        $calc = new Calculations();
-        $avgCons = $calc->CalcEnergyUser(FALSE);
 
         /* Create and populate the pData object */
         $MyData = new pData();
