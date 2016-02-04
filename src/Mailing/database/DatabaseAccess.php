@@ -17,7 +17,7 @@ class DBAccessSingleton
     //variable to hold db connection
     private $db;
 
-    // the userId / with extractions
+    // the userId / with extractions / with registered for report
     private $userIdAll;
     public function getUserIdAll()
     {
@@ -28,6 +28,12 @@ class DBAccessSingleton
     public function getUserIdsWithExtractions()
     {
         return $this->userIdsWithExtractions;
+    }
+
+    private $userIdsRegisteredForReport;
+    public function getUserIdsRegisteredForReport()
+    {
+        return $this->userIdsRegisteredForReport;
     }
 
     // user data information
@@ -170,6 +176,7 @@ class DBAccessSingleton
     {
         $this->SetAllUserIds();
         $this->SetAllUserIdWithExtractions();
+        $this->SetAllUserIdRegisteredForReport();
 
         $this->SetAllUserShowerUsageInformation();
     }
@@ -213,6 +220,21 @@ class DBAccessSingleton
         while($row = mysqli_fetch_object($res))
         {
             array_push($this->userIdsWithExtractions, $row->b1user_id);
+        }
+    }
+
+    /**
+     * set all userId who are registerd to the portal
+     * TODO: update the column studyDataProvider to the corresponding one for registered to reprot
+     */
+    public function SetAllUserIdRegisteredForReport()
+    {
+        $this->userIdsRegisteredForReport = array();
+        $query = "SELECT id FROM b1user WHERE studyDataProvider = 1";
+        $res = mysqli_query($this->db, $query);
+        while($row = mysqli_fetch_object($res))
+        {
+            array_push($this->userIdsRegisteredForReport, $row->id);
         }
     }
 

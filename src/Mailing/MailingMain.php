@@ -62,6 +62,7 @@ $allUser = array(1);
 // if you wanna send all users with extractions or all registered users
 //$allUser = $db->getUserIdsWithExtractions();
 //$allUser = $db->getUserIdAll();
+//$allUser = $db->getUserIdsRegisteredForReport();
 
 foreach($allUser as $id)
 {
