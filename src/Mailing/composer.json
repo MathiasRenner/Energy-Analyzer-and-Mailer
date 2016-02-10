@@ -1,5 +1,8 @@
 {
     "require": {
         "tijsverkoyen/css-to-inline-styles": "^1.5"
-    }
+    },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  }
 }
