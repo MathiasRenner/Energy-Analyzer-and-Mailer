@@ -1,16 +1,16 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Max
- * Date: 10/02/16
- * Time: 20:07
  */
 include "../business/Calculations.php";
 
+/*
+ * Test class for the Calculation.php
+ */
 class CalculationTests extends PHPUnit_Framework_TestCase
 {
 
-    public function testCalculationEnergyUsageNormalShowerExpected()
+    public function testCalculationEnergyUsageNormalShowerExpected1750()
     {
         // Arrange
         $a = new Calculations();
@@ -22,4 +22,6 @@ class CalculationTests extends PHPUnit_Framework_TestCase
         // Assert
         $this->assertEquals(1750, $b);
     }
+
+
 }
