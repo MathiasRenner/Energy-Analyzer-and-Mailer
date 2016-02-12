@@ -29,7 +29,7 @@ class HtmlTwitterBadge
         $reportCount = count($aryUniqueReportOn);
         $upload = 0;
 
-        $rewardHeadingText = '&nbsp; &nbsp; Your reward!';
+        $rewardHeadingText = '&nbsp; &nbsp; You received a new badge!';
         $badge = "";
 
         // select the right badge
@@ -37,7 +37,7 @@ class HtmlTwitterBadge
         {
             $badge = "";
             $upload = 10;
-            $rewardHeadingText = "Your next reward will be here!";
+            $rewardHeadingText = "Your first badge will be here!";
         }
         elseif($reportCount >= 10 && $reportCount < 25)
         {

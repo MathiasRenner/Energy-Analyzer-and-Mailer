@@ -63,13 +63,13 @@ class HtmlReminder
                 <tr>
                 <td>  <img src="'. UtilSingleton::getInstance()->InlinePicture("assets/priming/baer.png") .'" width="50" alt=""/>
                 </td>
-                <td>&nbsp; Hello <b>' . $name . ' </b> ,</td>
+                <td>&nbsp; Hello <b>' . $name . '</b>,</td>
                 </tr>
                 </table>
 
-                <b>we need some recent data from you such that we can provide you your <b>personal</b> amphiro report </b> (the last time you uploaded your shower data was  '.  $DaysSinceLastUpload .'   days ago).
+                <b>we need some recent data from you, so we can provide you with your <b>personal</b> amphiro report </b> (the last time you uploaded your shower data was  '.  $DaysSinceLastUpload .'   days ago).
                  <br/><br/>
-                The report will then provide you information about...
+                In the report you will receive information about...
 
                 </td>
                 </tr>
@@ -79,7 +79,7 @@ class HtmlReminder
 
 
                 <lu>
-                   <li><strong>your energy consumption compared to other customers</strong></li>
+                   <li><strong>your energy consumption compared to other amphiro users</strong></li>
                    <li><strong>your energy saving performance</strong></li>
                    <li><strong>and give personal energy saving tips</strong></li>
                 </lu>
@@ -88,10 +88,9 @@ class HtmlReminder
 
                 <tr>
                 <td  width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 30px; padding-right: 30px;">
-                ...so you can even save more energy!
+                ...so you can save even more energy!
                 <br/><br/>
-                <b>We look forward to hear from you soon!</b>
-
+                <b>We look forward to hearing from you soon!</b>
 
                 </td>
                 </tr>
