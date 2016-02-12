@@ -44,10 +44,10 @@ class CreateHtmlMail
             $htmlheadmeta
             .$priming_html
             .$thinkBig_html
-            .$summary_html
             .$descinj_html
             .$classification_html
             .$timecomp_html
+            .$summary_html
             .$recommendations_html
             .$twitter_goal_html
             .$footer_html
