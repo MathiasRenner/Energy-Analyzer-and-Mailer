@@ -43,11 +43,11 @@ class CreateHtmlMail
         return
             $htmlheadmeta
             .$priming_html
+            .$summary_html
             .$thinkBig_html
             .$descinj_html
             .$classification_html
             .$timecomp_html
-            .$summary_html
             .$recommendations_html
             .$twitter_goal_html
             .$footer_html
