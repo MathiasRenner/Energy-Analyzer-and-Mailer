@@ -104,7 +104,7 @@ class HtmlTwitterBadge
    <tr>
             <td width="30%" align="center">
             <a href="' . $twittertext . '">
-                <img width="140px" height="80px"   src="'.UtilSingleton::getInstance()->InlinePicture("assets/twitter/twitter_share_2.png").'"/>
+                <img width="140px" height="auto"   src="'.UtilSingleton::getInstance()->InlinePicture("assets/twitter/twitter_share_2.png").'"/>
             </a>
             </td>
 
