@@ -31,7 +31,7 @@ class HtmlThinkBig
         $consLightning = round($energyConsumption / 500000,1);
         //$consHouseHold = round($energyConsumption / 3500,2) * 100;
 
-        $textConsumption = 'This '. $diff .' your energy consumption after <b>200</b> showers';
+        $textConsumption = 'Your energy consumption <br/>after <b>200</b> showers ' . $diff;
         $textConsumptionVar = 'This amount of energy corresponds to the <b>annual</b> energy consumption of <br/> &nbsp;';
 
         $energyConsumption = number_format($energyConsumption,0,",",".");
