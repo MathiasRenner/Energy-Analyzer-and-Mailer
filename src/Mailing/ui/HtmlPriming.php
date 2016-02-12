@@ -66,7 +66,7 @@ class HtmlPriming
                 </table>
                 We are pleased to provide you with your <b>personal</b> amphiro report.
                 <br/>
-                We provide information about...
+                You receive information about...
 
                 </td>
                 </tr>
