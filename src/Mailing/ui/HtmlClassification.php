@@ -27,7 +27,7 @@ class HtmlClassification
         $rowE  = "";
         $rowF  = "";
         $rowG  = "";
-
+        
         // set the user row
         if ($class == 'A+') {
             $rowAA = '<td> <img width="auto" height="40px" src="'.UtilSingleton::getInstance()->InlinePicture("assets/classifications/AAY.png").'" > </td>';
@@ -157,7 +157,7 @@ class HtmlClassification
             $goal = '
             <tr>
                 <td class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 15px;">
-                <b>You are awesome!</b>
+                <b>You are awesome!<br/> Keep up the good work!</b>
                 </td>
             </tr>
                             ';
