@@ -29,7 +29,7 @@ class HtmlTwitterBadge
         $reportCount = count($aryUniqueReportOn);
         $upload = 0;
 
-        $rewardHeading = '&nbsp; &nbsp; Your reward!';
+        $rewardHeadingText = '&nbsp; &nbsp; Your reward!';
         $badge = "";
 
         // select the right badge
@@ -37,52 +37,60 @@ class HtmlTwitterBadge
         {
             $badge = "";
             $upload = 10;
-            $rewardHeading = "Your next reward will be here!";
+            $rewardHeadingText = "Your next reward will be here!";
         }
         elseif($reportCount >= 10 && $reportCount < 25)
         {
-
-            $badge = '<td width="30%" align="center"><img width="140" height="82" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g1.png").'"></td>';
+            $badge = '<td width="30%" align="center" valign="top"><img width="90" height="auto" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g1.png").'"></td>';
             $upload = 25;
         }
         elseif($reportCount >= 25 && $reportCount < 75)
         {
-            $badge = '<td width="30%" align="center"><img width="140" height="82" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g2.png").'"></td>';
+            $badge = '<td width="30%" align="center" valign="top"><img width="90" height="auto" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g2.png").'"></td>';
             $upload = 75;
         }
         elseif($reportCount >= 75 && $reportCount < 150)
         {
-            $badge = '<td width="30%" align="center"><img width="140" height="82" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g3.png").'"></td>';
+            $badge = '<td width="30%" align="center" valign="top"><img width="90" height="auto" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g3.png").'"></td>';
             $upload = 150;
         }
         elseif($reportCount >= 150 && $reportCount < 300)
         {
-            $badge = '<td width="30%" align="center"><img width="140" height="82"  src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g4.png").'"></td>';
+            $badge = '<td width="30%" align="center" valign="top"><img width="90" height="auto" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g4.png").'"></td>';
             $upload = 300;
         }
         elseif($reportCount >= 300)
         {
-            $badge = '<td width="30%" align="center"><img width="140" height="82" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g5.png").'"></td>';
+            $badge = '<td width="30%" align="center" valign="top"><img width="90" height="auto" src="'.UtilSingleton::getInstance()->InlinePicture("assets/badges/g5.png").'"></td>';
         }
 
         $rewardText = "";
         if($reportCount < 10)
         {
-            $rewardText = '<td width="40%" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+          $rewardHeading = '<td width="70%" colspan="3" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            '.$rewardHeadingText.'</td>';
+
+        $rewardText = '<td width="40%" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
              You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
             Upload your shower data <b>'. $upload .'</b> times <br/> and you will get your first reward!
             </td>';
         }
         elseif($reportCount < 300)
         {
-            $rewardText = '<td width="40%" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            $rewardHeading = '<td width="70%" colspan="3" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            '.$rewardHeadingText.'</td>';
+
+            $rewardText = '<td width="40%" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 1px; padding-left: 20px;">
             You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
-            Upload your shower data <b>'. $upload .'</b> times and the living place increases!
+            Upload your shower data <b>'. $upload .'</b> times to increase the polar bear\'s living space!
             </td>';
         }
         elseif($reportCount >= 300)
         {
-            $rewardText = '<td width="40%" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            $rewardHeading = '<td width="70%" colspan="3" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+            '.$rewardHeadingText.'</td>';
+
+            $rewardText = '<td width="40%" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 1px; padding-left: 20px;">
             You have uploaded your data <b>'. $reportCount . '</b> times!<br/>
             We thank you very much for being such an awesome customer!
             </td>';
@@ -95,8 +103,7 @@ class HtmlTwitterBadge
    <tr >
         <td width="30%" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
         </td>
-        <td width="70%" colspan="3" class="body_copy" align="center" style="font-family: arial,sans-serif; font-size: 18px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-        '.$rewardHeading.'</td>
+        '. $rewardHeading.'
         <td></td>
    </tr>
 
@@ -108,9 +115,10 @@ class HtmlTwitterBadge
             </a>
             </td>
 
-            '. $badge .'
 
             '. $rewardText .'
+
+            '. $badge .'
 
     </tr>
 </table>
