@@ -31,8 +31,8 @@ class HtmlThinkBig
         $consLightning = round($energyConsumption / 500,1);
         //$consHouseHold = round($energyConsumption / 3500,2) * 100;
 
-        $textConsumption = 'This '. $diff .' your energy consumption with <b>200</b> showers';
-        $textConsumptionVar = 'This energy consumption corresponds to the <b>annual</b> energy consumption of <br/> &nbsp;';
+        $textConsumption = 'This '. $diff .' your energy consumption after <b>200</b> showers';
+        $textConsumptionVar = 'This amount of energy corresponds to the <b>annual</b> energy consumption of <br/> &nbsp;';
 
 
         return
@@ -74,15 +74,15 @@ class HtmlThinkBig
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-       <b>'. $consHomeOffice .'</b><br/> notebooks(s)
+       <b>'. $consHomeOffice .'</b><br/> notebooks
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <b>'. $consWashingMachine .'</b><br/> washing machine(s)
+      <b>'. $consWashingMachine .'</b><br/> washing machines
       </td>
 
       <td width="160" valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
-      <b>'. $consLightning .'</b><br/> times lightning a household
+      <b>'. $consLightning .'</b><br/> domestic lighting
       </td>
 
     </tr>

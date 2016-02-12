@@ -64,9 +64,9 @@ class HtmlPriming
                 <td>&nbsp; Hello <b>' . $name . '</b>,</td>
                 </tr>
                 </table>
-                We are pleased to provide you your <b>personal</b> amphiro report.
+                We are pleased to provide you with your <b>personal</b> amphiro report.
                 <br/>
-                We provide you information about...
+                We provide information about...
 
                 </td>
                 </tr>
@@ -75,7 +75,7 @@ class HtmlPriming
                 <td  width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 50px; padding-right: 50px;">
 
                 <lu>
-                   <li><strong>your energy consumption compared to our other customers</strong></li>
+                   <li><strong>your energy consumption compared to other amphiro users</strong></li>
                    <li><strong>your energy saving performance</strong></li>
                    <li><strong>personal energy saving tips</strong></li>
                 </lu>
@@ -84,7 +84,7 @@ class HtmlPriming
 
                 <tr>
                 <td  width="800" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px; padding-left: 30px; padding-right: 30px;">
-                ...so you can even save more energy!
+                ...so you can save even more energy!
                 </td>
                 </tr>
             </table>

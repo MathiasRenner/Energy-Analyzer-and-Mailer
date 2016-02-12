@@ -24,7 +24,7 @@ class HtmlRecommendations
 
         // compare shower time
         if ($calcUserTime > $calcAllUserTime) {
-            $textReduceTime = "<b>Invest less time in showering!</b><br />Your showertime is high compared to others.";
+            $textReduceTime = "<b>Invest less time in showering!</b><br />Your shower time is high compared to others.";
             array_push($array, $textReduceTime);
         }
 
@@ -35,7 +35,7 @@ class HtmlRecommendations
 
         // compare flow rate
         if ($UserflowRate > $avgflowRate) {
-            $textReduceWater = "<b>Turn on the tap only half way!</b><br />Compared to others, you have a high flow rate.";
+            $textReduceWater = "<b>Turn on the tap only half way!</b><br />Compared to others you have a high flow rate.";
             array_push($array, $textReduceWater);
         }
 
@@ -46,13 +46,13 @@ class HtmlRecommendations
 
         // compare number of showers
         if ($UserAvgNumberOfShowers > $AvgNumberOfShowers) {
-            $textReduceFrequency = "<b>Don't take a shower too often!</b><br />You take showers more ofthen than others.";
+            $textReduceFrequency = "<b>Don't take a shower too often!</b><br />You take showers more often than others.";
             array_push($array, $textReduceFrequency);
         }
 
 
         // instanciate global variable for beeing accessible
-        $textReduceShampooing = '<b>Stop water during shampooing!</b><br />Take a short break rather than letting the soap immediately rubbing down again.';
+        $textReduceShampooing = '<b>Stop the water during shampooing!</b><br />Take a short break rather than letting the water rub down the soap immediately.';
         // analysing shower breaks is not yet available from the data, show randomly instead
         if (round(rand(0, 1))) {
             array_push($array, $textReduceShampooing);

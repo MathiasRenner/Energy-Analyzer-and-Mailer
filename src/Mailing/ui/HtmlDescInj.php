@@ -20,17 +20,17 @@ class HtmlDescInj
         if($avgUser <= $avgTop20)
         {
             $inj = '<td align="left" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj1.png").'" width="50%" alt="" style="display: block; border: 0;" /></td>';
-            $descText = "You are one of the Top 20% user. That's great!<br/>Do not stop being an energy saver!";
+            $descText = "You are one of the Top 20% users. That's great!<br/>Don't stop being an energy saver!";
         }
         elseif($avgUser <= $avgAll)
         {
             $inj = '<td align="left" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj2.png").'" width="45%" alt="" style="display: block; border: 0;" /></td>';
-            $descText = "Your average energy consumption for your last showers was above the average.<br/>Well done!";
+            $descText = "Your average energy consumption for your last showers was below the average.<br/>Well done!";
         }
         else
         {
             $inj = '<td align="left" class="hero_image"><img src="'.UtilSingleton::getInstance()->InlinePicture("assets/injunctive/inj3.png").'" width="52%" alt="" style="display: block; border: 0;" /></td>';
-            $descText = "Your average energy consumption for your last showers was below the average.<br/>You are good, but we know you can do better!";
+            $descText = "Your average energy consumption for your last showers was above the average.<br/>You are good, but we know you can do better!";
         }
 
         return '
@@ -40,7 +40,7 @@ class HtmlDescInj
         <table cellpadding="0" cellspacing="0">
         <tr>
                <td class="headline" colspan="2" class="headline" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #7f7f7f;  padding-top: 10px;">
-               How are you doing compared to all amphiro users?
+               How are you doing compared to other amphiro users?
                </td>
         </tr>
 

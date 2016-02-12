@@ -173,16 +173,14 @@ class HtmlClassification
 <table class=section cellpadding="0" cellspacing="0">
     <tr>
         <td class="headline" colspan="2" align="center" style="font-family: arial,sans-serif; font-size: 22px; color: #7f7f7f; padding-top: 10px;">
-        Your position on the efficiency scale
+        Your energy efficiency level
         </td>
     </tr>
 
     <tr>
         <td colspan="2" class="body_copy" align="left" style="font-family: arial,sans-serif; font-size: 14px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;
         padding-left: 30px; padding-right: 30px;">
-        for the average energy consumption of the last <b>'. $extractionUserCount .'</b> showers<br/>
-
-        In average, you consumed <b>'. $energy .' Wh</b> per shower.
+        Over the last <b>'. $extractionUserCount .'</b> showers you consumed <b>'. $energy .' Wh</b> on average per shower.<br/>
         With this energy consumption your energy efficiency class is <b>'. $class .'</b>. <br/> &nbsp;
         </td>
     </tr>
