@@ -106,7 +106,7 @@ class HtmlRecommendations
             <table class=section cellpadding="0" cellspacing="0" >
                 <tr>
                     <td class="headline" width="800" colspan="2" style="font-family: arial,sans-serif; font-size: 22px; color: #7f7f7f; padding-top: 10px;">
-                    Personal tips how you can improve
+                    How you can improve
                     </td>
                 </tr>
 
