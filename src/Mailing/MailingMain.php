@@ -47,22 +47,27 @@ include "ui/HtmlThinkBig.php";
 $debug = true;
 UtilSingleton::getInstance()->SetDebugMode($debug);
 
-// create the chart object
-$createChart = new CreateCharts();
-
 // Init DB and get all relevant db entries
 $db = DBAccessSingleton::getInstance();
-$db->Init();  // init database
+$db->Init();  // init database and all consumption data
 
-// To show  users in different efficiency classes, use 1 = A | 7 = B | 5 = F | array(1,5,7);
-// Test if user did not recently upload data: 11
-// Test if just received a report: 4
-$allUser = array(1);
+if($debug)
+{
+    $daysSinceLastUpload = 9999;
+    // To show  users in different efficiency classes, use 1 = A | 7 = B | 5 = F | array(1,5,7);
+    // Test if user did not recently upload data: 11
+    // Test if just received a report: 4
+    $allUser = array(1);
+}
+else
+{
+    $daysSinceLastUpload = 21;
+    // if you wanna send all users with extractions or all registered users
+    $allUser = $db->getUserIdsWithExtractions();
+    //$allUser = $db->getUserIdAll();
+    //$allUser = $db->getUserIdsRegisteredForReport();
+}
 
-// if you wanna send all users with extractions or all registered users
-//$allUser = $db->getUserIdsWithExtractions();
-//$allUser = $db->getUserIdAll();
-//$allUser = $db->getUserIdsRegisteredForReport();
 
 foreach($allUser as $id)
 {
@@ -72,9 +77,6 @@ foreach($allUser as $id)
      // create the message object
     $message = new Swift_Message("This is your Amphiro report. Together we can save the planet!");
     UtilSingleton::getInstance()->SetSwiftMailerInstance($message);
-
-    // create all charts
-    $createChart->CreateAllCharts();
 
     // if last mailing has been sent within the last X days, do not send a report again
     global $sendMail;
@@ -86,7 +88,7 @@ foreach($allUser as $id)
         break;
 
         // if user did not upload data in the last X days, send him a reminder to upload data
-    } else if ($db->CalcDaysSinceLastUpload() >= 21) {
+    } else if ($db->CalcDaysSinceLastUpload() >= $daysSinceLastUpload) {
 
         // create the html mail including all pictures + html + style
         $htmlMailing = new CreateHtmlMailReminder();
@@ -101,6 +103,11 @@ foreach($allUser as $id)
     // only send Mail when variable has not been set to false before
     if ($sendMail == true)
     {
+        // create the chart object
+        $createChart = new CreateCharts();
+        // create all charts
+        $createChart->CreateAllCharts();
+
         // inline css
         $cssToInlineStyles = new CssToInlineStyles();
         $css = file_get_contents(__DIR__ . '/ui/mailing.css');
