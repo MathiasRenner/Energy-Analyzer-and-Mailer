@@ -57,7 +57,7 @@ if($debug)
     // To show  users in different efficiency classes, use 1 = A | 7 = B | 5 = F | array(1,5,7);
     // Test if user did not recently upload data: 11
     // Test if just received a report: 4
-    $allUser = array(1);
+    $allUser = array(7);
 }
 else
 {
@@ -85,7 +85,7 @@ foreach($allUser as $id)
 
         $sendMail = false;
         echo 'No report has been generated because the last report has been sent ' . $db->DaysSinceLastMailing($id) . ' day(s) ago.';
-        break;
+        //break;
 
         // if user did not upload data in the last X days, send him a reminder to upload data
     } else if ($db->CalcDaysSinceLastUpload() >= $daysSinceLastUpload) {

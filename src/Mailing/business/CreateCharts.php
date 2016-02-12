@@ -182,8 +182,6 @@ class CreateCharts
             // ... proceed to declare your function
         }
 
-        // draws an heading text
-        $myDescChart->drawText(270,28,"consumption in Wh",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 
         // create the chart
         $myDescChart->drawBarChart(array("DisplayValues"=>TRUE,"Surrounding"=>30,"OverrideColors"=>$palette));
@@ -191,6 +189,9 @@ class CreateCharts
         // workaround to hide the Y-axis
         $RectangleSettings = array("R"=>255,"G"=>255,"B"=>255);
         $myDescChart->drawFilledRectangle(10,30, 1000,80,$RectangleSettings);
+
+        // draws an heading text
+        $myDescChart->drawText(270,50,"consumption in Wh",array("FontSize"=>20,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 
         // save the picture to file
         $myDescChart->render("pictures/descChart.png");
