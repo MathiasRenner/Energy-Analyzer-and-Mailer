@@ -63,9 +63,10 @@ else
 {
     $daysSinceLastUpload = 21;
     // if you wanna send all users with extractions or all registered users
-    $allUser = $db->getUserIdsWithExtractions();
+    //$allUser = $db->getUserIdsWithExtractions();
     //$allUser = $db->getUserIdAll();
-    //$allUser = $db->getUserIdsRegisteredForReport();
+    $allUser = $db->getUserIdsRegisteredForReport();
+    //$allUser = array(1);
 }
 
 
@@ -75,7 +76,7 @@ foreach($allUser as $id)
     $db->UpdateCurrentUserData($id);
 
      // create the message object
-    $message = new Swift_Message("This is your Amphiro report. Together we can save the planet!");
+    $message = new Swift_Message("Your personal amphiro report");
     UtilSingleton::getInstance()->SetSwiftMailerInstance($message);
 
     // if last mailing has been sent within the last X days, do not send a report again
@@ -120,10 +121,9 @@ foreach($allUser as $id)
         $transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de', 587, 'tls');
         $transport->setLocalDomain('[127.0.0.1]');
 
-        $from = array('mailing@amphiro.com' => 'Your Amphiro Team');
+        $from = array('mailing@amphiro.com' => 'Amphiro');
         $to = array(
             $db->getEmail() => $db->getFirstname(). ' ' . $db->getFamilyname()
-
         );
 
         // object for sending the finished mail
@@ -140,7 +140,10 @@ foreach($allUser as $id)
         //$message->addPart($text, 'text/plain');
 
         // display for debug
-        print $message->getBody();
+        if($debug)
+        {
+            print $message->getBody();
+        }
 
         if($debug == false)
         {
