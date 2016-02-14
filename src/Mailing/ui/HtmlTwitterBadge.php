@@ -1,14 +1,17 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Max
- * Date: 19/01/16
- * Time: 15:18
  */
 
+/**
+ * Class HtmlTwitterBadge for displaying the twitter and gamification feature
+ */
 class HtmlTwitterBadge
 {
-
+    /**
+     *
+     * @return string building the html segment
+     */
     public function GetTwitterBadge()
     {
 
@@ -17,7 +20,7 @@ class HtmlTwitterBadge
         $class =  UtilSingleton::GetEfficiencyClass($energy);
 
         // feature twitter
-        $ttext = 'Let\'s+save+the+planet!+My+efficiency+class+for+the+last+showers+were+' . $class . '+with+' . $energy . '+Wh+per+shower!';
+        $ttext = 'Let\'s+save+more+energy!+My+shower+efficiency+class+is+' . $class . '+with+' . $energy . '+Wh+per+shower!';
         $twittertext = 'https://twitter.com/intent/tweet?url=http%3A%2F%2Famphiro.com&text='. $ttext .'&via=AmphiroAG';
 
         // feature gamification badge
@@ -25,6 +28,7 @@ class HtmlTwitterBadge
 
         // get the count off all uploads
         $aryReportedOn = $db->getReportedOnUser();
+        // only one upload per day will be used for the upload count
         $aryUniqueReportOn = array_unique($aryReportedOn);
         $reportCount = count($aryUniqueReportOn);
         $upload = 0;
