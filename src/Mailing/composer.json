@@ -1,6 +1,7 @@
 {
     "require": {
-        "tijsverkoyen/css-to-inline-styles": "^1.5"
+        "tijsverkoyen/css-to-inline-styles": "^1.5",
+        "swiftmailer/swiftmailer": "@stable"
     },
   "require-dev": {
     "phpunit/phpunit": "3.7.*"

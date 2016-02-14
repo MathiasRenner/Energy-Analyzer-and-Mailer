@@ -1,17 +1,27 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Max
- * Date: 25/11/15
- * Time: 17:42
+ */
+
+/**
+ * Main PHP File for running the mailing service
+ * Include all needed files
+ *
+ * Set Debug Mode true = sending the mail, false = show the mailing in the browser
+ *
+ * 1. step: init all needed database variables
+ * 2. step: init the SwiftMailer instaces
+ * 3. step: decide weather to send an mailing or not
+ * 4. step: build all the grafics
+ * 5. step: build all the hmtl mailing segments
+ * 6. step: combine the css with the html segments
+ * 7. step: send the mail
  */
 
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 require_once 'config.php';
 require_once __DIR__ . '/vendor/autoload.php';
-
-include "libs/swiftmailer/lib/swift_required.php";
 
 /* pChart library inclusions */
 include("libs/charts/pChart2_1_4/class/pData.class.php");
@@ -43,6 +53,7 @@ include "ui/HtmlThinkBig.php";
 //$id = $_GET['user'];
 //$debug = $_GET['debug'];
 
+// 1. step
 // DEBUG MODE:
 $debug = true;
 UtilSingleton::getInstance()->SetDebugMode($debug);
@@ -66,7 +77,7 @@ else
     //$allUser = $db->getUserIdsWithExtractions();
     //$allUser = $db->getUserIdAll();
     $allUser = $db->getUserIdsRegisteredForReport();
-    //$allUser = array(1);
+    //$allUser = array(1,2,3);
 }
 
 
@@ -75,10 +86,12 @@ foreach($allUser as $id)
     // set the user db information
     $db->UpdateCurrentUserData($id);
 
-     // create the message object
+    // 2. step
+    // create the message object
     $message = new Swift_Message("Your personal amphiro report");
     UtilSingleton::getInstance()->SetSwiftMailerInstance($message);
 
+    // 3. step
     // if last mailing has been sent within the last X days, do not send a report again
     global $sendMail;
     $sendMail = true;
@@ -96,6 +109,14 @@ foreach($allUser as $id)
         $html = $htmlMailing->CreateHTMLReminderMailing();
 
     } else {
+
+        // 4. step
+        // create the chart object
+        $createChart = new CreateCharts();
+        // create all charts
+        $createChart->CreateAllCharts();
+
+        // 5. step
         // create the html mail including all pictures + html + style
         $htmlMailing = new CreateHtmlMail();
         $html = $htmlMailing->CreateHTMLMailing();
@@ -104,11 +125,7 @@ foreach($allUser as $id)
     // only send Mail when variable has not been set to false before
     if ($sendMail == true)
     {
-        // create the chart object
-        $createChart = new CreateCharts();
-        // create all charts
-        $createChart->CreateAllCharts();
-
+        // 6. step
         // inline css
         $cssToInlineStyles = new CssToInlineStyles();
         $css = file_get_contents(__DIR__ . '/ui/mailing.css');
@@ -147,8 +164,9 @@ foreach($allUser as $id)
 
         if($debug == false)
         {
+            // 7. step
             // for sending your email
-            if ($recipients = $mailer->send($message, $failures)) { echo 'Message successfully sent!';
+            if ($recipients = $mailer->send($message, $failures)) { echo '<br/>Message successfully sent!';
 
             // write timestamp to database
             //$db->WriteTimestampOfMailing($id);
