@@ -23,7 +23,7 @@ class HtmlTwitterBadge
         // feature gamification badge
         $db = DBAccessSingleton::getInstance();
 
-        // get the count off all uploads
+        // get the count of all uploads
         $aryReportedOn = $db->getReportedOnUser();
         // only one upload per day will be used for the upload count
         $aryUniqueReportOn = array_unique($aryReportedOn);

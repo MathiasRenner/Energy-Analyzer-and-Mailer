@@ -161,7 +161,7 @@ class DBAccessSingleton
     private function __clone(){}
 
     /**
-     * Get all the data from the db and rum all functions one time to get everything we needed
+     * Get all the data from the db and run all functions once to get everything we needed
      *
      * the user id
      */
