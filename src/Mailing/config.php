@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Max
- * Date: 15/12/15
- * Time: 20:48
- */
 
 // needed for inline css
 

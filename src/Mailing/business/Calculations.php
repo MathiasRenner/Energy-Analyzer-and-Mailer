@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Max
- * Date: 09/12/15
- * Time: 13:58
- */
-
 
 /**
  * Class Calculations

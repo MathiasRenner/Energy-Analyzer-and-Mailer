@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Max
- * Date: 13/01/16
- * Time: 10:29
- */
 
 /**
  * Class UtilHelper

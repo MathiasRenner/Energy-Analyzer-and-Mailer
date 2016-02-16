@@ -1,7 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- */
+
 
 include "../database/DatabaseAccess.php";
 include "../business/Calculations.php";

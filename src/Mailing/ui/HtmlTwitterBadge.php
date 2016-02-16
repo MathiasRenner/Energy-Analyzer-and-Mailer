@@ -1,7 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- */
 
 /**
  * Class HtmlTwitterBadge for displaying the twitter and gamification feature

@@ -1,7 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- */
 
 /**
  * Main PHP File for running the mailing service
