@@ -11,10 +11,10 @@ class Calculations
      *
      *  Calculates the Efficiency for the user
      *
-     *  E =  c * Volumen * (Durchschnittstemp. - 10°C) / n
-     *  c: spezifische Wärmekapazität von Wasser
-     *  Grundtemperatur Wasser: Kann konfiguriert werden, ist aber standardmäßig auf 10°C festgeleget
-     *  n:  Effizienz = 100% (ist standardmäßig so festgelegt, kann aber konfiguriert werden bei Bedarf)
+     *  E =  c * volume * (average temperature - base temperature) / n
+     *  c: specific heat capacity of water
+     *  base temperature: 10°C by default. This value can be configured if needed.
+     *  n:  efficiency: 100% by default. This value can be configured if needed.
      *
      * @param $volume
      * @param $hotWater

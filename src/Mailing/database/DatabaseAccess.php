@@ -1,13 +1,6 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Max
- * Date: 28/11/15
- * Time: 15:55
- */
-
-/**
  * Class DBAccessSingleton
  * implemented as singleton
  * to access all the data-objects with an single db-access

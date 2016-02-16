@@ -1,6 +1,5 @@
 <?php
 
-
 include "../database/DatabaseAccess.php";
 include "../business/Calculations.php";
 
