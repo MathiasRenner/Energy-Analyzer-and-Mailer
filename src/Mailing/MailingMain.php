@@ -1,4 +1,10 @@
 <?php
+/*
+ * Developed by Mathias/Clemens/Max
+ * University of Bamberg
+ * Masters cource WiSe 2015/16
+ * at Energy Efficient Systems Group
+ */
 
 /**
  * Main PHP File for running the mailing service
@@ -65,7 +71,7 @@ if($debug)
     // To show  users in different efficiency classes, use 1 = A | 7 = B | 5 = F | array(1,5,7);
     // Test if user did not recently upload data: 11
     // Test if just received a report: 4
-    $allUser = array(1);
+    $allUser = array(7);
 }
 else
 {
@@ -74,7 +80,9 @@ else
     //$allUser = $db->getUserIdsWithExtractions();
     //$allUser = $db->getUserIdAll();
     $allUser = $db->getUserIdsRegisteredForReport();
-    //$allUser = array(1,2,3);
+//    $allUser = array(1,7,5);
+    $allUser = array(7);
+
 }
 
 
@@ -137,7 +145,7 @@ foreach($allUser as $id)
 
         $from = array('mailing@amphiro.com' => 'Amphiro');
         $to = array(
-            $db->getEmail() => $db->getFirstname(). ' ' . $db->getFamilyname()
+             $db->getEmail() => $db->getFirstname(). ' ' . $db->getFamilyname()
         );
 
         // object for sending the finished mail
@@ -148,7 +156,7 @@ foreach($allUser as $id)
         $message->setBody($html, 'text/html');
 
         // further infos
-        //$text = "This is your Amphiro report. Together we can save the planet!";
+        //$text = "your text for a new part";
 
         $message->setTo($to);
         //$message->addPart($text, 'text/plain');
@@ -163,12 +171,17 @@ foreach($allUser as $id)
         {
             // 7. step
             // for sending your email
-            if ($recipients = $mailer->send($message, $failures)) { echo '<br/>Message successfully sent!';
+            if ($recipients = $mailer->send($message, $failures))
+            {
+                echo '<br/>Message for user '. $id .' successfully sent!';
 
-            // write timestamp to database
-            //$db->WriteTimestampOfMailing($id);
-
-            } else { echo "There was an error:\n"; print_r($failures);}
+                // write timestamp to database
+                //$db->WriteTimestampOfMailing($id);
+            }
+            else
+            {
+                echo "There was an error:\n"; print_r($failures);
+            }
         }
     }
 }

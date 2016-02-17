@@ -14,15 +14,15 @@ class HtmlThinkBig
         $db = DBAccessSingleton::getInstance();
         $extractionUserCount = $db->getExtractionsCountUser();
 
-        if($extractionUserCount >= 200)
+        if($extractionUserCount >= 400)
         {
-            $energyConsumption = round(array_sum(array_slice($db->getEnergyUser(),200*(-1),200))); /// 1000;
+            $energyConsumption = round(array_sum(array_slice($db->getEnergyUser(),400*(-1),400))); /// 1000;
             $diff = "is";
         }
         else
         {
             $energyConsumption = round(array_sum(array_slice($db->getEnergyUser(),$extractionUserCount *(-1),$extractionUserCount))
-                    / count(array_slice($db->getEnergyUser(),$extractionUserCount*(-1),$extractionUserCount))) * 200; //(200 / 1000);
+                    / count(array_slice($db->getEnergyUser(),$extractionUserCount*(-1),$extractionUserCount))) * 400; //(200 / 1000);
             $diff = "will be";
         }
 
@@ -31,7 +31,7 @@ class HtmlThinkBig
         $consLightning = round($energyConsumption / 500000,1);
         //$consHouseHold = round($energyConsumption / 3500,2) * 100;
 
-        $textConsumption = 'Your energy consumption <br/>after <b>200</b> showers ' . $diff;
+        $textConsumption = 'Your energy consumption <br/>after <b>400</b> showers ' . $diff;
         $textConsumptionVar = 'This amount of energy corresponds to the <b>annual</b> energy consumption of <br/> &nbsp;';
 
         $energyConsumption = number_format($energyConsumption,0,",",".");
