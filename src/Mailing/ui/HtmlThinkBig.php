@@ -50,7 +50,7 @@ class HtmlThinkBig
 
     <tr>
 
-      <td valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 35px; line-height: 20px !important; color: #7f7f7f; padding-top: 10px;">
+      <td valign="center" align="center" class="body_copy" style="font-family: arial,sans-serif; font-size: 35px; line-height: 30px !important; color: #7f7f7f; padding-top: 10px;">
       '.$energyConsumption.' Wh
       </td>
 
