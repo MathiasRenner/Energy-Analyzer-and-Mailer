@@ -155,7 +155,7 @@ class DBAccessSingleton
      */
     private function __construct()
     {
-        $this->db = mysqli_connect('***REMOVED***:5190', '***REMOVED***', '***REMOVED***', '***REMOVED***');
+        $this->db = mysqli_connect('IP', 'USER', 'PASSWORD', 'DATABASE');
     }
 
     private function __clone(){}
