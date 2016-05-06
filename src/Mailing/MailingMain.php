@@ -143,7 +143,7 @@ foreach($allUser as $id)
         $transport = Swift_SmtpTransport::newInstance('mail.uni-bamberg.de', 587, 'tls');
         $transport->setLocalDomain('[127.0.0.1]');
 
-        $from = array('mailing@amphiro.com' => 'Amphiro');
+        $from = array('report@amphiro.com' => 'Amphiro');
         $to = array(
              $db->getEmail() => $db->getFirstname(). ' ' . $db->getFamilyname()
         );
