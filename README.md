@@ -5,7 +5,7 @@ This software is a extension for the [Amphiro](https://www.amphiro.com/). It sen
 ## How does it work?
 
 The input data (= shower consumption data) is analyzed by means of statistical calculations. These results are used to generate a report about the users' showering consumption. In the report, psychological tricks are applied in order to achieve maximum conservation effects (e.g. theory of planned behavior, peer group comparison, goal setting, gamification etc.).
-After the report has been generated, users receive this report as an Email into their mailbox. This is an example output of the software for a specific user:
+After the report has been generated, users receive this report as an email into their mailbox. This is an example output of the software for a specific user:
 
 
 ![](screenshots/MCM_Mailing_Seite_01_Effi-Klasse_B.png)
