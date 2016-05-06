@@ -253,7 +253,7 @@ class DBAccessSingleton
     public function DaysSinceLastMailing($id)
     {
         // Query timestamp of last Mailing from Database
-        $queryUE = "select MailingSentOn from ***REMOVED***.bires_mcm_mailing where b1user_ID = $id ORDER BY MailingSentOn DESC  limit 1";
+        $queryUE = "select MailingSentOn from b1host.bires_mcm_mailing where b1user_ID = $id ORDER BY MailingSentOn DESC  limit 1";
         $res = mysqli_query($this->db, $queryUE);
         $dateLastMailingArray = mysqli_fetch_assoc($res);
         $dateLastMailing = $dateLastMailingArray['MailingSentOn'];
